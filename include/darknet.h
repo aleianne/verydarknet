@@ -108,14 +108,23 @@ typedef struct{
 
 typedef struct transition_fault_t {
     int bit;
-    int row;
-    int column;
+    int filter;
+    int weight;
+    int output_neuron;
     int is_faulty;
 } transition_fault;
 
+typedef struct fc_transition_fault_t {
+    int bit;
+    int batch;
+    int input_neuron;
+    int output_neuron;
+    int is_faulty;
+} fc_transition_fault;
+
 typedef enum {
     NO_FAULT,
-    TRANSACTION_FAULT,
+    TRANSITION_FAULT,
     PERMENANT_FAULT,
     SINGLE_EVEN_UPSET
 } FAULT_MODEL;
@@ -221,7 +230,9 @@ struct layer{
     float probability;
     float scale;
 
+    int is_faulty;
     transition_fault *fault;
+    fc_transition_fault *fc_fault;
 
     char  * cweights;
     int   * indexes;

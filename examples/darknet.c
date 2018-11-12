@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-extern void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top, char *fault_model_value);
+extern void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top, char *fault_model_value, int fault_percentage);
 extern void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filename, float thresh, float hier_thresh, char *outfile, int fullscreen);
 extern void run_yolo(int argc, char **argv);
 extern void run_detector(int argc, char **argv);
@@ -447,7 +447,8 @@ int main(int argc, char **argv)
         run_coco(argc, argv);
     } else if (0 == strcmp(argv[1], "classify")){
         char *fault_model_option = find_char_arg(argc, argv, "-faultModel", "no-faults");
-        predict_classifier("cfg/imagenet1k.data", argv[2], argv[3], argv[4], 5, fault_model_option);
+        int fault_percentage = find_int_arg(argc, argv, "-fault-percentage", 10);
+        predict_classifier("cfg/imagenet1k.data", argv[2], argv[3], argv[4], 5, fault_model_option, fault_percentage);
     } else if (0 == strcmp(argv[1], "classifier")){
         run_classifier(argc, argv);
     } else if (0 == strcmp(argv[1], "regressor")){

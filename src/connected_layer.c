@@ -38,6 +38,11 @@ layer make_connected_layer(int batch, int inputs, int outputs, ACTIVATION activa
     l.weights = calloc(outputs*inputs, sizeof(float));
     l.biases = calloc(outputs, sizeof(float));
 
+    l.is_faulty = 0;
+    l.fault = calloc(1, sizeof(transition_fault));
+    l.fc_fault = calloc(1, sizeof(fc_transition_fault));
+
+
     l.forward = forward_connected_layer;
     l.backward = backward_connected_layer;
     l.update = update_connected_layer;
@@ -157,7 +162,12 @@ void forward_connected_layer(layer l, network net)
     float *a = net.input;
     float *b = l.weights;
     float *c = l.output;
-    gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
+
+    if (l.is_faulty == 0) {
+        gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
+    } else {
+        gemm_nt_faulty(*l.fc_fault, m,n,k,1,a,k,b,k,c,n);
+    }
     if(l.batch_normalize){
         forward_batchnorm_layer(l, net);
     } else {

@@ -12,6 +12,13 @@
 #include "xnor_layer.h"
 #endif
 
+void print_layer_weights(float *W, int nweights) {
+    int i;
+    for (i = 0; i < nweights; i++) {
+        printf("the %d weight is: %5.2f", W[i]);
+    }
+}
+
 void swap_binary(convolutional_layer *l)
 {
     float *swap = l->weights;
@@ -201,6 +208,8 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
     l.nweights = c/groups*n*size*size;
     l.nbiases = n;
 
+    l.is_faulty = 0;
+    l.fc_fault = (fc_transition_fault *) calloc(1, sizeof(fc_transition_fault));
     l.fault = (transition_fault *) calloc(1, sizeof(transition_fault));
 
     // float scale = 1./sqrt(size*size*c);
@@ -488,13 +497,13 @@ void forward_convolutional_layer(convolutional_layer l, network net)
                 // this function try to transform the convolution op into a more simple matrix multiplication
                 im2col_cpu(im, l.c/l.groups, l.h, l.w, l.size, l.stride, l.pad, b);
             }
-            // what does gemm mean?
-            // TODO: i think this is the core function of the convolution operation, between the input tensor and the filter tensor 
+            
             // update: this is the tensor multiplication between the weight tensor for each filter to the input image 
             // the result is stored into c
-            if (l.fault->is_faulty == 0) {
+            if (l.is_faulty == 0) {
                 gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
             } else {
+                print_layer_weights(l.weights, l.nweights);
                 gemm_nn_faulty(*l.fault,m,n,k,1,a,k,b,n,c,n);
             }
             

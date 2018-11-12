@@ -52,8 +52,8 @@ void permanent_fault_generation(float *X, network *net, int *indexes, float *pre
 	    printf ("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK);	
 }
 
-void transition_fault_generation(float *X, network *net, int *indexes, float *predictions) {
-    int i;
+void transition_fault_generation(float *X, network *net, int *indexes, float *predictions, int fault_percentage) {
+    int i, layer_n = 2;
     int top = net->outputs;
     float *g_pred  = calloc(top, sizeof(float));
 
@@ -61,8 +61,10 @@ void transition_fault_generation(float *X, network *net, int *indexes, float *pr
         //int index = indexes[i];
         g_pred[i] = predictions[i];
     }
+	
+    clock_t begin_time = clock();
 
-	int max_i = max (g_pred, top);
+    int max_i = max (g_pred, top);
 
     fault_t fault;
     outcome_t  outcome;
@@ -73,22 +75,35 @@ void transition_fault_generation(float *X, network *net, int *indexes, float *pr
     outcome.MSK = 0;
 	
     int max_f;
+    
+    layer l = net->layers[layer_n];
+    int n_iteration = (int) (l.outputs * fault_percentage) / 100;
+    int n_filters = l.n, n_weights = l.nweights / l.n, n_output_neurons = l.out_w * l.out_h;
+    srand(time(NULL));
 
-    transition_fault *t_fault = (transition_fault *) malloc(sizeof(transition_fault));
-    t_fault->bit = 23;
-    t_fault->column = 45;
-    t_fault->row = 34;
-    t_fault->is_faulty = 1;
+    int j;
+    for (j = 0; j < n_iteration; ++j) {
+        transition_fault *t_fault = (transition_fault *) malloc(sizeof(transition_fault));
+        t_fault->bit = 23;
+        t_fault->filter = rand() % n_filters ;
+        t_fault->weight = rand() % n_weights;
+        t_fault->output_neuron = rand() % n_output_neurons;
+        t_fault->is_faulty = 1;
 
-    // inject here the transition fault
-    create_new_fault(1, net, t_fault);
+        // inject here the transition fault
+        create_new_fault(layer_n, net, t_fault);
 
-    // predict the outcome
-    predictions = network_predict(net, X);
-    if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
-    top_k(predictions, net->outputs, net->outputs, indexes);
-    max_f = max (predictions, top);       
-    check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
+        // predict the outcome
+        predictions = network_predict(net, X);
+        if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
+        top_k(predictions, net->outputs, net->outputs, indexes);
+        max_f = max (predictions, top);       
+        check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
+    }
+    
+    printf("=== RESULTS ===\n");
+    printf("simulation executed in %f seconds \n", sec(clock() - begin_time));
+    printf ("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK);
 }
 
 float *get_regression_values(char **labels, int n)
@@ -644,7 +659,7 @@ void try_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filena
     }
 }
 
-void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top, char *fault_model_value)
+void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top, char *fault_model_value, int fault_percentage)
 {
     network *net = load_network(cfgfile, weightfile, 0);
     set_batch_network(net, 1);
@@ -692,8 +707,8 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
 
         FAULT_MODEL fault_model;
         
-        if (strcmp(fault_model_value, "transactional") == 0) {
-            fault_model = TRANSACTION_FAULT;
+        if (strcmp(fault_model_value, "transition") == 0) {
+            fault_model = TRANSITION_FAULT;
         } else if (strcmp(fault_model_value, "no-faults") == 0) {
             fault_model = NO_FAULT;
         } else if (strcmp(fault_model_value, "seu") == 0) {
@@ -709,7 +724,8 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
             case PERMENANT_FAULT: 
                 permanent_fault_generation(X, net, indexes, predictions);   
                 break;
-            case TRANSACTION_FAULT:
+            case TRANSITION_FAULT:
+		transition_fault_generation(X, net, indexes, predictions, fault_percentage);
                 break;
             case SINGLE_EVEN_UPSET: 
                 break;
@@ -1180,6 +1196,7 @@ void run_classifier(int argc, char **argv)
     int top = find_int_arg(argc, argv, "-t", 0);
     int clear = find_arg(argc, argv, "-clear");
     char *fault_model_option = find_char_arg(argc, argv, "-faultModel", "no-faults");
+    int fault_percentage =  find_int_arg(argc, argv, "-fault-perc", 10);
     //printf("the fault model is: %s", fault_model_option);
     char *data = argv[3];
     char *cfg = argv[4];
@@ -1187,7 +1204,7 @@ void run_classifier(int argc, char **argv)
     char *filename = (argc > 6) ? argv[6]: 0;
     char *layer_s = (argc > 7) ? argv[7]: 0;
     int layer = layer_s ? atoi(layer_s) : -1;
-    if(0==strcmp(argv[2], "predict")) predict_classifier(data, cfg, weights, filename, top, fault_model_option);
+    if(0==strcmp(argv[2], "predict")) predict_classifier(data, cfg, weights, filename, top, fault_model_option, fault_percentage);
     else if(0==strcmp(argv[2], "fout")) file_output_classifier(data, cfg, weights, filename);
     else if(0==strcmp(argv[2], "try")) try_classifier(data, cfg, weights, filename, atoi(layer_s));
     else if(0==strcmp(argv[2], "train")) train_classifier(data, cfg, weights, gpus, ngpus, clear);
