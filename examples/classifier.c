@@ -725,7 +725,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
                 permanent_fault_generation(X, net, indexes, predictions);   
                 break;
             case TRANSITION_FAULT:
-		transition_fault_generation(X, net, indexes, predictions, fault_percentage);
+		        transition_fault_generation(X, net, indexes, predictions, fault_percentage);
                 break;
             case SINGLE_EVEN_UPSET: 
                 break;
