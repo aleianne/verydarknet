@@ -1,5 +1,51 @@
 #include "transition_fault_injector.h" 
 
+void multiple_fault_injection(network *net) {
+
+    FILE *fp = fopen("multiple_layer_faults.txt", "a");
+    if (fp == NULL) {
+        printf("impossible to open the file, error: %s", strerror(error));
+        exit(1);
+    }
+
+    layer l;
+    fc_transition_fault *fault1;
+    transition_fault *fault2;
+    int i;
+    for (i = 0; i < net->n; ++i) {
+        l = net->layers[i];
+        if (l.type == CONVOLUTIONAL) {
+            fault2 = (transition_fault *) malloc(sizeof(transition_fault));
+            int n_filters = l.n, n_weights = l.nweights / l.n, n_output_neurons = l.out_w * l.out_h;
+
+            fault2->bit = rand() % 32;
+            fault2->weight = rand() % n_weights;
+            fault2->output_neuron = rand() % n_output_neurons;
+            fault2->filter = rand() % n_filters;
+
+            fprintf(fp, "layer %d, type: convolutional bit: %d weight: %d neuron: %d filter: %d", fault2->bit, fault2->weight, fault2->output_neuron, fault2->filter);
+
+            create_new_fault(i, net, fault2);
+        } else if (l.type == CONNECTED) {
+            fault1 = (fc_transition_fault *) malloc(sizeof(fc_transition_fault));
+            int batch_size = l.batch;
+            int n_output = l.outputs;
+            int n_input = l.inputs;
+
+            fault1->bit = rand() % 32;
+            fault1->batch = rand() % batch_size;
+            fault1->output_neuron = rand() % n_output;
+            fault1->input_neuron = rand() % n_input;
+
+            fprintf(fp, "layer %d, type: fully connected bit: %d batch: %d input neuron: %d output neuron: %d", fault1->bit, fault1->batch, fault1->input_neuron, fault1->output_neuron);
+
+            create_new_fc_fault(i, net, fault1);
+        }
+    }
+
+    fclose(fp);
+}
+
 void create_new_fault(int target_layer, network *net, transition_fault *fault_i) {
     layer *l = &net->layers[target_layer];
     
@@ -17,7 +63,7 @@ void create_new_fc_fault(int target_layer, network *net, fc_transition_fault *fa
     if (l->type == CONNECTED) {
         l->fc_fault = fault_i;
     } else {
-        fprintf(stderr, "this kind of errro should be injected into a fully connected layer\n");
+        fprintf(stderr, "this kind of error should be injected into a fully connected layer\n");
     }
 }
 

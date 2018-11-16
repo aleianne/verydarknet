@@ -212,6 +212,8 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
     l.fc_fault = (fc_transition_fault *) calloc(1, sizeof(fc_transition_fault));
     l.fault = (transition_fault *) calloc(1, sizeof(transition_fault));
 
+    printf("the number of multiplication into this convolutional layer is %d\n", l.h * l.w * l.c * l.out_c * l.out_h * l.out_w);
+
     // float scale = 1./sqrt(size*size*c);
     float scale = sqrt(2./(size*size*c/l.groups));
     //printf("convscale %f\n", scale);

@@ -5,51 +5,91 @@
 #include <sys/time.h>
 #include <assert.h>
 
+void multiple_layer_fault_generation(network *net, float *X, int *indexes, float *predictions, int fault_percentage) {
+    int i;
+    int top = net->outputs;
+    float *g_pred  = calloc(top, sizeof(float));
+
+    for(i = 0; i < net->outputs; ++i){
+        //int index = indexes[i];
+        g_pred[i] = predictions[i];
+    }
+
+	int max_i = max (g_pred, top);
+
+    fault_t fault;
+    outcome_t  outcome;
+    outcome.SDC = 0;
+    outcome.Crit_SDC = 0;
+    outcome.No_Crit_SDC = 0;
+    outcome.SDC = 0;
+    outcome.MSK = 0;
+	
+    int max_f;
+    int n_itaration  = (int) 500000000 / fault_percentage;
+    
+
+    while (--n_itaration>0) {
+        multiple_fault_injection(net);
+
+        predictions = network_predict(net, X);
+        if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
+        top_k(predictions, net->outputs, net->outputs, indexes);
+        max_f = max (predictions, top);
+                    
+        check_max_outcome (&outcome, predictions, g_pred, max_i, max_f);	
+    }
+
+    printf("===RESULTS===\n");
+	printf ("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK);	
+}
+
 void permanent_fault_generation(float *X, network *net, int *indexes, float *predictions) {
-        int i;
-        int top = net->outputs;
-        float *g_pred  = calloc(top, sizeof(float));
+    int i;
+    int top = net->outputs;
+    float *g_pred  = calloc(top, sizeof(float));
 
-        for(i = 0; i < net->outputs; ++i){
-            //int index = indexes[i];
-            g_pred[i] = predictions[i];
-        }
+    for(i = 0; i < net->outputs; ++i){
+        //int index = indexes[i];
+        g_pred[i] = predictions[i];
+    }
 
-	    int max_i = max (g_pred, top);
+	int max_i = max (g_pred, top);
 
-        fault_t fault;
-        outcome_t  outcome;
-        outcome.SDC = 0;
-        outcome.Crit_SDC = 0;
-        outcome.No_Crit_SDC = 0;
-        outcome.SDC = 0;
-        outcome.MSK = 0;
+    fault_t fault;
+    outcome_t  outcome;
+    outcome.SDC = 0;
+    outcome.Crit_SDC = 0;
+    outcome.No_Crit_SDC = 0;
+    outcome.SDC = 0;
+    outcome.MSK = 0;
 	
-        int max_f;
+    int max_f;
 
-        FILE *fl;
-        fl = fopen ("fault_list6.txt","r");
-        if (fl == NULL) {
-            printf ("fault_list6.txt not found \n");
-            exit (-1);
-        }
-        fault.layer_index = 6;
-        while (fscanf (fl, "%d %d", &(fault.weigth), &(fault.bit)) != EOF) {
-            //	printf ("Inject in %d %d\n", fault.weigth, fault.bit);
-            inject (net, &fault);	
-            float *predictions = network_predict(net, X);
-            if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
-            top_k(predictions, net->outputs, net->outputs, indexes);
-            max_f = max (predictions, top);
+    FILE *fl;
+    fl = fopen ("fault_list6.txt","r");
+    if (fl == NULL) {
+        printf ("fault_list6.txt not found \n");
+        exit (-1);
+    }
+    
+    fault.layer_index = 6;
+    while (fscanf (fl, "%d %d", &(fault.weigth), &(fault.bit)) != EOF) {
+        //	printf ("Inject in %d %d\n", fault.weigth, fault.bit);
+        inject (net, &fault);	
+        float *predictions = network_predict(net, X);
+        if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
+        top_k(predictions, net->outputs, net->outputs, indexes);
+         max_f = max (predictions, top);
                 
-            check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
-            //if (check_max_outcome (&outcome, predictions, g_pred, max_i, max_f)) 
-            //printf ("Critical SDC \n");
-            //printf ("\n");
-            release (net, &fault);	
-        } 
+        check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
+        //if (check_max_outcome (&outcome, predictions, g_pred, max_i, max_f)) 
+        //printf ("Critical SDC \n");
+        //printf ("\n");
+        release (net, &fault);	
+    } 
 	
-	    printf ("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK);	
+	printf ("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK);	
 }
 
 void transition_fault_generation(float *X, network *net, int *indexes, float *predictions, int fault_percentage) {
@@ -77,29 +117,75 @@ void transition_fault_generation(float *X, network *net, int *indexes, float *pr
     int max_f;
     
     layer l = net->layers[layer_n];
-    int n_iteration = (int) (l.outputs * fault_percentage) / 100;
-    int n_filters = l.n, n_weights = l.nweights / l.n, n_output_neurons = l.out_w * l.out_h;
+    
     srand(time(NULL));
 
-    int j;
-    for (j = 0; j < n_iteration; ++j) {
-        transition_fault *t_fault = (transition_fault *) malloc(sizeof(transition_fault));
-        t_fault->bit = 23;
-        t_fault->filter = rand() % n_filters ;
-        t_fault->weight = rand() % n_weights;
-        t_fault->output_neuron = rand() % n_output_neurons;
-        t_fault->is_faulty = 1;
-
-        // inject here the transition fault
-        create_new_fault(layer_n, net, t_fault);
-
-        // predict the outcome
-        predictions = network_predict(net, X);
-        if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
-        top_k(predictions, net->outputs, net->outputs, indexes);
-        max_f = max (predictions, top);       
-        check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
+    FILE *fp = fopen("fautl_list_output.txt", "w");
+    if (fp == NULL) {
+        printf("impossible to open the file");
+        exit(1);
     }
+
+    if (l.type == CONVOLUTIONAL) {
+        int j;
+        int n_iteration = (int) (l.outputs * fault_percentage) / 100;
+        int n_filters = l.n, n_weights = l.nweights / l.n, n_output_neurons = l.out_w * l.out_h;
+
+        fprintf(fp, "BIT\tFILTER\tWEIGHT\tNEURON");
+
+        for (j = 0; j < n_iteration; ++j) {
+            transition_fault *t_fault = (transition_fault *) malloc(sizeof(transition_fault));
+            t_fault->bit = rand() % 32;
+            t_fault->filter = rand() % n_filters ;
+            t_fault->weight = rand() % n_weights;
+            t_fault->output_neuron = rand() % n_output_neurons;
+            t_fault->is_faulty = 1;
+
+            // print into the file the informations about the fault
+            fprintf(fp, "%10d\t%10d\t%10d\t%10d", t_fault->bit, t_fault->filter, t_fault->weight, t_fault->output_neuron);
+
+            // inject here the transition fault
+            create_new_fault(layer_n, net, t_fault);
+
+            // predict the outcome
+            predictions = network_predict(net, X);
+            if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
+            top_k(predictions, net->outputs, net->outputs, indexes);
+            max_f = max (predictions, top);       
+            check_max_outcome (&outcome, predictions, g_pred, max_i, max_f);
+        } 
+    } else if (l.type == CONNECTED) {
+        int j;
+        int n_iteration = (int) (l.outputs * fault_percentage) / 100;
+        int batch_size = l.batch;
+        int n_output = l.outputs;
+        int n_input = l.inputs;
+    
+        fprintf(fp, "BIT\tIMAGE\tINPUT NEURON\tOUTPUT NEURON");
+
+        for (j = 0; j < n_iteration; ++j) {
+            fc_transition_fault *ft = (fc_transition_fault *) calloc(1, sizeof(fc_transition_fault));
+            ft->bit = rand() % 32;
+            ft->batch = rand() % batch_size;
+            ft->input_neuron = rand() % n_input;
+            ft->output_neuron = rand() % n_output;
+
+            // print into the file the informations about the fault
+            fprintf(fp, "%10d\t%10d\t%10d\t%10d", ft->bit, ft->batch, ft->input_neuron, ft->output_neuron);
+
+            // inject here the transition fault
+            create_new_fc_fault(layer_n, net, ft);
+
+            // predict the outcome
+            predictions = network_predict(net, X);
+            if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
+            top_k(predictions, net->outputs, net->outputs, indexes);
+            max_f = max (predictions, top);       
+            check_max_outcome (&outcome, predictions, g_pred, max_i, max_f);
+        } 
+    }
+
+    fclose(fp);
     
     printf("=== RESULTS ===\n");
     printf("simulation executed in %f seconds \n", sec(clock() - begin_time));
@@ -715,6 +801,8 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
             fault_model = SINGLE_EVEN_UPSET;
         } else if (strcmp(fault_model_value, "permanent") == 0) {
             fault_model = PERMENANT_FAULT;
+        } else if (strcmp(fault_model_value, "multi-layer") == 0) {
+            fault_model = MULTI_LAYER;
         } else {
             fault_model = NO_FAULT;
         }
@@ -729,6 +817,8 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
                 break;
             case SINGLE_EVEN_UPSET: 
                 break;
+            case MULTI_LAYER:
+                multiple_layer_fault_generation(net, X, indexes, predictions, fault_percentage);    
             default:
                 break;
         }

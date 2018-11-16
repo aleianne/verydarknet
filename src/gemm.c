@@ -127,8 +127,11 @@ void gemm_nt_faulty(fc_transition_fault fault, int M, int N, int K, float ALPHA,
     for(i = 0; i < M; ++i){
         for(j = 0; j < N; ++j){
             register float sum = 0;
+            float sum2;
             for(k = 0; k < K; ++k){
                 sum += ALPHA*A[i*lda+k]*B[j*ldb + k];
+                sum2 = sum;
+                inject_fc_transition_fault(fault, i, j, k, &sum2);
             }
             C[i*ldc+j] += sum;
         }

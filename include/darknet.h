@@ -126,7 +126,8 @@ typedef enum {
     NO_FAULT,
     TRANSITION_FAULT,
     PERMENANT_FAULT,
-    SINGLE_EVEN_UPSET
+    SINGLE_EVEN_UPSET,
+    MULTI_LAYER
 } FAULT_MODEL;
 
 struct network;
