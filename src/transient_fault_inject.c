@@ -17,7 +17,7 @@ float flip_bit(int bit, float value) {
 	int mask = mask << bit;
     int mask2 = ~ mask; 
     temp2 = temp1 ^ mask;
-    temp3 = temp1 & mask;
+    temp3 = temp1 & mask2;
     if (temp3 == mask2) {
         temp2 &= mask2;
     }
