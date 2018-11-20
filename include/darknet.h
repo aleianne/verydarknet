@@ -111,7 +111,6 @@ typedef struct transition_fault_t {
     int filter;
     int weight;
     int output_neuron;
-    int is_faulty;
 } transition_fault;
 
 typedef struct fc_transition_fault_t {
@@ -119,8 +118,14 @@ typedef struct fc_transition_fault_t {
     int batch;
     int input_neuron;
     int output_neuron;
-    int is_faulty;
 } fc_transition_fault;
+
+typedef struct seu_fault_t {
+    int bit;
+    int filter;
+    int weight;
+    int output_neuron;
+} seu_fault;
 
 typedef enum {
     NO_FAULT,
@@ -234,6 +239,8 @@ struct layer{
     int is_faulty;
     transition_fault *fault;
     fc_transition_fault *fc_fault;
+    
+    seu_fault *seu_fault;
 
     char  * cweights;
     int   * indexes;

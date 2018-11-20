@@ -209,8 +209,9 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
     l.nbiases = n;
 
     l.is_faulty = 0;
-    l.fc_fault = (fc_transition_fault *) calloc(1, sizeof(fc_transition_fault));
-    l.fault = (transition_fault *) calloc(1, sizeof(transition_fault));
+    l.fc_fault = NULL;
+    l.fault = NULL;
+    l.seu_fault = NULL;
 
     printf("the number of multiplication into this convolutional layer is %d\n", l.h * l.w * l.c * l.out_c * l.out_h * l.out_w);
 
@@ -505,10 +506,16 @@ void forward_convolutional_layer(convolutional_layer l, network net)
             if (l.is_faulty == 0) {
                 gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
             } else {
-                print_layer_weights(l.weights, l.nweights);
-                gemm_nn_faulty(*l.fault,m,n,k,1,a,k,b,n,c,n);
-            }
+
+                //print_layer_weights(l.weights, l.nweights);
+
+                if (l.fault) {
+                    gemm_nn_faulty(*l.fault,m,n,k,1,a,k,b,n,c,n);
+                } else if (l.seu_fault) {
+                    gemm_nn_faulty_seu(*l.seu_fault,m,n,k,1,a,k,b,n,c,n);
+                }
             
+            }
         }
     }
 

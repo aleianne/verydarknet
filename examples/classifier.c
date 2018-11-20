@@ -1,6 +1,7 @@
 #include "darknet.h"
 #include "injector.h"
 #include "transition_fault_injector.h"
+#include "transient_fault_inject.h"
 
 #include <sys/time.h>
 #include <assert.h>
@@ -44,6 +45,75 @@ void multiple_layer_fault_generation(network *net, float *X, int *indexes, float
 	printf ("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK);	
 }
 
+
+void seu_generation(float *X, network *net, int *indexes, float *predictions, int fault_percentage) {
+    int i;
+    int layer_n = 0;
+    int top = net->outputs;
+    float *g_pred = calloc(top, sizeof(float));
+
+    for (i = 0; i < net->output; ++i) {
+        g_pred[i] = predictions[i];
+    }
+
+    int max_i = max (g_pred, top);
+
+    outcome_t outcome;
+    outcome.SDC = 0;
+    outcome.Crit_SDC = 0;
+    outcome.No_Crit_SDC = 0;
+    outcome.SDC = 0;
+    outcome.MSK = 0;
+
+    layer l = net->layers[layer_n];
+    int n_iteration = (int) (l.outputs * l.size * l.size * l.c * fault_percentage) / 100;
+    int n_filters = l.n, n_weights = l.nweights / l.n, n_output_neurons = l.out_w * l.out_h;
+    
+    int max_f;
+
+    srand(time(NULL));
+
+    FILE *fp = fopen("seu_fault_list.txt", "w");
+    if (fp == NULL) {
+        printf("impossible to open the file");
+    }
+
+    clock_t begin_time = clock();
+
+    if (l.type == CONVOLUTIONAL) {
+
+        fprintf(fp, "BIT\tFILTER\tWEIGHT\tNEURON");
+
+        for (i = 0; i < n_iteration; ++i) {
+            seu_fault *fault_i = (seu_fault *) malloc(sizeof(seu_fault));
+            fault_i->bit = rand() % 32;
+            fault_i->filter = rand() % n_filters;
+            fault_i->weight = rand() % n_weights;
+            fault_i->output_neuron = rand() % n_output_neurons;
+
+            // print into the file the informations about the fault
+            fprintf(fp, "%10d\t%10d\t%10d\t%10d", fault_i->bit, fault_i->filter, fault_i->weight, fault_i->output_neuron);
+
+            inject_convolutionals_seu(fault_i, net, layer_n);
+
+            float *predictions = network_predict(net, X);
+            if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
+            top_k(predictions, net->outputs, net->outputs, indexes);
+            max_f = max (predictions, top);
+                    
+            check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
+        }
+    } else {
+
+    }
+
+    fclose(fp);
+
+    printf("=== RESULTS ===\n");
+    printf("simulation executed in %f seconds \n", sec(clock() - begin_time));
+    printf ("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK);
+}
+
 void permanent_fault_generation(float *X, network *net, int *indexes, float *predictions) {
     int i;
     int top = net->outputs;
@@ -80,7 +150,7 @@ void permanent_fault_generation(float *X, network *net, int *indexes, float *pre
         float *predictions = network_predict(net, X);
         if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
         top_k(predictions, net->outputs, net->outputs, indexes);
-         max_f = max (predictions, top);
+        max_f = max (predictions, top);
                 
         check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
         //if (check_max_outcome (&outcome, predictions, g_pred, max_i, max_f)) 
@@ -106,7 +176,6 @@ void transition_fault_generation(float *X, network *net, int *indexes, float *pr
 
     int max_i = max (g_pred, top);
 
-    fault_t fault;
     outcome_t  outcome;
     outcome.SDC = 0;
     outcome.Crit_SDC = 0;
@@ -128,7 +197,7 @@ void transition_fault_generation(float *X, network *net, int *indexes, float *pr
 
     if (l.type == CONVOLUTIONAL) {
         int j;
-        int n_iteration = (int) (l.outputs * fault_percentage) / 100;
+        int n_iteration = (int) (l.outputs * l.size * l.size * l.c * fault_percentage) / 100;
         int n_filters = l.n, n_weights = l.nweights / l.n, n_output_neurons = l.out_w * l.out_h;
 
         fprintf(fp, "BIT\tFILTER\tWEIGHT\tNEURON");
@@ -139,7 +208,6 @@ void transition_fault_generation(float *X, network *net, int *indexes, float *pr
             t_fault->filter = rand() % n_filters ;
             t_fault->weight = rand() % n_weights;
             t_fault->output_neuron = rand() % n_output_neurons;
-            t_fault->is_faulty = 1;
 
             // print into the file the informations about the fault
             fprintf(fp, "%10d\t%10d\t%10d\t%10d", t_fault->bit, t_fault->filter, t_fault->weight, t_fault->output_neuron);

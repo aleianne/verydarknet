@@ -2,6 +2,7 @@
 #include "utils.h"
 #include "cuda.h"
 #include "transition_fault_injector.h"
+#include "transient_fault_inject.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -188,6 +189,28 @@ void gemm_nn_faulty(transition_fault fault, int M, int N, int K, float ALPHA,
             for(j = 0; j < N; ++j){                          
                 C[i*ldc+j] += A_PART*B[k*ldb+j];
                 inject_transition_fault(fault, i, k, j, &C[i*ldc+j]);
+            }
+        }
+    }
+}
+
+void gemm_nn_faulty_seu(seu_fault fault, int M, int N, int K, float ALPHA, 
+        float *A, int lda, 
+        float *B, int ldb,
+        float *C, int ldc)
+{
+    int i,j,k;
+    #pragma omp parallel for
+    for(i = 0; i < M; ++i){
+        for(k = 0; k < K; ++k){
+            register float A_PART = ALPHA*A[i*lda+k];
+            register float faulty_weight = flip_bit(fault.bit, ALPHA*A[i*lda+k]);
+            for(j = 0; j < N; ++j){    
+                if (j >= fault.output_neuron && k == fault.weight && i == fault.filter) {
+                    C[i*ldc+j] += A_PART*B[k*ldb+j];
+                } else {
+                    C[i*ldc+j] += A_PART*B[k*ldb+j];   
+                }                      
             }
         }
     }
