@@ -5,6 +5,7 @@
 #include "cuda.h"
 #include "blas.h"
 #include "gemm.h"
+#include "gemm_faulty.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -47,7 +48,7 @@ layer make_connected_layer(int batch, int inputs, int outputs, ACTIVATION activa
     l.backward = backward_connected_layer;
     l.update = update_connected_layer;
 
-    printf("the number of multiplication into this fully connected layer is %d\n", l.batch * l.inputs * l.outputs);
+    //printf("the number of multiplication into this fully connected layer is %d\n", l.batch * l.inputs * l.outputs);
 
     //float scale = 1./sqrt(inputs);
     float scale = sqrt(2./inputs);
