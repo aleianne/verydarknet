@@ -512,6 +512,7 @@ void forward_convolutional_layer(convolutional_layer l, network net)
 
                 if (l.fault) {
                     gemm_nn_faulty(*l.fault,m,n,k,1,a,k,b,n,c,n);
+		    gemm_nn_faulty2(*l.fault,m,n,k,1,a,k,b,n,c,n);
                 } else if (l.seu_fault) {
                     gemm_nn_faulty_seu(*l.seu_fault,m,n,k,1,a,k,b,n,c,n);
                 }

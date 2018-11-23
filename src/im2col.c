@@ -11,9 +11,6 @@ float im2col_get_pixel(float *im, int height, int width, int channels,
     return im[col + width*(row + height*channel)];
 }
 
-// what does the function below mean?
-// follow this link for more explanations -> http://www.mathworks.com/help/images/ref/im2col.html
-
 //From Berkeley Vision's Caffe!
 //https://github.com/BVLC/caffe/blob/master/LICENSE
 void im2col_cpu(float* data_im,

@@ -3,7 +3,15 @@
 
 #include "darknet.h"
 
+typedef struct fault_value_t {
+    float previous_value;
+    float actual_value;
+} fault_value;
+
 static float previous_mul_result;
+
+fault_value delete_correct_value(float *B, int out_neuron, int weight, int ldb);
+float inject_mul_fault(fault_value f, float *C, int ldc, int weight, int filter, int bit);
 
 void multiple_fault_injection(network *net);
 

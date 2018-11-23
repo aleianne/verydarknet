@@ -26,20 +26,27 @@ void create_fault_list (int connections, int bit_size, int perc) {
 	int n_inj, i;
 	int w, bit;
 	
-	out = fopen  ("fault_list4.txt", "w");
+	out = fopen  ("fault_list.txt", "w");
 	srand (time (NULL));
 	n_inj =  (connections * bit_size) / perc ;
 	
 	for (i = 0; i < n_inj; i++){
+
+		
 		w = rand () % connections;
 		bit = rand () % bit_size;
 
 		fprintf (out, "%d %d\n", w, bit);
+
+
 	} 
 
 	fclose (out);
 }
-  
+
+ 
+// injector
+
 
 // this method simply inject a fault by applyng a bit flip to the n-th bit 
 void inject (network *net, fault_t *fault) 
@@ -57,6 +64,8 @@ void inject (network *net, fault_t *fault)
     memcpy (&w, &i_t, sizeof (w));
 //	printf ("faulty w = %f\n", w);
 	l.weights[fault->weigth] = w;
+
+
 }
 
 void release (network *net, fault_t *fault) 
@@ -145,6 +154,7 @@ int check_max_outcome (outcome_t *o, float *f_out, float *g_out, int g_max_index
 			}
 
 		}
+
 	}
 		
 	return ret;

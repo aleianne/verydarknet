@@ -81,7 +81,7 @@ void inject_fc_transition_fault(fc_transition_fault f, int i, int j, int k, floa
 
 void inject_transition_fault(transition_fault f, int i, int j, int k, float *result) {
     // store the previous value into a variable
-    if (i == f.filter && j == f.weight && f.output_neuron-1) {
+    if (i == f.filter && j == f.weight && k == f.output_neuron-1) {
         previous_mul_result = *result;
     }
 
@@ -89,6 +89,21 @@ void inject_transition_fault(transition_fault f, int i, int j, int k, float *res
     if(i == f.filter && j == f.weight && f.output_neuron == k) {
         *result = check_bit_on_fault_transition(f.bit, previous_mul_result, *result);
     }
+}
+
+fault_value delete_correct_value(float *B, int out_neuron, int weight, int ldb)  {
+    fault_value f;
+    f.actual_value = B[ldb*weight + out_neuron];
+    f.previous_value = B[ldb*weight + out_neuron - 1];
+    B[ldb*weight + out_neuron] = 0;
+    return f;
+}
+
+float inject_mul_fault(fault_value f, float *A, int lda, int weight, int filter, int bit) {
+    float c = A[lda*filter + weight];
+    float old_value = f.previous_value * c;
+    float new_value = f.actual_value * c ;
+    return check_bit_on_fault_transition(bit, old_value, new_value);
 }
 
 float check_bit_on_fault_transition(int shift, float old_value, float new_value) {

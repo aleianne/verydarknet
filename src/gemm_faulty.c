@@ -36,12 +36,36 @@ void gemm_nn_faulty(transition_fault fault, int M, int N, int K, float ALPHA,
         for(k = 0; k < K; ++k){
             register float A_PART = ALPHA*A[i*lda+k];
             for(j = 0; j < N; ++j){                          
-                C[i*ldc+j] += A_PART*B[k*ldb+j];
-                inject_transition_fault(fault, i, k, j, &C[i*ldc+j]);
+                float fault_value = A_PART*B[k*ldb+j];
+                inject_transition_fault(fault, i, k, j, &fault_value);
+                C[i*ldc+j] += fault_value;
             }
         }
     }
 }
+
+void gemm_nn_faulty2(transition_fault fault, int M, int N, int K, float ALPHA, 
+        float *A, int lda, 
+        float *B, int ldb,
+        float *C, int ldc) {
+
+            // delete the correct value from the matrix
+            fault_value f = delete_correct_value(B, fault.output_neuron, fault.weight, ldb);
+
+            int i,j,k;
+            #pragma omp parallel for
+            for(i = 0; i < M; ++i){
+                for(k = 0; k < K; ++k){
+                    register float A_PART = ALPHA*A[i*lda+k];
+                    for(j = 0; j < N; ++j){                          
+                        C[i*ldc+j] += A_PART*B[k*ldb+j];
+                    }
+                }
+            }
+
+            float faulty_value = inject_mul_fault(f, A, lda, fault.weight, fault.filter, fault.bit);
+	    C[fault.filter*ldc + fault.output_neuron] += faulty_value;
+    }
 
 void gemm_nn_faulty_seu(seu_fault fault, int M, int N, int K, float ALPHA, 
         float *A, int lda, 

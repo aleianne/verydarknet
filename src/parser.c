@@ -189,7 +189,6 @@ convolutional_layer parse_convolutional(list *options, size_params params)
     char *activation_s = option_find_str(options, "activation", "logistic");
     ACTIVATION activation = get_activation(activation_s);
 
-    // those value represent the input height, width and color channel
     int batch,h,w,c;
     h = params.h;
     w = params.w;
@@ -883,7 +882,6 @@ network *parse_network_cfg(char *filename)
             net->workspace = calloc(1, workspace_size);
         }
 #else
-        // TODO: pay attenction here: this attribute is very imporatant to undertand the image computation between two hidden conv layer
         net->workspace = calloc(1, workspace_size);
 #endif
     }
@@ -1176,8 +1174,6 @@ void load_convolutional_weights(layer l, FILE *fp)
         fread(l.scales, sizeof(float), l.n, fp);
         fread(l.rolling_mean, sizeof(float), l.n, fp);
         fread(l.rolling_variance, sizeof(float), l.n, fp);
-
-        // non capisco perchè l'autore ha messo questi if(false)
         if(0){
             int i;
             for(i = 0; i < l.n; ++i){
@@ -1205,7 +1201,6 @@ void load_convolutional_weights(layer l, FILE *fp)
             printf("\n");
         }
     }
-    // at this point the author load the weights associated to the layer
     fread(l.weights, sizeof(float), num, fp);
     //if(l.c == 3) scal_cpu(num, 1./256, l.weights, 1);
     if (l.flipped) {

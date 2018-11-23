@@ -2,7 +2,9 @@
 #define INJ_DARKNET_API
 
 #include <stdlib.h>
+
 #include <time.h>
+
 #include "darknet.h"
 
 #define MAX_INJ 100
@@ -15,7 +17,6 @@ typedef struct _fault_t {
 	float good_w;
 
 } fault_t;
-
 typedef struct _outcome_t {
 
 	int SDC;

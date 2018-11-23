@@ -196,8 +196,8 @@ void transition_fault_generation(float *X, network *net, int *indexes, float *pr
 
     if (l.type == CONVOLUTIONAL) {
         int j;
-        int n_iteration = (int) (l.outputs * l.size * l.size * l.c * fault_percentage) / 100;
-        //int n_iteration = (int) (l.outputs * fault_percentage) / 100;
+        //int n_iteration = (int) (l.outputs * l.size * l.size * l.c * fault_percentage) / 100;
+        int n_iteration = (int) (l.outputs * fault_percentage) / 100;
         int n_filters = l.n, n_weights = l.nweights / l.n, n_output_neurons = l.out_w * l.out_h;
 
         fprintf(fp, "BIT\tFILTER\tWEIGHT\tNEURON\n");
