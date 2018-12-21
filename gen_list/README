@@ -1,0 +1,6 @@
+gen_list create a new fault list given the fault model
+
+./gen_list {transition_conv, transition_fc} [filename]
+
+until now this program generate the fault list for the 
+transition fault model.

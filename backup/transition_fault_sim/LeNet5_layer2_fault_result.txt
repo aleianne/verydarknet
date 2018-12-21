@@ -1,0 +1,12 @@
+=== RESULTS ===
+simulation executed in 113677.117188 seconds 
+SDC = 325
+CritSDC = 0
+No_Crit_SDC = 325
+MSK = 1003195
+=== RESULTS ===
+simulation executed in 114174.453125 seconds 
+SDC = 36
+CritSDC = 0
+No_Crit_SDC = 36
+MSK = 1003484
