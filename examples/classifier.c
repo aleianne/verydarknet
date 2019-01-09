@@ -31,12 +31,31 @@ void print_predictions(float *predictions, int size) {
   }
 }
 
-void print_stuck_at_prediction_informations(FILE *fp, int *array, int size ,int correct_prediction) {
+void print_stuck_at_prediction_informations(FILE *fp, int *array, int size , int correct_prediction) {
   int i;
   fprintf(fp, "\n%d\t", correct_prediction);
   for (i = 0; i < size; i++) {
     fprintf(fp, "%d\t", array[i]);
   }
+}
+
+void print_fc_layer_info(network *net, int layer_n) {
+  layer l = net->layers[layer_n];
+  float *output = l.output;
+  int outputs_n = l.outputs;
+
+  char *filename = "fc_results.txt";
+
+  FILE *fp = fopen(filename, "w");
+  if (fp == NULL) {
+     printf("impossible to open file %s", filename);
+     exit(1);
+  }
+  int i;
+  for (i = 0; i < outputs_n; i++) {
+    fprintf(fp, "%10.2f\n", output[i]);
+  }
+  fclose(fp);
 }
 
 float *get_filter_outcome(float *output, int filter, int dimension) {
@@ -50,26 +69,27 @@ float *get_filter_outcome(float *output, int filter, int dimension) {
   return result;
 }
 
+
 void print_layer_info(network *n, int layer_n, int filter) {
   layer l = n->layers[layer_n];
-  int dim = l.out_h * l.out_h;
+  int dim = l.out_w * l.out_h;
   float *r = get_filter_outcome(l.output, filter, dim);
 
-  FILE *fp = fopen("filter_result.txt", "w");
-  if (fp == NULL) {
-    printf("impossible to open the file");
-    exit(1);
-  }
+   FILE *fp = fopen("filter_result.txt", "w");
+   if (fp == NULL) {
+     printf("impossible to open the file");
+     exit(1);
+   }
   
-  int i, j;
+   int i, j;
 
-  for (i = 0; i < l.out_h; ++i) {
-    for (j = 0; j < l.out_w; ++j) {
-      fprintf(fp, "%f ", r[i*l.out_h + j]); 
-    }
-    fprintf(fp,"\n");
-  }
-  fclose(fp);
+   for (i = 0; i < l.out_h; ++i) {
+     for (j = 0; j < l.out_w; ++j) {
+       fprintf(fp, "%15.2f ", r[i*l.out_h + j]); 
+     }
+     fprintf(fp,"\n");
+   }
+   fclose(fp);
 }
 
 void seu_generation(float *X, network *net, float *g_pred, int fault_percentage, char *filename, int network_layer) {
@@ -180,12 +200,16 @@ outcome_t stuck_at_fault_generation(float *X, network *net, float *g_pred, char 
      // insert the value predicted into the array
      label_predicted[bit-1] = max_f;
 
-     // remove the fault 
+     if (bit == 1) {
+       //print_layer_info(net, 2, 1);
+       //print_fc_layer_info(net, 4);
+     }
+
+     // remove fault 
      remove_fault(net, network_layer);
      
      bit++;
-  }
-  
+  }  
 
   print_stuck_at_prediction_informations(fp, label_predicted, 8, max_i);
   fclose(fp);
@@ -922,7 +946,10 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
         fprintf(stderr, "%s: Predicted in %f seconds. \n", input, sec(clock()-time));
 
 
-	print_layer_info(net, network_layer, 1);
+	// in this point of the predict classifier function 
+	// we print the informations about the filter output
+	//print_layer_info(net, 2, 1);
+	//print_fc_layer_info(net, 4);
 	
 
 	// compute the golden prediction
@@ -970,7 +997,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
 	      seu_generation(X, net, g_pred, fault_percentage, testfile, network_layer);
                 break;
 	    case STUCK_AT: {
-	        printf("sono esattamente qui");
+	        //printf("sono esattamente qui");
 		clock_t begin_time = clock();
 		outcome_t o1 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_1_result.txt", network_layer, 1);
 		outcome_t o2 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_0_result.txt", network_layer, 0);
@@ -978,7 +1005,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
 		o2.MSK += o1.MSK;
 		o2.Crit_SDC += o1.Crit_SDC;
 		o2.No_Crit_SDC += o1.No_Crit_SDC;
-		print_result(o2, sec(clock() - begin_time));
+		print_result(o2, sec(clock() - begin_time)); 
 	      }
 	      break;
             default:

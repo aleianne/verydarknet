@@ -131,6 +131,10 @@ void gemm_nn_faulty_stuck_at(stuck_at_fault fault, int M, int N, int K, float AL
 			     float *A, int lda,
 			     float *B, int ldb, 
 			     float *C, int ldc) {
+
+  // printf("the bit position is %d\n", fault.bit);
+  //printf("the stuck-at type is %d\n", fault.type);
+  
     int i,j,k;
     float tmp;
     #pragma omp parallel for
@@ -144,4 +148,9 @@ void gemm_nn_faulty_stuck_at(stuck_at_fault fault, int M, int N, int K, float AL
             }
         }
     }
+
+    // this is only for debug
+    //tmp = 23.156;
+    //float value = compute_faulty_multiplication(tmp, 23, 0);
+    //printf("the value before the stuck-at-0 at position %d is %f, than the result is %f\n", 23, tmp, value);  
 }

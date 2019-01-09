@@ -13,19 +13,22 @@ float compute_faulty_multiplication(float value, int position, int type) {
   int tmp, mask;
   memcpy(&tmp, &value, sizeof(float));
   if (type == 1) {
-    // printf("DEBUG: the value before the stuck at is %d\n", tmp);
+    //printf("DEBUG: the value before the stuck at is %d\n", tmp);
     mask = 0x01;
     mask <<= position;
     tmp |= mask;
     //printf("DEBUG: the value after the stuck at is %d\n", tmp);
   } else {
+    //printf("the stuck at position is %d\n", position);
+    //printf("DEBUG: the value before the stuck at is %d\n", tmp);
     mask = 0x01;
-    mask = ~mask;
     mask <<= position;
+    mask = ~mask;
     tmp &= mask;
+    //printf("DEBUG: the value after the stuck at is %d\n", tmp);
   }
   memcpy(&value, &tmp, sizeof(float));
-  return tmp;
+  return value;
 }
 
 void remove_fault(network *net, int layer_n) {
