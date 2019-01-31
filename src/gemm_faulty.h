@@ -2,6 +2,7 @@
 #define GEMM_FAULTY_H 
 
 #include "darknet.h"
+#include "fault_injector.h"
 #include "transition_fault_injector.h"
 #include "transient_fault_injector.h"
 #include "stuck_at_fault_injector.h"

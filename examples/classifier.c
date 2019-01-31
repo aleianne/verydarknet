@@ -725,31 +725,31 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
             }
         
             switch(fault_model){
-                case NO_FAULT: break;
-                case PERMENANT_FAULT: 
-                    permanent_fault_injector_sim(X, net, g_pred, testfile, network_layer);   
-                    break;
-                case TRANSITION_FAULT:
-                    transition_fault_injector_sim(X, net, g_pred, testfile, network_layer);
-                    break;
-                case SINGLE_EVENT_UPSET: 
-                    seu_fault_injector_sim(X, net, g_pred, fault_percentage, testfile, network_layer);
-                    break;
-                case STUCK_AT: {
-                    stuck_at_fault_injector_sim(X, net, g_pred, testfile, network_layer);
-                    //printf("sono esattamente qui");
-                    /*clock_t begin_time = clock();
-                    outcome_t o1 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_1_result.txt", network_layer, 1);
-                    outcome_t o2 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_0_result.txt", network_layer, 0);
-                    o2.SDC += o1.SDC;
-                    o2.MSK += o1.MSK;
-                    o2.Crit_SDC += o1.Crit_SDC;
-                    o2.No_Crit_SDC += o1.No_Crit_SDC;
-                    print_result(o2, sec(clock() - begin_time)); */ 
-                }
-                    break;
-                default:
-                    break;
+            case NO_FAULT: break;
+            case PERMENANT_FAULT: 
+                permanent_fault_injector_sim(X, net, g_pred, testfile, network_layer);   
+                break;
+            case TRANSITION_FAULT:
+                transition_fault_injector_sim(X, net, g_pred, testfile, network_layer);
+                break;
+            case SINGLE_EVENT_UPSET: 
+                seu_fault_injector_sim(X, net, g_pred, fault_percentage, testfile, network_layer);
+                break;
+            case STUCK_AT: {
+                stuck_at_fault_injector_sim(X, net, g_pred, testfile, network_layer);
+                //printf("sono esattamente qui");
+                /*clock_t begin_time = clock();
+                outcome_t o1 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_1_result.txt", network_layer, 1);
+                outcome_t o2 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_0_result.txt", network_layer, 0);
+                o2.SDC += o1.SDC;
+                o2.MSK += o1.MSK;
+                o2.Crit_SDC += o1.Crit_SDC;
+                o2.No_Crit_SDC += o1.No_Crit_SDC;
+                print_result(o2, sec(clock() - begin_time)); */ 
+            }
+                break;
+            default:
+                break;    
             }
         } else  {
             printf("impossible to inject fault %s into layer %d", fault_model_value, network_layer);

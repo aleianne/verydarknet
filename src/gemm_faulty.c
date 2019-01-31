@@ -27,6 +27,7 @@ void gemm_nt_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
         float *C, int ldc)
 {
     stuck_at_fault f_parsed = *((stuck_at_fault *) fault);
+    int mul_counter = f_parsed.fault_location;
     int i,j,k;
     float result;
     #pragma omp parallel for
@@ -34,8 +35,14 @@ void gemm_nt_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
         for(j = 0; j < N; ++j){
             register float sum = 0;
             for(k = 0; k < K; ++k){
-               result = ALPHA*A[i*lda+k]*B[j*ldb + k];
-               sum += compute_faulty_multiplication(result, f_parsed.bit, f_parsed.type);
+                result = ALPHA*A[i*lda+k]*B[j*ldb + k];
+                mul_counter--;
+                if (mul_counter == 0) {
+                    sum += compute_faulty_multiplication(result, f_parsed.bit, f_parsed.type);
+                    mul_counter = MAC_UNIT_N;
+                } else {
+                    sum += result;
+                }    
             }
             C[i*ldc+j] += sum;
         }
@@ -133,6 +140,7 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
     //  printf("the stuck-at type is %d\n", fault.type);
     
     stuck_at_fault f_parsed = *((stuck_at_fault *) fault);
+    int mul_counter = f_parsed.fault_location;
     int i,j,k;
     float tmp;
     #pragma omp parallel for
@@ -140,8 +148,14 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
         for(k = 0; k < K; ++k){
             register float A_PART = ALPHA*A[i*lda+k];
             for(j = 0; j < N; ++j){
-	        tmp = A_PART*B[k*ldb+j];
-		C[i*ldc+j] += compute_faulty_multiplication(tmp, f_parsed.bit, f_parsed.type);
+	            tmp = A_PART*B[k*ldb+j];
+                mul_counter--;
+                if (mul_counter == 0) {
+                    C[i*ldc+j] += compute_faulty_multiplication(tmp, f_parsed.bit, f_parsed.type);
+                    mul_counter = MAC_UNIT_N;
+                } else {
+                    C[i*ldc+j] += tmp;
+                }
                 //C[i*ldc+j] += A_PART*B[k*ldb+j];   
             }
         }

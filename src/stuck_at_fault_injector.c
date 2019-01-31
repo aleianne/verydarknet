@@ -1,10 +1,11 @@
 #include "stuck_at_fault_injector.h"
 
-void inject_stuck_at_fault_into_layers(network *net, int layer_n, int bit, int type) {
+void inject_stuck_at_fault_into_layers(network *net, int layer_n, int bit, int type, int fault_location) {
     // create a new stuck-at data structure
     stuck_at_fault *new_st_fault = malloc(sizeof(stuck_at_fault));
     new_st_fault->bit = bit;
     new_st_fault->type = type;
+    new_st_fault->fault_location = fault_location;
 
     if (layer_n < net->n) {
         inject_stuck_at_fault(net, layer_n, new_st_fault);
@@ -25,20 +26,20 @@ void inject_stuck_at_fault(network *net, int layer_n, stuck_at_fault *fault) {
     l->fault = fault;
 }
 
-float compute_faulty_multiplication(float value, int position, int type) {
+float compute_faulty_multiplication(float value, int bit_position, int type) {
     int tmp, mask;
     memcpy(&tmp, &value, sizeof(float));
     if (type == 1) {
         //printf("DEBUG: the value before the stuck at is %d\n", tmp);
         mask = 0x01;
-        mask <<= position;
+        mask <<= bit_position;
         tmp |= mask;
         //printf("DEBUG: the value after the stuck at is %d\n", tmp);
     } else {
         //printf("the stuck at position is %d\n", position);
         //printf("DEBUG: the value before the stuck at is %d\n", tmp);
         mask = 0x01;
-        mask <<= position;
+        mask <<= bit_position;
         mask = ~mask;
         tmp &= mask;
         //printf("DEBUG: the value after the stuck at is %d\n", tmp);

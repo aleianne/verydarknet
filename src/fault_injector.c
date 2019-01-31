@@ -79,7 +79,7 @@ void seu_fault_injector_sim(float *X, network *net, float *g_pred, int fault_per
 }
 
 // if the network layer is less than 0 apply the fault injection to all network layers
-outcome_t stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer) {
+void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer) {
     int j = 0;
 
     int top = net->outputs;
@@ -89,19 +89,15 @@ outcome_t stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, cha
     int max_f;
     int max_i = max(g_pred, top);
 
-    outcome_t outcome;
+    /*outcome_t outcome;
     outcome.SDC = 0;
     outcome.Crit_SDC = 0;
     outcome.No_Crit_SDC = 0;
-    outcome.MSK = 0;
+    outcome.MSK = 0;*/
 
-    FILE *fp = fopen(filename, "a");
-    if (fp == NULL) {
-        printf("impossible to open file %s\n", filename);
-        exit(1);
-    }
+    clock_t sim_begin_time = clock();
 
-    int mac_number = 1024;
+    int mac_number = MAC_UNIT_N;
     int bit_number = 8;
     int bit_position = 0;
     int k, m, n;
@@ -113,7 +109,7 @@ outcome_t stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, cha
                 bit_position = bit_position + 22;
 
                 // inject fault into convolutional network
-                inject_stuck_at_fault_into_layers(net, network_layer, bit_position, k);
+                inject_stuck_at_fault_into_layers(net, network_layer, bit_position, k, m);
                 
                 // predict the outcome
                 predictions = network_predict(net, X);
@@ -127,9 +123,8 @@ outcome_t stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, cha
             }
         }
     }
-    
-    fclose(fp);
-    return outcome;
+
+    clock_t sim_end_time = clock();
 }
 
 void permanent_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer) {
