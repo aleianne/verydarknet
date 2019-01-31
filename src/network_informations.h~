@@ -1,8 +1,0 @@
-#ifndef NETWORK_INFORMATION_H
-#define NETWORK_INFORMATION_H
-
-#include "darknet.h"
-
-void 
-
-#endif

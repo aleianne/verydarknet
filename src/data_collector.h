@@ -1,5 +1,5 @@
-#ifndef NETWORK_INFORMATION_H
-#define NETWORK_INFORMATION_H
+#ifndef DATA_COLLECTOR_H
+#define DATA_COLLECTOT_H 
 
 #include "darknet.h"
 

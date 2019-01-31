@@ -1,16 +1,14 @@
 #include "darknet.h"
 #include "injector.h"
-#include "transition_fault_injector.h"
-#include "transient_fault_inject.h"
-#include "stuck_at_fault_injector.h"
-#include "network_informations.h"
+#include "fault_injector.h"
+#include "data_collector.h"
 
 #include <sys/time.h>
 #include <assert.h>
 
-void print_result(outcome_t outcome, float exec_time) {
+/* void print_result(outcome_t outcome, float exec_time) {
 	printf("=== RESULTS ===\n");
-    	printf("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\nminutes = %f\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK, exec_time/60);
+    printf("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\nminutes = %f\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK, exec_time/60);
 }
 
 FILE *open_fault_list_file(char *filename) {
@@ -91,260 +89,7 @@ void print_layer_info(network *n, int layer_n, int filter) {
    }
    fclose(fp);
 }
-
-void seu_generation(float *X, network *net, float *g_pred, int fault_percentage, char *filename, int network_layer) {
-   
-    int layer_n = network_layer;
-    int top = net->outputs;
-
-    int *indexes = calloc(top, sizeof(int)); 
-    float *predictions = calloc(top, sizeof(float));
-
-    int max_i = max (g_pred, top);
-
-    outcome_t outcome;
-    outcome.SDC = 0;
-    outcome.Crit_SDC = 0;
-    outcome.No_Crit_SDC = 0;
-    outcome.MSK = 0;
-
-    layer l = net->layers[layer_n];
-    int n_iteration = (int) (l.outputs * l.size * l.size * l.c * fault_percentage) / 100;
-    int n_filters = l.n, n_weights = l.nweights / l.n, n_output_neurons = l.out_w * l.out_h;
-
-    int max_f;
-
-    srand(time(NULL));
-
-    FILE *fp = open_fault_list_file(filename);
-
-    // this is the value that represent the max number of neuron that can be affected by the fault
-    int max_neurons;
-
-    clock_t begin_time = clock();
-
-    if (l.type == CONVOLUTIONAL) {
-        int i;
-        fprintf(fp, "BIT\tFILTER\tWEIGHT\tNEURON");
-
-        for (i = 0; i < n_iteration; ++i) {
-            seu_fault *fault_i = (seu_fault *) malloc(sizeof(seu_fault));
-            fault_i->bit = rand() % 32;
-            fault_i->filter = rand() % n_filters;
-            fault_i->weight = rand() % n_weights;
-            fault_i->output_neuron = rand() % n_output_neurons;
-
-	    // compute the number of neurons affected by the fault
-	    max_neurons = n_output_neurons - fault_i->output_neuron;
-	    fault_i->output_neuron_end = rand() %  max_neurons;
-
-            // print into the file the informations about the fault
-            fprintf(fp, "%10d\t%10d\t%10d\t%10d", fault_i->bit, fault_i->filter, fault_i->weight, fault_i->output_neuron);
-
-            inject_convolutional_seu(fault_i, net, layer_n);
-
-            predictions = network_predict(net, X);
-            if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
-            top_k(predictions, net->outputs, net->outputs, indexes);
-            max_f = max (predictions, top);
-
-            check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
-        }
-    } else {
-
-    }
-
-    fclose(fp);
-
-    print_result(outcome, sec(clock() - begin_time));
-}
-
-outcome_t stuck_at_fault_generation(float *X, network *net, float *g_pred, char *filename, int network_layer, int stuck_at_type) {
-  int j = 0;
-
-  int top = net->outputs;
-  int *indexes = calloc(top, sizeof(int));
-  float *predictions = calloc(top, sizeof(float));
- 
-  int label_predicted[8];
-
-  int max_f;
-  int max_i = max(g_pred, top);
-
-  outcome_t outcome;
-  outcome.SDC = 0;
-  outcome.Crit_SDC = 0;
-  outcome.No_Crit_SDC = 0;
-  outcome.MSK = 0;
-
-  int bit = 1;
-
-  FILE *fp = fopen(filename, "a");
-  if (fp == NULL) {
-    printf("impossible to open file %s\n", filename);
-    exit(1);
-  }
-
-  while(bit <= 8) {
-    
-     // inject the fault into the network
-     inject_stuck_at_fault(net, network_layer, bit, stuck_at_type);
-    
-     // predict the outcome
-     predictions = network_predict(net, X);
-     if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
-     top_k(predictions, net->outputs, net->outputs, indexes);
-     max_f = max (predictions, top);
-     check_max_outcome (&outcome, predictions, g_pred, max_i, max_f);
-
-     // insert the value predicted into the array
-     label_predicted[bit-1] = max_f;
-
-     if (bit == 1) {
-       //print_layer_info(net, 2, 1);
-       //print_fc_layer_info(net, 4);
-     }
-
-     // remove fault 
-     remove_fault(net, network_layer);
-     
-     bit++;
-  }  
-
-  print_stuck_at_prediction_informations(fp, label_predicted, 8, max_i);
-  fclose(fp);
-
-  return outcome;
-}
-
-void permanent_fault_generation(float *X, network *net, float *g_pred, char *filename, int network_layer) {
-   
-    int top = net->outputs;
-    
-    int *indexes = calloc(top, sizeof(int));
-    float *predictions = calloc(top, sizeof(float));
-
-    int max_i = max (g_pred, top);
-
-    fault_t fault;
-    outcome_t  outcome;
-    outcome.SDC = 0;
-    outcome.Crit_SDC = 0;
-    outcome.No_Crit_SDC = 0;
-    outcome.MSK = 0;
-
-    int max_f;
-
-    FILE *fl = open_fault_list_file(filename);
-
-    clock_t begin_time = clock();
-
-    fault.layer_index = network_layer;
-    while (fscanf (fl, "%d %d", &(fault.weigth), &(fault.bit)) != EOF) {
-
-        inject (net, &fault);
-        predictions = network_predict(net, X);
-        if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
-        top_k(predictions, net->outputs, net->outputs, indexes);
-        max_f = max (predictions, top);
-
-        check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
-        release (net, &fault);	
-    }
-
-    fclose(fl);
-
-    print_result(outcome, sec(clock() - begin_time));
-
-}
-
-void transition_fault_generation(float *X, network *net, float *g_pred, char *filename, int network_layer) {
-    
-    int layer_n = network_layer;
-    int top = net->outputs;
-
-    int *indexes = calloc(top, sizeof(int));
-    float *predictions = calloc(top, sizeof(float));
-
-    int max_i = max (g_pred, top);
-
-    outcome_t  outcome;
-    outcome.SDC = 0;
-    outcome.Crit_SDC = 0;
-    outcome.No_Crit_SDC = 0;
-    outcome.MSK = 0;
-
-    int max_f;
-
-    layer l = net->layers[layer_n];
-    srand(time(NULL));
-
-    FILE *fp = open_fault_list_file(filename);
-
-    clock_t begin_time = clock();
-    
-    printf("\n=== BEGIN THE SIMULATION ===\n");
-
-    if (l.type == CONVOLUTIONAL) {
-      int i;
-      int f, w, n;
-
-       	while (fscanf(fp, "%d %d %d", &w, &f, &n) != EOF) {
-	    // read the information from the fault list and inject the error into the network
- 	    i = 8;
-	    while(i > 0) {
-            	transition_fault *t_fault = (transition_fault *) malloc(sizeof(transition_fault));
-            	t_fault->bit =  22 + i;
-            	t_fault->filter = f;
-            	t_fault->weight = w;
-            	t_fault->output_neuron = n;
-
-            	// inject here the transition fault
-            	create_new_fault(net, t_fault, layer_n);
-
-            	// predict the outcome
-            	predictions = network_predict(net, X);
-            	if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
-            	top_k(predictions, net->outputs, net->outputs, indexes);
-            	max_f = max (predictions, top);
-            	check_max_outcome (&outcome, predictions, g_pred, max_i, max_f);
-
-	    	i--;
-	    }
-        }
-    } else if (l.type == CONNECTED) {
-      int j;
-      int b, i, o;
-
-       	while (fscanf(fp, "%d %d %d", &b, &i, &o) != EOF) {
-	        j = 8;
-		while (j > 0) {
-		  // allocate the fualt structure that contains the information about the fault position
-	          fc_transition_fault *ft = (fc_transition_fault *) calloc(1, sizeof(fc_transition_fault));
-            	  ft->bit = 22 + j;
-        	  ft->batch = b;
-	          ft->input_neuron = i;
-	          ft->output_neuron = o;
-
-	          // inject here the transition fault
-            	  create_new_fc_fault(net, ft, layer_n);
-
-        	  // predict the outcome
-	          predictions = network_predict(net, X);
-            	  if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
-        	  top_k(predictions, net->outputs, net->outputs, indexes);
-	          max_f = max (predictions, top);
-            	  check_max_outcome (&outcome, predictions, g_pred, max_i, max_f);
-
-		  j--;
-		}
-        }
-    }
-
-    fclose(fp);
-
-    print_result(outcome, sec(clock() - begin_time));
-}
+*/
 
 float *get_regression_values(char **labels, int n)
 {
@@ -899,6 +644,10 @@ void try_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filena
     }
 }
 
+// the last two parameters has been added by me and represent the fault model to be used during the simulation
+// the fault percentage to be covered (i don't think it can be usedful)
+// the fault list file
+// the network layer target for the simulation
 void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top, char *fault_model_value, int fault_percentage, char *testfile, int network_layer)
 {
     network *net = load_network(cfgfile, weightfile, 0);
@@ -935,7 +684,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
         //resize_network(net, r.w, r.h);
         //printf("%d %d\n", r.w, r.h);
 
-	//init_inj (net);	
+	    //init_inj (net);	
 
         float *X = r.data;
         time=clock();
@@ -945,73 +694,68 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
         top_k(predictions, net->outputs, net->outputs, indexes);
         fprintf(stderr, "%s: Predicted in %f seconds. \n", input, sec(clock()-time));
 
-
-	// in this point of the predict classifier function 
-	// we print the informations about the filter output
-	//print_layer_info(net, 2, 1);
-	//print_fc_layer_info(net, 4);
-	
-
-	// compute the golden prediction
-	int i;
-	float *g_pred = calloc(net->outputs, sizeof(float));
-	for( i = 0; i < net->outputs; ++i) {
-	  g_pred[i] = predictions[i];
-	}
-
-	// print the a set of information for each layer
-	// print_network_informations(net);
-
-	// begin the fault simulation
-        FAULT_MODEL fault_model;
+        // in this point of the predict classifier function 
+        // we print the informations about the filter output
+        //print_layer_info(net, 2, 1);
+        //print_fc_layer_info(net, 4);
         
-        if (strcmp(fault_model_value, "transition") == 0) {
-            fault_model = TRANSITION_FAULT;
-        } else if (strcmp(fault_model_value, "no-faults") == 0) {
-            fault_model = NO_FAULT;
-        } else if (strcmp(fault_model_value, "seu") == 0) {
-            fault_model = SINGLE_EVENT_UPSET;
-        } else if (strcmp(fault_model_value, "permanent") == 0) {
-            fault_model = PERMENANT_FAULT;
-        } else if (strcmp(fault_model_value, "stuck-at") == 0) {
-	  fault_model = STUCK_AT;
-        } else {
-          fault_model = NO_FAULT;
+        // compute the golden prediction
+        int i;
+        float *g_pred = calloc(net->outputs, sizeof(float));
+        for( i = 0; i < net->outputs; ++i) {
+            g_pred[i] = predictions[i];
         }
-	
-	// check if target layer exists
-	if (network_layer > net->n) {
-	  printf("error: cannot inject fauls into layer %d\n", network_layer);
-	  return; 
-	}
 
-        switch(fault_model){
-            case NO_FAULT: break;
-            case PERMENANT_FAULT: 
-	      permanent_fault_generation(X, net, g_pred, testfile, network_layer);   
-                break;
-            case TRANSITION_FAULT:
-		transition_fault_generation(X, net, g_pred, testfile, network_layer);
-                break;
-            case SINGLE_EVENT_UPSET: 
-	      seu_generation(X, net, g_pred, fault_percentage, testfile, network_layer);
-                break;
-	    case STUCK_AT: {
-	        //printf("sono esattamente qui");
-		clock_t begin_time = clock();
-		outcome_t o1 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_1_result.txt", network_layer, 1);
-		outcome_t o2 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_0_result.txt", network_layer, 0);
-		o2.SDC += o1.SDC;
-		o2.MSK += o1.MSK;
-		o2.Crit_SDC += o1.Crit_SDC;
-		o2.No_Crit_SDC += o1.No_Crit_SDC;
-		print_result(o2, sec(clock() - begin_time)); 
-	      }
-	      break;
-            default:
-                break;
+        if (network_layer < net->n) {
+            // begin the fault simulation
+            FAULT_MODEL fault_model;
+            
+            if (strcmp(fault_model_value, "transition") == 0) {
+                fault_model = TRANSITION_FAULT;
+            } else if (strcmp(fault_model_value, "no-faults") == 0 || strcmp(fault_model_value, "no-fault") == 0) {
+                fault_model = NO_FAULT;
+            } else if (strcmp(fault_model_value, "seu") == 0) {
+                fault_model = SINGLE_EVENT_UPSET;
+            } else if (strcmp(fault_model_value, "permanent") == 0) {
+                fault_model = PERMENANT_FAULT;
+            } else if (strcmp(fault_model_value, "stuck-at") == 0) {
+                fault_model = STUCK_AT;
+            } else {
+                fault_model = NO_FAULT;
+            }
+        
+            switch(fault_model){
+                case NO_FAULT: break;
+                case PERMENANT_FAULT: 
+                    permanent_fault_injector_sim(X, net, g_pred, testfile, network_layer);   
+                    break;
+                case TRANSITION_FAULT:
+                    transition_fault_injector_sim(X, net, g_pred, testfile, network_layer);
+                    break;
+                case SINGLE_EVENT_UPSET: 
+                    seu_fault_injector_sim(X, net, g_pred, fault_percentage, testfile, network_layer);
+                    break;
+                case STUCK_AT: {
+                    stuck_at_fault_injector_sim(X, net, g_pred, testfile, network_layer);
+                    //printf("sono esattamente qui");
+                    /*clock_t begin_time = clock();
+                    outcome_t o1 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_1_result.txt", network_layer, 1);
+                    outcome_t o2 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_0_result.txt", network_layer, 0);
+                    o2.SDC += o1.SDC;
+                    o2.MSK += o1.MSK;
+                    o2.Crit_SDC += o1.Crit_SDC;
+                    o2.No_Crit_SDC += o1.No_Crit_SDC;
+                    print_result(o2, sec(clock() - begin_time)); */ 
+                }
+                    break;
+                default:
+                    break;
+            }
+        } else  {
+            printf("impossible to inject fault %s into layer %d", fault_model_value, network_layer);
         }
-	
+
+        // release the memory used to store the image data
         if(r.data != im.data) free_image(r);
         free_image(im);
         if (filename) break;

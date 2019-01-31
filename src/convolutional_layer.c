@@ -222,10 +222,6 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
     
     // here define the struct for the fault injection 
     l.f_model = NO_FAULT;
-    l.t_fc_fault = NULL;
-    l.t_conv_fault = NULL;
-    l.seu_fault = NULL;
-    l.st_fault = NULL;
 
     //printf("the number of multiplication into this convolutional layer is %d\n", l.h * l.w * l.c * l.out_c * l.out_h * l.out_w);
 
@@ -482,13 +478,13 @@ void forward_convolutional_layer(convolutional_layer l, network net)
     fill_cpu(l.outputs*l.batch, 0, l.output, 1);
 
     if(l.xnor){
-	//printf("the xnor option is active");
+	    //printf("the xnor option is active");
         binarize_weights(l.weights, l.n, l.c/l.groups*l.size*l.size, l.binary_weights);
         swap_binary(&l);
         binarize_cpu(net.input, l.c*l.h*l.w*l.batch, l.binary_input);
         net.input = l.binary_input;
     } else {
-	//printf("the xnor is not active");
+	    //printf("the xnor is not active");
     }
 
     int m = l.n/l.groups;
@@ -511,49 +507,47 @@ void forward_convolutional_layer(convolutional_layer l, network net)
                 im2col_cpu(im, l.c/l.groups, l.h, l.w, l.size, l.stride, l.pad, b);
             }
 
-	    switch(l.f_model) {
-	      case NO_FAULT:
-		//printf("the fault model is NO_FAULT\n");
-		gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
-		break;
-	      case TRANSITION_FAULT:
-		//printf("the fault model is TRANSITION_FAULT\n");
-		gemm_nn_faulty2(*l.t_conv_fault,m,n,k,1,a,k,b,n,c,n);
-		break;
-	      case SINGLE_EVENT_UPSET:
-		//printf("the fault model is SINGLE_EVENT_UPSET\n");
-		gemm_nn_faulty_seu(*l.seu_fault,m,n,k,1,a,k,b,n,c,n);
-		break;
-	      case STUCK_AT:	
-		//printf("the fault model is STUCK_AT\n");
-		gemm_nn_faulty_stuck_at(*l.st_fault,m,n,k,1,a,k,b,n,c,n);
-		break;
-	      default:
-		break;
-	    }
-
-	    /*
-            if (l.is_faulty == 0) {
+            switch(l.f_model) {
+            case NO_FAULT:
+                //printf("the fault model is NO_FAULT\n");
                 gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
-            } else {
+                break;
+            case TRANSITION_FAULT:
+                //printf("the fault model is TRANSITION_FAULT\n");
+                //gemm_nn_faulty2(l.fault,m,n,k,1,a,k,b,n,c,n);
+                break;
+            case SINGLE_EVENT_UPSET:
+                //printf("the fault model is SINGLE_EVENT_UPSET\n");
+                //gemm_nn_faulty_seu(l.fault,m,n,k,1,a,k,b,n,c,n);
+                break;
+            case STUCK_AT:	
+                //printf("the fault model is STUCK_AT\n");
+                gemm_nn_faulty_stuck_at(l.fault,m,n,k,1,a,k,b,n,c,n);
+                break;
+            default:
+                break;
+            }
 
-                if (l.fault) {
-                    //gemm_nn_faulty(*l.fault,m,n,k,1,a,k,b,n,c,n);
-		    gemm_nn_faulty2(*l.fault,m,n,k,1,a,k,b,n,c,n);
-                } else if (l.seu_fault) {
-                    gemm_nn_faulty_seu(*l.seu_fault,m,n,k,1,a,k,b,n,c,n);
-                } else if (l.st_fault) {
-		    gemm_nn_faulty_stuck_at(*l.st_fault,m,n,k,1,a,k,b,n,c,n);
-		}
-            
-		}*/
+            /*
+                if (l.is_faulty == 0) {
+                    gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
+                } else {
+
+                    if (l.fault) {
+                        //gemm_nn_faulty(*l.fault,m,n,k,1,a,k,b,n,c,n);
+                gemm_nn_faulty2(*l.fault,m,n,k,1,a,k,b,n,c,n);
+                    } else if (l.seu_fault) {
+                        gemm_nn_faulty_seu(*l.seu_fault,m,n,k,1,a,k,b,n,c,n);
+                    } else if (l.st_fault) {
+                gemm_nn_faulty_stuck_at(*l.st_fault,m,n,k,1,a,k,b,n,c,n);
+            }
+                
+            }*/
         }
     }
 
     //flaot *r = print_filter_outcome(l.output, 4, l.out_h*l.out_w);
     
-    
-
     if(l.batch_normalize){
         forward_batchnorm_layer(l, net);
     } else {

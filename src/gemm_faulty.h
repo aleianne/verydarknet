@@ -3,35 +3,35 @@
 
 #include "darknet.h"
 #include "transition_fault_injector.h"
-#include "transient_fault_inject.h"
+#include "transient_fault_injector.h"
 #include "stuck_at_fault_injector.h"
 
-void gemm_nn_faulty2(transition_fault fault, int M, int N, int K, float ALPHA, 
+void gemm_nn_faulty2(void *fault, int M, int N, int K, float ALPHA, 
         float *A, int lda, 
         float *B, int ldb,
         float *C, int ldc);
 
-
-void gemm_nt_faulty(fc_transition_fault fault, int M, int N, int K, float ALPHA, 
+void gemm_nt_faulty(void *fault, int M, int N, int K, float ALPHA, 
         float *A, int lda, 
         float *B, int ldb,
         float *C, int ldc);
 
-void gemm_nn_faulty(transition_fault fault, int M, int N, int K, float ALPHA, 
+void gemm_nn_faulty(void *fault, int M, int N, int K, float ALPHA, 
         float *A, int lda, 
         float *B, int ldb,
         float *C, int ldc);
 
-void gemm_nn_faulty_seu(seu_fault fault, int M, int N, int K, float ALPHA, 
+void gemm_nn_faulty_seu(void *fault, int M, int N, int K, float ALPHA, 
         float *A, int lda, 
         float *B, int ldb,
         float *C, int ldc);     
 
-void gemm_nn_faulty_stuck_at(stuck_at_fault fault, int M, int N, int K, float ALPHA,
-			     float *A, int lda,
-			     float *B, int ldb, 
-			     float *C, int ldc); 
-void gemm_nt_faulty_stuck_at(stuck_at_fault fault, int M, int N, int K, float ALPHA, 
+void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
+	float *A, int lda,
+	float *B, int ldb, 
+        float *C, int ldc); 
+
+void gemm_nt_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA, 
         float *A, int lda, 
         float *B, int ldb,
         float *C, int ldc);  

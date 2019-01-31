@@ -1,8 +1,6 @@
 #include "gemm.h"
 #include "utils.h"
 #include "cuda.h"
-#include "transition_fault_injector.h"
-#include "transient_fault_inject.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>

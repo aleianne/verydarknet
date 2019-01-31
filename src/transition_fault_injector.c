@@ -5,7 +5,6 @@ void create_new_fault(network *net, transition_fault *fault_i, int target_layer)
     l->f_model = TRANSITION_FAULT;
 
     if (l->type == CONVOLUTIONAL) {
-        l->t_conv_fault = fault_i;
         l->f_model = TRANSITION_FAULT;
     } else {
         fprintf(stderr, "this kind of error should be injected into a convolutional layer\n");
@@ -16,8 +15,7 @@ void create_new_fc_fault(network *net, fc_transition_fault *fault_i, int target_
     layer *l = &net->layers[target_layer];
     
     if (l->type == CONNECTED) {
-        l->t_fc_fault = fault_i;
-	l->f_model = TRANSITION_FAULT;
+	    l->f_model = TRANSITION_FAULT;
     } else {
         fprintf(stderr, "this kind of error should be injected into a fully connected layer\n");
     }

@@ -51,10 +51,6 @@ layer make_connected_layer(int batch, int inputs, int outputs, ACTIVATION activa
 
     // here defiene the struct for the fault injection 
     l.f_model = NO_FAULT;
-    l.t_conv_fault = NULL;
-    l.t_fc_fault = NULL;
-    l.st_fault = NULL;
-    l.seu_fault = NULL;
 
     l.forward = forward_connected_layer;
     l.backward = backward_connected_layer;
@@ -194,20 +190,19 @@ void forward_connected_layer(layer l, network net)
 
     switch(l.f_model) {
     case TRANSITION_FAULT:
-      gemm_nt_faulty(*l.t_fc_fault, m,n,k,1,a,k,b,k,c,n);
-      break;
+        gemm_nt_faulty(l.fault, m,n,k,1,a,k,b,k,c,n);
+        break;
     case SINGLE_EVENT_UPSET:
-      break;
+        break;
     case STUCK_AT:
-      gemm_nt_faulty_stuck_at(*l.st_fault, m,n,k,1,a,k,b,k,c,n);
-      break;
+        gemm_nt_faulty_stuck_at(l.fault, m,n,k,1,a,k,b,k,c,n);
+        break;
     case NO_FAULT:
-      gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
-      break;
+        gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
+        break;
     default:
-      break;
+        break;
     }
-
 
     if(l.batch_normalize){
         forward_batchnorm_layer(l, net);
@@ -217,7 +212,6 @@ void forward_connected_layer(layer l, network net)
 
     
     activate_array(l.output, l.outputs*l.batch, l.activation);
-    //print_activation_value(l.output, l.outputs);
 }
 
 void backward_connected_layer(layer l, network net)

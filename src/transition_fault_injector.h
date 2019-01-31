@@ -3,6 +3,20 @@
 
 #include "darknet.h"
 
+typedef struct transition_fault_t {
+    int bit;
+    int filter;
+    int weight;
+    int output_neuron;
+} transition_fault;
+
+typedef struct fc_transition_fault_t {
+    int bit;
+    int batch;
+    int input_neuron;
+    int output_neuron;
+} fc_transition_fault;
+
 typedef struct fault_value_t {
     float previous_value;
     float actual_value;

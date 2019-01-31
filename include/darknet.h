@@ -107,38 +107,10 @@ typedef struct{
 } update_args;
 
 typedef struct pred_struct_t {
-  int correct_label;
-  int wrong_label;
-  int bit;
+    int correct_label;
+    int wrong_label;
+    int bit;
 } pred_struct;
-
-typedef struct transition_fault_t {
-    int bit;
-    int filter;
-    int weight;
-    int output_neuron;
-} transition_fault;
-
-typedef struct fc_transition_fault_t {
-    int bit;
-    int batch;
-    int input_neuron;
-    int output_neuron;
-} fc_transition_fault;
-
-typedef struct seu_fault_t {
-    int bit;
-    int filter;
-    int weight;
-    int output_neuron;
-    int output_neuron_end;
-} seu_fault;
-
-typedef struct stuck_at_fault_t {
-  int bit;
-  int type;
-} stuck_at_fault;
-
 
 typedef enum {
     NO_FAULT,
@@ -251,11 +223,15 @@ struct layer{
     float probability;
     float scale;
 
-  FAULT_MODEL f_model;
-  transition_fault *t_conv_fault;
-  fc_transition_fault *t_fc_fault;
-  seu_fault *seu_fault;
-  stuck_at_fault *st_fault;       
+    FAULT_MODEL f_model;
+    void *fault;
+    /*
+    transition_fault *t_conv_fault;
+    fc_transition_fault *t_fc_fault;
+    seu_fault *seu_fault;
+    stuck_at_fault *st_fault; 
+    */
+
 
     char  * cweights;
     int   * indexes;

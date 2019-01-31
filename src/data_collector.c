@@ -1,4 +1,4 @@
-#include "network_informations.h"
+#include "data_collector.h"
 
 void print_network_informations(network *net) {
   
@@ -44,5 +44,5 @@ void print_layer_conv_info(layer l, int layer_id) {
 
 void print_layer_fc_info(layer l, int layer_id) {
   int n_iteration = l.outputs * l.inputs;
-  printf("layer fully connected n: %d; MUL: %d, INPUTS %d, OUTPUTS %d, BATCHES %d ", layer_id, n_iterations, l.inputs, l.outputs, l.batch);
+  printf("layer fully connected n: %d; MUL: %d, INPUTS %d, OUTPUTS %d, BATCHES %d ", layer_id, n_iteration, l.inputs, l.outputs, l.batch);
 }
