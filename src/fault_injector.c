@@ -95,6 +95,7 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
     outcome.No_Crit_SDC = 0;
     outcome.MSK = 0;*/
 
+    fprintf(stderr, "begin the stuck-at simualtion\n");
     clock_t sim_begin_time = clock();
 
     int mac_number = MAC_UNIT_N;
@@ -125,6 +126,7 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
     }
 
     clock_t sim_end_time = clock();
+    fprintf(stderr, "simulation completed in %f seconds", sec(sim_end_time - sim_begin_time));
 }
 
 void permanent_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer) {
