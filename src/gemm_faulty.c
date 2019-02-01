@@ -166,7 +166,7 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
                     int tmp2 = compute_faulty_multiplication(tmp, f_parsed.bit, f_parsed.type);
                     C[i*ldc+j] += tmp2;
                     counter2++;
-                    printf("the correct result is %f the faulty one is %f\n,", tmp, tmp2);
+                    printf("the correct result is %f the faulty one is %f\n", tmp, tmp2);
                     printf("the counter for moltiplication is %d, the counter for the mac injection is %d\n", counter1, counter2);
                     mul_counter = MAC_UNIT_N;
                 } else {

@@ -34,7 +34,7 @@ float compute_faulty_multiplication(float value, int bit_position, int type) {
     int tmp, mask;
     memcpy(&tmp, &value, sizeof(float));
     mask = 0x01;
-    mask <<= bit_position;
+    mask <<= (bit_position - 1);
     if (type == 1) {
         //printf("DEBUG: the value before the stuck at is %d\n", tmp);
         tmp |= mask;
