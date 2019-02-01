@@ -163,7 +163,7 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
                 mul_counter--;
                 counter1++;
                 if (mul_counter == 0) {
-                    int tmp2 = compute_faulty_multiplication(tmp, f_parsed.bit, f_parsed.type);
+                    float tmp2 = compute_faulty_multiplication(tmp, f_parsed.bit, f_parsed.type);
                     C[i*ldc+j] += tmp2;
                     counter2++;
                     printf("the correct result is %f the faulty one is %f\n", tmp, tmp2);
