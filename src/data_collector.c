@@ -52,3 +52,24 @@ void print_prediction_results(float *pred, int n) {
         printf("prediction score for label %d: %f\n", i, pred[i]);
     }
 }
+
+void init_stuck_at_data_struct() {
+    int i, j;
+    for (i = 0; i < BIT_N; i++) {
+        for (j = 0; j < LABEL_N; i++) {
+            sa0_label_freq[i][j] = 0;
+            sa1_label_freq[i][j] = 0;
+        }
+    }
+}
+
+void update_sa_freq(int st_type, int bit,  int label) {
+    if (label < 0 || label > LABEL_N) {
+        return;
+    }
+    if (st_type == 1) {
+        sa0_label_freq[bit][label]++;
+    } if (st_type == 0) {
+        sa1_label_freq[bit][label]++;
+    }
+}

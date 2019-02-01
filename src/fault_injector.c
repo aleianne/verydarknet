@@ -127,7 +127,8 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
                 print_prediction_results(g_pred, top);
                 fprintf(stderr, "\nresults for the faulty prediction:\n");
                 print_prediction_results(predictions, top);
-
+                fprintf(stderr, "the golden prediction is %d\n", max_i);
+                fprintf(stderr, "the faulty prediction is %d\n", max_f);
                 /*
             }
         }
@@ -177,9 +178,10 @@ void permanent_fault_injector_sim(float *X, network *net, float *g_pred, char *f
 
 void transition_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer) {
     
-    /*int layer_n = network_layer;
+    /*
+    
+    int layer_n = network_layer;
     int top = net->outputs;
-
     int *indexes = calloc(top, sizeof(int));
     float *predictions = calloc(top, sizeof(float));
 
