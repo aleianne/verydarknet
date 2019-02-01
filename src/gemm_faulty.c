@@ -29,6 +29,7 @@ void gemm_nt_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
     stuck_at_fault f_parsed = *((stuck_at_fault *) fault);
     int mul_counter = f_parsed.fault_location;
     int counter1 = 0; int counter2 = 0;
+    printf("total number of multiplication %d\n", K * M * N);
     printf("the fault location is %d\n", mul_counter);
     int i,j,k;
     float result;
@@ -148,6 +149,9 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
     
     stuck_at_fault f_parsed = *((stuck_at_fault *) fault);
     int mul_counter = f_parsed.fault_location;
+    int counter1 = 0; int counter2 = 0;
+    printf("total number of multiplication %d\n", K * M * N);
+    printf("the fault location is %d\n", mul_counter);
     int i,j,k;
     float tmp;
     #pragma omp parallel for
@@ -157,8 +161,13 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
             for(j = 0; j < N; ++j){
 	            tmp = A_PART*B[k*ldb+j];
                 mul_counter--;
+                counter1++;
                 if (mul_counter == 0) {
-                    C[i*ldc+j] += compute_faulty_multiplication(tmp, f_parsed.bit, f_parsed.type);
+                    int tmp2 = compute_faulty_multiplication(tmp, f_parsed.bit, f_parsed.type);
+                    C[i*ldc+j] += tmp2;
+                    counter2++;
+                    printf("the correct result is %f the faulty one is %f\n,", tmp, tmp2);
+                    printf("the counter for moltiplication is %d, the counter for the mac injection is %d\n", counter1, counter2);
                     mul_counter = MAC_UNIT_N;
                 } else {
                     C[i*ldc+j] += tmp;
