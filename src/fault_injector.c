@@ -108,7 +108,7 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
             for (n = 0; n < bit_number; n++) {*/
                 // add the 22 offset in order to create a stuck-at only to exponential bits
                 bit_position = bit_position + 23;
-                k = 0;
+                k = 1;
                 m = 81;
                 // inject fault into convolutional network
                 inject_stuck_at_fault_into_layers(net, network_layer, bit_position, k, m);
