@@ -33,17 +33,15 @@ void inject_stuck_at_fault(network *net, int layer_n, stuck_at_fault *fault) {
 float compute_faulty_multiplication(float value, int bit_position, int type) {
     int tmp, mask;
     memcpy(&tmp, &value, sizeof(float));
+    mask = 0x01;
+    mask <<= bit_position;
     if (type == 1) {
         //printf("DEBUG: the value before the stuck at is %d\n", tmp);
-        mask = 0x01;
-        mask <<= bit_position;
         tmp |= mask;
         //printf("DEBUG: the value after the stuck at is %d\n", tmp);
     } else {
         //printf("the stuck at position is %d\n", position);
         //printf("DEBUG: the value before the stuck at is %d\n", tmp);
-        mask = 0x01;
-        mask <<= bit_position;
         mask = ~mask;
         tmp &= mask;
         //printf("DEBUG: the value after the stuck at is %d\n", tmp);
