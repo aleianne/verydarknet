@@ -11,7 +11,7 @@ void inject_stuck_at_fault_into_layers(network *net, int layer_n, int bit, int t
         if (net->layers[layer_n].type == CONVOLUTIONAL || net->layers[layer_n].type == CONNECTED) {
             inject_stuck_at_fault(net, layer_n, new_st_fault);
         } else {
-            fprintf("impossible to insert fault into layer %d because it is not a convolution or fully connected layer", layer_n);
+            fprintf(stderr, "impossible to insert fault into layer %d because it is not a convolution or fully connected layer", layer_n);
         }
     } else {
         int i;

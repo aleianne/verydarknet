@@ -151,7 +151,7 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
     int mul_counter = f_parsed.fault_location;
     int counter1 = 0; int counter2 = 0;
     printf("total number of multiplication %d\n", K * M * N);
-    printf("the fault location is %d\n", mul_counter);
+    printf("the fault location is %d, the bit position is %d, the stuck-at type is %d \n", mul_counter, f_parsed.bit, f_parsed.type);
     int i,j,k;
     float tmp;
     #pragma omp parallel for
