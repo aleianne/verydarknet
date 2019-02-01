@@ -6,6 +6,7 @@
 #include "stuck_at_fault_injector.h"
 #include "transition_fault_injector.h"
 #include "transient_fault_injector.h"
+#include "data_collector.h"
 
 #define MAC_UNIT_N 1024
 

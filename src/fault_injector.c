@@ -122,6 +122,12 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
 
                 // remove fault 
                 remove_fault(net, network_layer);
+
+                fprintf(stderr, "results for golden prediction:\n");
+                print_prediction_results(g_pred, top);
+                fprintf(stderr, "\nresults for the faulty prediction:\n");
+                print_prediction_results(predictions, top);
+
                 /*
             }
         }
