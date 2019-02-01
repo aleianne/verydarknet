@@ -22,7 +22,7 @@ pretrained_weights/
 python/
 fault_list.txt
 version.txt
-tests7
+tests/
 darknet
 .fuse*
 
