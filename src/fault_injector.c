@@ -95,20 +95,21 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
     outcome.No_Crit_SDC = 0;
     outcome.MSK = 0;*/
 
-    fprintf(stderr, "begin the stuck-at simualtion\n");
+    fprintf(stderr, "begin the stuck-at simulation\n");
     clock_t sim_begin_time = clock();
 
     int mac_number = MAC_UNIT_N;
     int bit_number = 8;
-    int bit_position = 0;
+    int bit_position = 3;
     int k, m, n;
 
-    for (k = 0; k < 2; k++) {
+    /*for (k = 0; k < 2; k++) {
         for (m = 0; m < mac_number; m++)  {
-            for (n = 0; n < bit_number; n++) {
+            for (n = 0; n < bit_number; n++) {*/
                 // add the 22 offset in order to create a stuck-at only to exponential bits
                 bit_position = bit_position + 22;
-
+                k = 0;
+                m = 34;
                 // inject fault into convolutional network
                 inject_stuck_at_fault_into_layers(net, network_layer, bit_position, k, m);
                 
@@ -121,12 +122,13 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
 
                 // remove fault 
                 remove_fault(net, network_layer);
+                /*
             }
         }
-    }
+    }*/
 
     clock_t sim_end_time = clock();
-    fprintf(stderr, "simulation completed in %f seconds", sec(sim_end_time - sim_begin_time));
+    fprintf(stderr, "simulation completed in %f seconds\n", sec(sim_end_time - sim_begin_time));
 }
 
 void permanent_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer) {
