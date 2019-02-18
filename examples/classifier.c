@@ -667,7 +667,27 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
     int *indexes = calloc(top, sizeof(int));
     char buff[256];
     char *input = buff;
+
+    // this time the filename is the name of the file that contains all the image set to be used during the simulation
+    /*
+
+        FILE *test_set_fp = fopen(filename, "r");
+
+        if (test_set_fp == NULL) {
+            fprintf("impossible to opent file: %s", filename);
+            exit(1);
+        }
+
+        while(fgets(input, 256, test_set_fp) != NULL) {
+            // all' interno di questo while devone esser inserite le funzionie per 
+            // effettuare un ciclo di inferenza
+        } 
+
+    */
+
     while(1){
+
+        // se all'eseguibile non passiamo nessun filename allora aspetterà interattivamente che vengano passati da stdin i nomi delle immagini da elaborare
         if(filename){
             strncpy(input, filename, 256);
         }else{
@@ -696,8 +716,8 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
 
         // in this point of the predict classifier function 
         // we print the informations about the filter output
-        //print_layer_info(net, 2, 1);
-        //print_fc_layer_info(net, 4);
+        // print_layer_info(net, 2, 1);
+        // print_fc_layer_info(net, 4);
         
         // compute the golden prediction
         int i;

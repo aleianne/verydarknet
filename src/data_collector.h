@@ -18,4 +18,6 @@ void print_prediction_results(float *pred, int n);
 void init_stuck_at_data_struct();
 void update_sa_freq(int st_type, int bit, int label);
 
+void write_golded_prediction_file();
+
 #endif

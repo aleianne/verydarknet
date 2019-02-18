@@ -78,7 +78,7 @@ void seu_fault_injector_sim(float *X, network *net, float *g_pred, int fault_per
     fclose(fp);*/
 }
 
-// if the network layer is less than 0 apply the fault injection to all network layers
+// if the network_layer is less than 0 apply the fault injection to all network layers
 void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer) {
     int j = 0;
 
@@ -106,7 +106,7 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
     /*for (k = 0; k < 2; k++) {
         for (m = 0; m < mac_number; m++)  {
             for (n = 0; n < bit_number; n++) {*/
-                // add the 22 offset in order to create a stuck-at only to exponential bits
+                // add the 22 offset in order to create a stuck-at only into exponential bits
                 bit_position = bit_position + 23;
                 k = 1;
                 m = 81;
@@ -117,7 +117,7 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
                 predictions = network_predict(net, X);
                 if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
                 top_k(predictions, net->outputs, net->outputs, indexes);
-                max_f = max (predictions, top);
+                max_f = max(predictions, top);
                 //check_max_outcome (&outcome, predictions, g_pred, max_i, max_f);
 
                 // remove fault 
