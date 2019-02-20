@@ -468,11 +468,8 @@ void backward_bias(float *bias_updates, float *delta, int batch, int n, int size
     }
 }
 
-// questa funzione viene passata come puntatore all'atto della creazione del layer e quindi della rete;
-// viene eseguita dopo, in particolare quando viene richiamata la funzione forward_input (o qualcosa del genere)
 void forward_convolutional_layer(convolutional_layer l, network net)
 {
-
     int i, j;
 
     fill_cpu(l.outputs*l.batch, 0, l.output, 1);
@@ -507,7 +504,20 @@ void forward_convolutional_layer(convolutional_layer l, network net)
                 im2col_cpu(im, l.c/l.groups, l.h, l.w, l.size, l.stride, l.pad, b);
             }
 
-            switch(l.f_model) {
+            // inject the fault into the network
+            if (l.f_model == TRANSITION_FAULT) {
+                //gemm_nn_faulty2(l.fault,m,n,k,1,a,k,b,n,c,n);
+            } else if (l.f_model == SINGLE_EVENT_UPSET) {
+                //gemm_nn_faulty_seu(l.fault,m,n,k,1,a,k,b,n,c,n);
+            } else if (l.f_model == STUCK_AT_0 || l.f_model == STUCK_AT_1) {
+                gemm_nn_faulty_stuck_at(l.fault,m,n,k,1,a,k,b,n,c,n);
+            } else if (l.f_model == NO_FAULT) {
+                gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
+            } else {
+                gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
+            }
+
+            /*switch(l.f_model) {
             case NO_FAULT:
                 //printf("the fault model is NO_FAULT\n");
                 gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
@@ -526,28 +536,24 @@ void forward_convolutional_layer(convolutional_layer l, network net)
                 break;
             default:
                 break;
-            }
+            }*/
 
-            /*
+                /*
                 if (l.is_faulty == 0) {
                     gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
                 } else {
-
                     if (l.fault) {
                         //gemm_nn_faulty(*l.fault,m,n,k,1,a,k,b,n,c,n);
-                gemm_nn_faulty2(*l.fault,m,n,k,1,a,k,b,n,c,n);
+                        gemm_nn_faulty2(*l.fault,m,n,k,1,a,k,b,n,c,n);
                     } else if (l.seu_fault) {
                         gemm_nn_faulty_seu(*l.seu_fault,m,n,k,1,a,k,b,n,c,n);
                     } else if (l.st_fault) {
-                gemm_nn_faulty_stuck_at(*l.st_fault,m,n,k,1,a,k,b,n,c,n);
-            }
-                
-            }*/
+                        gemm_nn_faulty_stuck_at(*l.st_fault,m,n,k,1,a,k,b,n,c,n);
+                    }
+                }*/
         }
     }
 
-    //flaot *r = print_filter_outcome(l.output, 4, l.out_h*l.out_w);
-    
     if(l.batch_normalize){
         forward_batchnorm_layer(l, net);
     } else {

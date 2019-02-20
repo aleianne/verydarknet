@@ -15,6 +15,67 @@ void close_fault_list(FILE *fp) {
     }
 }
 
+void inject_fault(fault_list_entry_t fault_record, network *net, int target_layer) {
+    // if the layer is 0 than the entire network must be tested
+    if (target_layer > 0) {
+
+        int mac_position = fault_record.fault_position;
+        int bit = fault_record.faulty_bit;
+
+        // inject the fault into the network 
+        FAULT_MODEL fault_model = fault_record.fault_type;
+        switch (fault_model) {
+            case PERMENANT_FAULT: {
+            
+            } break;
+
+            case STUCK_AT_0: {
+                // only for debug
+                fprintf(stderr, "the fault injected into the network is a stuck at 0\n");
+                inject_stuck_at_fault_into_layers(net, target_layer, bit, 0, mac_position);
+            } break;
+
+            case STUCK_AT_1: {
+                // only for debug 
+                fprintf(stderr, "the fault inejcted into the network is a stuck at 1\n");
+                inject_stuck_at_fault_into_layers(net, target_layer, bit, 1, mac_position);
+            } break;
+
+            default: {
+                fprintf(stderr, "no fault has been injected\n");
+            }
+        }
+
+    } else {
+        // only for debug 
+        fprintf(stderr, "the target layer must be greater or equal to 0\n");
+    }
+}
+
+void remove_fault(fault_list_entry_t fault_record, network *net, int target_layer) {
+    FAULT_MODEL fault_model = fault_record.fault_type;
+
+    switch (fault_model) {
+
+        case NO_FAULT: {
+            fprintf(stderr, "no fault should be injected into the network");
+        }
+
+        case STUCK_AT_0: {
+            remove_stuck_at_fault(net, target_layer);
+        }
+
+        case STUCK_AT_1: {
+            remove_stuck_at_fault(net, target_layer);
+        }
+
+        default: {
+            // only for debug 
+            fprintf(stderr, "not \n");
+        }
+    }
+}
+
 void seu_fault_injector_sim(float *X, network *net, float *g_pred, int fault_percentage, char *filename, int network_layer) {
    
     /*int layer_n = network_layer;
@@ -80,7 +141,7 @@ void seu_fault_injector_sim(float *X, network *net, float *g_pred, int fault_per
 
 // if the network_layer is less than 0 apply the fault injection to all network layers
 void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer) {
-    int j = 0;
+    /*int j = 0;
 
     int top = net->outputs;
     int *indexes = calloc(top, sizeof(int));
@@ -89,25 +150,20 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
     int max_f;
     int max_i = max(g_pred, top);
 
-    /*outcome_t outcome;
-    outcome.SDC = 0;
-    outcome.Crit_SDC = 0;
-    outcome.No_Crit_SDC = 0;
-    outcome.MSK = 0;*/
-
+    // print this information only for debug
     fprintf(stderr, "begin the stuck-at simulation\n");
     clock_t sim_begin_time = clock();
 
     int mac_number = MAC_UNIT_N;
     int bit_number = 8;
     int bit_position = 7;
-    int k, m, n;
+    int k, m, n;*/
 
     /*for (k = 0; k < 2; k++) {
         for (m = 0; m < mac_number; m++)  {
             for (n = 0; n < bit_number; n++) {*/
                 // add the 22 offset in order to create a stuck-at only into exponential bits
-                bit_position = bit_position + 23;
+                /*bit_position = bit_position + 23;
                 k = 1;
                 m = 81;
                 // inject fault into convolutional network
@@ -128,14 +184,14 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
                 fprintf(stderr, "\nresults for the faulty prediction:\n");
                 print_prediction_results(predictions, top);
                 fprintf(stderr, "the golden prediction is %d\n", max_i);
-                fprintf(stderr, "the faulty prediction is %d\n", max_f);
+                fprintf(stderr, "the faulty prediction is %d\n", max_f);*/
                 /*
             }
         }
     }*/
 
-    clock_t sim_end_time = clock();
-    fprintf(stderr, "simulation completed in %f seconds\n", sec(sim_end_time - sim_begin_time));
+    /*clock_t sim_end_time = clock();
+    fprintf(stderr, "simulation completed in %f seconds\n", sec(sim_end_time - sim_begin_time));*/
 }
 
 void permanent_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer) {

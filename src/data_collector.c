@@ -1,5 +1,6 @@
 #include "data_collector.h"
 
+/*
 void print_network_informations(network *net) {
      int i;
     layer l;
@@ -12,7 +13,6 @@ void print_network_informations(network *net) {
     }
     printf("\n");
 }
-
 
 void print_layer_n_mul(layer l, int layer_id) {
     if (l.type == CONVOLUTIONAL) {
@@ -73,3 +73,98 @@ void update_sa_freq(int st_type, int bit,  int label) {
         sa1_label_freq[bit][label]++;
     }
 }
+*/
+
+FILE *handle_file_open(char *filename) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        // fai qualcosa
+    }
+    return file;
+}
+
+char *path_extension(char *filename, char *path) {
+    int filename_size = strlen(filename);
+    int path_size = strlen(path);
+    int tot_length = filename_size + path_size;
+
+    // allocate a buffer that contains the complete image path;
+    char *cpt_image_path = calloc(tot_length + 1, sizeof(char));
+    strncpy(cpt_image_path, path, path_size);
+    strcat(cpt_image_path, filename);
+
+    return cpt_image_path;
+} 
+
+// this function generate output result file
+char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {
+
+    // in this function i must generate the information about results generated file
+    FAULT_MODEL fault_model = fault_record.fault_type;
+    int fault_position = fault_record.fault_position;
+    int fault_bit = fault_record.faulty_bit;
+
+    char *s_bit = calloc(3, sizeof(char));
+    char *s_position = calloc(5, sizeof(char));
+
+    char *filename = calloc(256, sizeof(char));
+
+    sprintf(s_bit, "%d", fault_bit);
+    sprintf(s_position, "%d", fault_position);
+
+    switch (fault_model)
+    {
+
+        case NO_FAULT: {
+            // this is a very strange case since the fault record has been already checked
+            fprintf(stderr, "no faults are been specified");
+        } break;
+
+        case STUCK_AT_0: {
+            strcpy(filename, "s-a-0_");
+        } break;
+
+        case STUCK_AT_1: {
+            strcpy(filename, "s-a-1_");
+        } break;
+
+        default: {
+
+        }
+            break;
+    }
+
+    // concatenate to the filename string the mac position and the faulty bit
+    strcat(filename, s_position);
+    strcat(filename, "_");
+    strcat(filename, s_bit);
+    strcat(filename, ".csv");
+
+    // only for debug
+    fprintf(stderr, "the filename to be used during the simulation is %s", filename);
+    return filename;
+}
+
+void write_prediction_file(prediction_results_t *prediction_array, char *filename, int size, char *header) {
+    
+    FILE *file = handle_file_open(filename); 
+    // insert the header row into the file
+    fprintf(file, "%s", header);
+
+    int i;
+    for (i = 0; i < size; i++) {
+        fprintf(file, "%s\t%d\t%f10.2", prediction_array[i].imagepath, prediction_array[i].label_pred, prediction_array[i].c_score);
+    }
+    fclose(file);
+}
+
+void write_faulty_prediction_file(prediction_results_t *prediction_array, char *filename, int size) {
+    char header[256] = "image name\tprediction\tconfidence score\n\n";
+    write_prediction_file(prediction_array, filename, size, header);
+}
+
+void write_golden_prediction_file(prediction_results_t *prediction_array, char *filename, int size) {
+    char header[256] = "image name\tgolden prediction\tconfidence score\n\n";
+    write_prediction_file(prediction_array, filename, size, header);
+}
+

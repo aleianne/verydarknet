@@ -17,5 +17,8 @@ void stuck_at_fault_injector_sim(float *X, network *net, float *g_pred, char *fi
 void permanent_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer); 
 void transition_fault_injector_sim(float *X, network *net, float *g_pred, char *filename, int network_layer);
 
+void inject_fault(fault_list_entry_t fault_record, network *net, int target_layer);
+void remove_fault(fault_list_entry_t fault_record, network *net, int target_layer);
+
 #endif 
 

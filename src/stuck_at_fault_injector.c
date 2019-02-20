@@ -26,7 +26,7 @@ void inject_stuck_at_fault_into_layers(network *net, int layer_n, int bit, int t
 void inject_stuck_at_fault(network *net, int layer_n, stuck_at_fault *fault) {
     layer *l = &net->layers[layer_n];
     // set the faulty flag to 1 and inject the fault
-    l->f_model = STUCK_AT;
+    l->f_model = STUCK_AT_1;
     l->fault = fault;
 }
 
@@ -36,25 +36,38 @@ float compute_faulty_multiplication(float value, int bit_position, int type) {
     mask = 0x01;
     mask <<= bit_position;
     if (type == 1) {
-        //printf("DEBUG: the value before the stuck at is %d\n", tmp);
         tmp |= mask;
-        //printf("DEBUG: the value after the stuck at is %d\n", tmp);
     } else {
-        //printf("the stuck at position is %d\n", position);
-        //printf("DEBUG: the value before the stuck at is %d\n", tmp);
         mask = ~mask;
         tmp &= mask;
-        //printf("DEBUG: the value after the stuck at is %d\n", tmp);
     }
     memcpy(&value, &tmp, sizeof(float));
     return value;
 }
 
-void remove_fault(network *net, int layer_n) {
-    // in questo caso il fault viene levato per un solo layer
-    // bisogna prevedere anche il caso in cui inietto su tutti i layer
-    layer *l = &net->layers[layer_n];
-    free(l->fault);
-    l->f_model = NO_FAULT;
-    l->fault = NULL;
+void remove_stuck_at_fault(network *net, int layer_n) {
+    if (layer_n < 0) {
+        // if layer number is less than 0 we must delete the fault from all the layers
+        int i;
+        for (i = 0; i < net->n; i++) {
+            if (net->layers[i].type == CONVOLUTIONAL || net->layers[i].type == CONNECTED) {
+                // remove the fault from the network
+                layer *l = &net->layers[i];
+                free(l->fault);
+                l->f_model = NO_FAULT;
+                l->fault = NULL;
+            }
+        }
+    } else {
+        layer *l = &net->layers[layer_n];
+        if (l->type == CONVOLUTIONAL || l->type == CONNECTED) {
+            free(l->fault);
+            l->f_model = NO_FAULT;
+            l->fault = NULL; 
+        } else {
+            // only for debug 
+            fprintf(stderr, "the layer %d is neither convolutional or fully connected", layer_n);
+        }
+    }
+    
 }

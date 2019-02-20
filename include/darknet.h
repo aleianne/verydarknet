@@ -119,7 +119,8 @@ typedef enum {
     SINGLE_EVENT_UPSET,
     MULTI_LAYER,
     MULTI_FILTER_FAULT,
-    STUCK_AT
+    STUCK_AT_1,
+    STUCK_AT_0
 } FAULT_MODEL;
 
 struct network;
@@ -609,6 +610,19 @@ typedef struct{
     float left, right, top, bottom;
 } box_label;
 
+// define a struct that contains the information about the golden prediction
+typedef struct prediction_results {
+    char *imagepath;        
+    int label_pred;     // label predicted
+    float c_score;      // confidence score of the predicted label
+} prediction_results_t;
+
+// define a new fault list record struct
+typedef struct fault_list_entry {
+    FAULT_MODEL fault_type;
+    int fault_position;
+    int faulty_bit; 
+} fault_list_entry_t;
 
 network *load_network(char *cfg, char *weights, int clear);
 load_args get_base_args(network *net);

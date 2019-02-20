@@ -644,10 +644,6 @@ void try_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filena
     }
 }
 
-// the last two parameters has been added by me and represent the fault model to be used during the simulation
-// the fault percentage to be covered (i don't think it can be usedful)
-// the fault list file
-// the network layer target for the simulation
 void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top, char *fault_model_value, int fault_percentage, char *testfile, int network_layer)
 {
     network *net = load_network(cfgfile, weightfile, 0);
@@ -668,26 +664,8 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
     char buff[256];
     char *input = buff;
 
-    // this time the filename is the name of the file that contains all the image set to be used during the simulation
-    /*
-
-        FILE *test_set_fp = fopen(filename, "r");
-
-        if (test_set_fp == NULL) {
-            fprintf("impossible to opent file: %s", filename);
-            exit(1);
-        }
-
-        while(fgets(input, 256, test_set_fp) != NULL) {
-            // all' interno di questo while devone esser inserite le funzionie per 
-            // effettuare un ciclo di inferenza
-        } 
-
-    */
-
     while(1){
 
-        // se all'eseguibile non passiamo nessun filename allora aspetterà interattivamente che vengano passati da stdin i nomi delle immagini da elaborare
         if(filename){
             strncpy(input, filename, 256);
         }else{
@@ -699,6 +677,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
         }
         image im = load_image_color(input, 0, 0);
         image r = letterbox_image(im, net->w, net->h);
+        
         //image r = resize_min(im, 320);
         //printf("%d %d\n", r.w, r.h);
         //resize_network(net, r.w, r.h);
@@ -720,7 +699,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
         // print_fc_layer_info(net, 4);
         
         // compute the golden prediction
-        int i;
+        /* int i;
         float *g_pred = calloc(net->outputs, sizeof(float));
         for( i = 0; i < net->outputs; ++i) {
             g_pred[i] = predictions[i];
@@ -758,14 +737,14 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
             case STUCK_AT: {
                 stuck_at_fault_injector_sim(X, net, g_pred, testfile, network_layer);
                 //printf("sono esattamente qui");
-                /*clock_t begin_time = clock();
+                clock_t begin_time = clock();
                 outcome_t o1 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_1_result.txt", network_layer, 1);
                 outcome_t o2 = stuck_at_fault_generation(X, net, g_pred, "stuck_at_0_result.txt", network_layer, 0);
                 o2.SDC += o1.SDC;
                 o2.MSK += o1.MSK;
                 o2.Crit_SDC += o1.Crit_SDC;
                 o2.No_Crit_SDC += o1.No_Crit_SDC;
-                print_result(o2, sec(clock() - begin_time)); */ 
+                print_result(o2, sec(clock() - begin_time)); 
             }
                 break;
             default:
@@ -773,7 +752,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
             }
         } else  {
             printf("impossible to inject fault %s into layer %d", fault_model_value, network_layer);
-        }
+        }*/
 
         // release the memory used to store the image data
         if(r.data != im.data) free_image(r);

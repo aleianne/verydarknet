@@ -174,34 +174,50 @@ void forward_connected_layer(layer l, network net)
     float *b = l.weights;
     float *c = l.output;
 
-    /*if (l.is_faulty == 0) {
+    /*
+    if (l.is_faulty == 0) {
         gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
     } else {
-      // printf("ahahah\n");
-      if (l.fc_fault) {
-	//printf("bu\n");
-	gemm_nt_faulty(*l.fc_fault, m,n,k,1,a,k,b,k,c,n);
-      } else if (l.st_fault) {
-	//printf("i'm here! %d %d \n", l.st_fault->bit, l.st_fault->type);
-	gemm_nt_faulty_stuck_at(*l.st_fault, m,n,k,1,a,k,b,k,c,n);
-	//printf("vediamo se qua arrivo!\n");
-      }        
-      }*/
+        // printf("ahahah\n");
+        if (l.fc_fault) {
+        //printf("bu\n");
+	    gemm_nt_faulty(*l.fc_fault, m,n,k,1,a,k,b,k,c,n);
+    } else if (l.st_fault) {
+	    //printf("i'm here! %d %d \n", l.st_fault->bit, l.st_fault->type);
+	    gemm_nt_faulty_stuck_at(*l.st_fault, m,n,k,1,a,k,b,k,c,n);
+	    //printf("vediamo se qua arrivo!\n");
+    }        
+    */
 
-    switch(l.f_model) {
-    case TRANSITION_FAULT:
+    /*switch(l.f_model) {
+        case TRANSITION_FAULT:
+            gemm_nt_faulty(l.fault, m,n,k,1,a,k,b,k,c,n);
+            break;
+        case SINGLE_EVENT_UPSET:
+            break;
+        case STUCK_AT_0:
+            gemm_nt_faulty_stuck_at(l.fault, m,n,k,1,a,k,b,k,c,n);
+            break;
+        case STUCK_AT_1: 
+            gemm_nt_faulty_stuck_at(l)
+        case NO_FAULT:
+            gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
+            break;
+        default:
+            break;
+    }*/
+
+    // check the type of fault to be injected 
+    if (l.f_model == TRANSITION_FAULT) {
         gemm_nt_faulty(l.fault, m,n,k,1,a,k,b,k,c,n);
-        break;
-    case SINGLE_EVENT_UPSET:
-        break;
-    case STUCK_AT:
-        gemm_nt_faulty_stuck_at(l.fault, m,n,k,1,a,k,b,k,c,n);
-        break;
-    case NO_FAULT:
+    } else if (l.f_model == SINGLE_EVENT_UPSET) {
+        fprintf(stderr, "single event upset fault injection is not implemented\n");
+    } else if (l.f_model == NO_FAULT) {
         gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
-        break;
-    default:
-        break;
+    } else if (l.f_model == STUCK_AT_0 || l.f_model == STUCK_AT_1) {
+        gemm_nt_faulty_stuck_at(l.fault, m,n,k,1,a,k,b,k,c,n);
+    } else {
+        gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
     }
 
     if(l.batch_normalize){
