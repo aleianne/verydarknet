@@ -21,6 +21,7 @@ extern void run_go(int argc, char **argv);
 extern void run_art(int argc, char **argv);
 extern void run_super(int argc, char **argv);
 extern void run_lsd(int argc, char **argv);
+extern void run_simulation(int argc, char **argv);
 
 void average(int argc, char *argv[])
 {
@@ -448,7 +449,7 @@ int main(int argc, char **argv)
     } else if (0 == strcmp(argv[1], "classify")){
         char *fault_model_option = find_char_arg(argc, argv, "-faultModel", "no-faults");
         int fault_percentage = find_int_arg(argc, argv, "-fault-percentage", 10);
-	char *filename = find_char_arg(argc, argv, "-faultList", "test.txt");
+	    char *filename = find_char_arg(argc, argv, "-faultList", "test.txt");
         int network_layer = find_int_arg(argc, argv, "-layer", 0);
         predict_classifier("cfg/imagenet1k.data", argv[2], argv[3], argv[4], 5, fault_model_option, fault_percentage, filename, network_layer);
     } else if (0 == strcmp(argv[1], "classifier")){
@@ -501,9 +502,12 @@ int main(int argc, char **argv)
         mkimg(argv[2], argv[3], atoi(argv[4]), atoi(argv[5]), atoi(argv[6]), argv[7]);
     } else if (0 == strcmp(argv[1], "imtest")){
         test_resize(argv[2]);
+    } else if (0 == strcmp(argv[1], "simualation")) {
+        // with the simulation keyword is possible to create a new simulation environment
+        // fault_simulation(argv[2], argv[3], argv[4]);
+        run_simulation(argc, argv);
     } else {
         fprintf(stderr, "Not an option: %s\n", argv[1]);
     }
     return 0;
 }
-

@@ -141,12 +141,12 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     }
 }
 
-void fault_simulation(char *cfgfile, char *weightsfile, char *testsetfile, char *faultlistfile, int target_layer) {
+void fault_simulation(char *datacfg, char *cfgfile, char *weightsfile, char *testsetfile, char *faultlistfile, int target_layer) {
 
     network *net = load_network(cfgfile, weightsfile, 0);
     set_batch_network(net, 1);
 
-    list *opt = read_data_cfg(cfgfile);
+    list *opt = read_data_cfg(datacfg);
 
     char *label_list = option_find_str(opt, "names", 0);
     if (!label_list) label_list = option_find_str(opt, "labels", "data/labels.list");
@@ -180,4 +180,26 @@ void fault_simulation(char *cfgfile, char *weightsfile, char *testsetfile, char 
     // release the the memory used by the fault list
     free_list_contents(fault_list);
     free_list(fault_list);
+}
+
+// the example od string passed to darknet.exe ./darknet [cfg] [weights] [test set] [fault list] [-target] 
+
+void run_simulation(int argc, char **argv) {
+    
+    if (argv < 4) {
+        fprintf(stderr, "the usage of the simualtion is: ");
+        return;
+    }
+
+    char *data = argv[3]; 
+    char *network_configuration = argv[4]; 
+    char *weights = (argc > 5)? argv[5] : 0;
+    char *testset = (argc > 6)? argv[6] : 0; 
+    char *faultlist = (argc > 7) ? argv[7] : 0;
+
+    // get the target layer, if is not included return 0
+    int network_layer = find_int_arg(argc, argv, "-layer", 0);
+
+    // run the simulation 
+    fault_simulation(data, network_configuration, weights, testset, faultlist, network_layer);
 }
