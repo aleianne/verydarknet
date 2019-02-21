@@ -78,7 +78,7 @@ void update_sa_freq(int st_type, int bit,  int label) {
 FILE *handle_file_open(char *filename) {
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
-        // fai qualcosa
+       file_error(filename);
     }
     return file;
 }
