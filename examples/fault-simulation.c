@@ -113,7 +113,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
             // create a new simulation for the selected image
             char *img = imagepath_array[j];
 
-            char *filename = path_extension(imagepaths_array[i], pathname);
+            char *filename = path_extension(imagepath_array[i], pathname);
 
             // load a new image
             image im = load_image_color(img, 0, 0);
@@ -173,7 +173,7 @@ void fault_simulation(char *datacfg, char *cfgfile, char *weightsfile, char *tes
         fprintf(stderr, "the fault list file %s is empty\n", faultlistfile);
         return;
     }
-    execute_faulty_prediction(net, image_list, fault_list, target_layer);
+    execute_faulty_prediction(net, image_list, fault_list, target_layer, path);
 
     // release the memory used by the list
     free_list_contents(image_list); 
