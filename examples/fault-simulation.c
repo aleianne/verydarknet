@@ -53,6 +53,9 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
     float *image_stream;
     float *predictions;
 
+    // only for debug
+    fprintf(stderr, "begin the golden prediction\n");
+
     // declare a new array of golden prediction
     prediction_results_t *net_predictions = calloc(list_elements, sizeof(prediction_results_t));
 
@@ -78,6 +81,8 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
         // release the memory used for catenation
         free(imagename);
     } 
+
+    fprintf(stderr, "golden prediction finished");
 
     // save all the data retrieved from the prediction into the golden_prediction.csv file
     char result[256] = "golden_prediction.csv";
