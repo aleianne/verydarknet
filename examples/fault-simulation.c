@@ -194,8 +194,8 @@ void run_simulation(int argc, char **argv) {
 
     char *data = argv[2]; 
     char *network_configuration = argv[3]; 
-    char *weights = (argc > 4)? argv[4] : 0;
-    char *testset = (argc > 5)? argv[5] : 0; 
+    char *weights = (argc > 4) ? argv[4] : 0;
+    char *testset = (argc > 5) ? argv[5] : 0; 
     char *faultlist = (argc > 6) ? argv[6] : 0;
 
     // get the target layer, if is not included return 0

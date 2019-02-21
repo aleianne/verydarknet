@@ -88,6 +88,10 @@ char *path_extension(char *filename, char *path) {
     int path_size = strlen(path);
     int tot_length = filename_size + path_size;
 
+    // delete the last \n in the line 
+    int pos = strlen(filename);
+    filename[pos - 1] = '\0';
+
     // allocate a buffer that contains the complete image path;
     char *cpt_image_path = calloc(tot_length + 1, sizeof(char));
     strncpy(cpt_image_path, path, path_size);
