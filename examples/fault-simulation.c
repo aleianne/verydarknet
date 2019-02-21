@@ -91,15 +91,15 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
     } 
 
 
-    fprintf(stderr, "golden prediction finished in %f sec", sec(clock() - begin));
+    fprintf(stderr, "golden prediction finished in %f sec\n", sec(clock() - begin));
 
     // save all the data retrieved from the prediction into the golden_prediction.csv file
-    fprintf(stderr, "begin to save the golden prediction into a file");
+    fprintf(stderr, "begin to save the golden prediction into a file\n");
 
-    char result[256] = "./results/golden_prediction.csv";
+    char result[256] = "golden_prediction.csv";
     write_golden_prediction_file(net_predictions, result, list_elements);
 
-    fprintf(stderr, "golden predictions saved correclty into the file");
+    fprintf(stderr, "golden predictions saved correclty into the file\n");
     free(imagepaths_array);
 }
 
