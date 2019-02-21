@@ -18,7 +18,7 @@ def generate_stuck_at_fault_list(fault_list_name, component_num):
         for i in range(component_num): 
             for j in range(23, 31):
                 # generate the string to be insert into the fault list file
-                fault_list_entry = "sa1\t" + str(i) + "\t" + str(j) + "\n"
+                fault_list_entry = "stuck-at-1\t" + str(i) + "\t" + str(j) + "\n"
                 fp.write(fault_list_entry)
 
 

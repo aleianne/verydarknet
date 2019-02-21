@@ -119,7 +119,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     // create a new output prediction array 
     prediction_results_t *prediction_results = calloc(test_set_size, sizeof(prediction_results_t)); 
 
-    for (i = 0; i < fault_list_size; i++) {
+    for (i = 0; i < 1; i++) {
         fault_list_entry_t *entry = faultlist_array[i];
 
         // inject the fault into the network
