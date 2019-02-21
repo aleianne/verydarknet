@@ -1,9 +1,25 @@
-def main():
-    print("initialize the fault list")
-    
+def generate_fault_list(fault_list_name, fault_model,  component_num):
+    ''' This function generate the fault list '''
+
+    i = int(component_num)
+
+    if (fault_model == "stuck-at"): 
+        generate_stuck_at_fault_list(fault_list_name, i)
+    else 
+        print("no others fault model has been implemented")
 
 
+def generate_stuck_at_fault_list(fault_list_name, component_num): 
+    ''' This function generate the stuck at fault list '''
+
+    with open(fault_list_name, "w") as fp: 
+        for i in range(component_num): 
+            for j in range(23, 31):
+                # generate the string to be insert into the fault list file
+                fault_list_entry = ""
+                fp.write(fault_list_name)
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    generate_fault_list(sys.argv[1], sys.argv[2], sys.argv[3])

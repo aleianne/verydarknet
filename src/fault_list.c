@@ -34,7 +34,7 @@ fault_list_entry_t *convert_faultlist_record(char *buffer, int size) {
 list *load_faultlist_file(char *faultlist) {
     FILE *file = fopen(faultlist, "r");
 
-    if (file == 0) file_error(faultlist);
+    if (file == NULL) file_error(faultlist);
 
     char buffer[BUFF_SIZE];
     list *fault_l = make_list();

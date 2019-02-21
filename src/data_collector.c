@@ -118,7 +118,6 @@ char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {
 
     switch (fault_model)
     {
-
         case NO_FAULT: {
             // this is a very strange case since the fault record has been already checked
             fprintf(stderr, "no faults are been specified");
@@ -133,9 +132,8 @@ char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {
         } break;
 
         default: {
-
-        }
-            break;
+            fprintf(stderr, "no faults are been specified");
+        } break;
     }
 
     // concatenate to the filename string the mac position and the faulty bit
