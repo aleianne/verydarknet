@@ -71,6 +71,8 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
 
         image_stream = r.data;
 
+        fprintf(stderr, "begin the prediction for image %s\n", imagename);
+
         predictions = network_predict(net, image_stream);
         int max_i = max_confidence_score(predictions, net->outputs);
 
