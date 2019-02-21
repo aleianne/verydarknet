@@ -131,6 +131,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
 
     // only for debug 
     fprintf(stderr, "begin the faulty prediction\n");
+    clock_t begin;
 
     for (i = 0; i < 1; i++) {
         fault_list_entry_t *entry = faultlist_array[i];
@@ -164,6 +165,10 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
             if(r.data != im.data) free_image(r);
             free_image(im);
         }
+
+
+        // only for debug
+        fprintf(stderr, "prediction completed in %f seconds", sec(clock() - begin));
 
         // create a new filename in order to store the data contained into the prediction results array
         char *filename = faulty_prediction_name_generator(*entry);
