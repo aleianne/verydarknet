@@ -185,7 +185,6 @@ void fault_simulation(char *datacfg, char *cfgfile, char *weightsfile, char *tes
 }
 
 // the example od string passed to darknet.exe ./darknet [cfg] [weights] [test set] [fault list] [-target] 
-
 void run_simulation(int argc, char **argv) {
     
     if (argc < 4) {
@@ -193,11 +192,11 @@ void run_simulation(int argc, char **argv) {
         return;
     }
 
-    char *data = argv[3]; 
-    char *network_configuration = argv[4]; 
-    char *weights = (argc > 5)? argv[5] : 0;
-    char *testset = (argc > 6)? argv[6] : 0; 
-    char *faultlist = (argc > 7) ? argv[7] : 0;
+    char *data = argv[2]; 
+    char *network_configuration = argv[3]; 
+    char *weights = (argc > 4)? argv[4] : 0;
+    char *testset = (argc > 5)? argv[5] : 0; 
+    char *faultlist = (argc > 6) ? argv[6] : 0;
 
     // get the target layer, if is not included return 0
     int network_layer = find_int_arg(argc, argv, "-layer", 0);
