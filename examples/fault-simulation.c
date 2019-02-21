@@ -36,7 +36,7 @@ list *load_imagepath_array(char *testsetfile, char *path) {
         // add image path into the list
         length = strlen(buffer);
         char *imagepath = calloc(length + path_length, sizeof(char));
-        strncpy(imagepath, buffer, MAX_BUFF);
+        strncpy(imagepath, buffer, length - 1);
         strcat(imagepath, path);
         list_insert(imagepaths, imagepath);
     }
