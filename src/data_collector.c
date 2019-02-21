@@ -155,7 +155,7 @@ void write_prediction_file(prediction_results_t *prediction_array, char *filenam
 
     int i;
     for (i = 0; i < size; i++) {
-        fprintf(file, "%s\t%d\t%f10.2", prediction_array[i].imagepath, prediction_array[i].label_pred, prediction_array[i].c_score);
+        fprintf(file, "%s\t%d\t%f10.2\n", prediction_array[i].imagepath, prediction_array[i].label_pred, prediction_array[i].c_score);
     }
     fclose(file);
 }
