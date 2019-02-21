@@ -502,7 +502,7 @@ int main(int argc, char **argv)
         mkimg(argv[2], argv[3], atoi(argv[4]), atoi(argv[5]), atoi(argv[6]), argv[7]);
     } else if (0 == strcmp(argv[1], "imtest")){
         test_resize(argv[2]);
-    } else if (0 == strcmp(argv[1], "simualation")) {
+    } else if (0 == strcmp(argv[1], "simulation")) {
         // with the simulation keyword is possible to create a new simulation environment
         // fault_simulation(argv[2], argv[3], argv[4]);
         run_simulation(argc, argv);

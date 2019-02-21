@@ -86,7 +86,7 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
     free(imagepaths_array);
 }
 
-void execute_faulty_prediction(network *net, list *image_list, list *fault_list, int target_layer) {
+void execute_faulty_prediction(network *net, list *image_list, list *fault_list, int target_layer, char *pathname) {
 
     char **imagepath_array = (char **) list_to_array(image_list);
     fault_list_entry_t **faultlist_array = (fault_list_entry_t **) list_to_array(fault_list);
@@ -112,6 +112,8 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
         for (j = 0; j < test_set_size; j++) {
             // create a new simulation for the selected image
             char *img = imagepath_array[j];
+
+            char *filename = path_extension(imagepaths_array[i], pathname);
 
             // load a new image
             image im = load_image_color(img, 0, 0);
@@ -186,8 +188,8 @@ void fault_simulation(char *datacfg, char *cfgfile, char *weightsfile, char *tes
 
 void run_simulation(int argc, char **argv) {
     
-    if (argv < 4) {
-        fprintf(stderr, "the usage of the simualtion is: ");
+    if (argc < 4) {
+        fprintf(stderr, "the usage of the simualtion is: [cfg] [weights] [test set] [fault list] [-target]");
         return;
     }
 
