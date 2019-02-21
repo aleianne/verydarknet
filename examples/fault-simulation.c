@@ -130,7 +130,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     prediction_results_t *prediction_results = calloc(test_set_size, sizeof(prediction_results_t)); 
 
     // only for debug 
-    fprintf(stderr, "begin the faulty prediction");
+    fprintf(stderr, "begin the faulty prediction\n");
 
     for (i = 0; i < 1; i++) {
         fault_list_entry_t *entry = faultlist_array[i];

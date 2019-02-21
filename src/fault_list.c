@@ -14,18 +14,19 @@ fault_list_entry_t *convert_faultlist_record(char *buffer, int size) {
         sscanf(buffer, "%s\t%d\t%d", fault_type, &new_fault->fault_position, &new_fault->faulty_bit); 
 
         // convert the fault type from string to a FAULT_MODEL type
-        if ((strcmp(buffer, "no-faults") == 0) || (strcmp(buffer, "no-fault") == 0)) {
+        if ((strcmp(fault_type, "no-faults") == 0) || (strcmp(buffer, "no-fault") == 0)) {
             f = NO_FAULT;
-        } else if (strcmp(buffer, "permanent-fault") == 0) {
+        } else if (strcmp(fault_type, "permanent-fault") == 0) {
             f = PERMENANT_FAULT;
-        } else if (strcmp(buffer, "stuck-at-1") == 0) {
+        } else if (strcmp(fault_type, "stuck-at-1") == 0) {
             f = STUCK_AT_1;
-        } else if (strcmp(buffer, "stuck-at-0") == 0) {
+        } else if (strcmp(fault_type, "stuck-at-0") == 0) {
             f = STUCK_AT_0;
         } else {
             f = NO_FAULT;
+            fprintf(stderr, "the fault read from the file is %s", fault_type);
         }
-        
+
         new_fault->fault_type = f;
         return new_fault;
     }   
