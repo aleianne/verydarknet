@@ -55,11 +55,12 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
 
     // only for debug
     fprintf(stderr, "begin the golden prediction\n");
+    fprintf(stderr, "the total number of image into the test set is %d\n", list_elements);
 
     // declare a new array of golden prediction
     prediction_results_t *net_predictions = calloc(list_elements, sizeof(prediction_results_t));
 
-    while (imagepaths_array[i++] != NULL) {
+    while (i < list_elements) {
 
         // catenate the path with the image name
         char *imagename = path_extension(imagepaths_array[i], pathname);
@@ -80,6 +81,8 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
 
         // release the memory used for catenation
         free(imagename);
+
+        i++;
     } 
 
     fprintf(stderr, "golden prediction finished");
