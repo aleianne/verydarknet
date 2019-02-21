@@ -8,7 +8,7 @@ data="../cfg/mnist.dataset"
 network_configuration="../cfg/mnist_lenet.cfg"
 weight="../pretrained_weights/mnist_lenet.weights"
 test_set="../data/mnist_data/mnist/images/validation_images.txt"
-fault_list="../fault_list"
+fault_list="../fault_list/fault_list.csv"
 
 echo "begin the simulation"
 

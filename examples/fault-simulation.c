@@ -60,6 +60,8 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
     // declare a new array of golden prediction
     prediction_results_t *net_predictions = calloc(list_elements, sizeof(prediction_results_t));
 
+    clock_t begin = clock();
+
     while (i < list_elements) {
 
         // catenate the path with the image name
@@ -71,7 +73,7 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
 
         image_stream = r.data;
 
-        fprintf(stderr, "begin the prediction for image %s\n", imagename);
+        //fprintf(stderr, "begin the prediction for image %s\n", imagename);
 
         predictions = network_predict(net, image_stream);
         int max_i = max_confidence_score(predictions, net->outputs);
@@ -87,10 +89,11 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
         i++;
     } 
 
-    fprintf(stderr, "golden prediction finished");
+
+    fprintf(stderr, "golden prediction finished in %f sec", sec(clock() - begin));
 
     // save all the data retrieved from the prediction into the golden_prediction.csv file
-    char result[256] = "golden_prediction.csv";
+    char result[256] = "./results/golden_prediction.csv";
     write_golden_prediction_file(net_predictions, result, list_elements);
 
     free(imagepaths_array);
@@ -181,6 +184,9 @@ void fault_simulation(char *datacfg, char *cfgfile, char *weightsfile, char *tes
     list *fault_list = load_faultlist_file(faultlistfile);
     if (fault_list->size == 0) {
         fprintf(stderr, "the fault list file %s is empty\n", faultlistfile);
+        // release the memory used by the image list
+        free_list_contents(image_list); 
+        free_list(image_list);
         return;
     }
     execute_faulty_prediction(net, image_list, fault_list, target_layer, path);
