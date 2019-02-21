@@ -83,14 +83,15 @@ FILE *handle_file_open(char *filename) {
     return file;
 }
 
-char *path_extension(char *filename, char *path) {
-    int filename_size = strlen(filename);
+
+// this method should be correct since 
+/*char *path_extension(char **filename, char *path) {
+    int filename_size = strlen(*filename);
     int path_size = strlen(path);
     int tot_length = filename_size + path_size;
 
     // delete the last \n in the line 
-    int pos = strlen(filename);
-    filename[pos - 1] = '\0';
+    *filename[filename_size - 1] = '\0';
 
     // allocate a buffer that contains the complete image path;
     char *cpt_image_path = calloc(tot_length + 1, sizeof(char));
@@ -98,7 +99,7 @@ char *path_extension(char *filename, char *path) {
     strcat(cpt_image_path, filename);
 
     return cpt_image_path;
-} 
+} */
 
 // this function generate output result file
 char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {

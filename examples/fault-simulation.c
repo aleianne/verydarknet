@@ -22,18 +22,22 @@ int max_confidence_score(float *vec, int N) {
 	return i_max;
 }
 
-list *load_imagepath_array(char *testsetfile) {
+list *load_imagepath_array(char *testsetfile, char *path) {
     FILE *file = fopen(testsetfile, "r");
 
     if (file == 0) file_error(testsetfile);
 
     char buffer[MAX_BUFF];
+    int length;
+    int path_length = strlen(path);
     list *imagepaths = make_list();
 
     while (fgets(buffer, MAX_BUFF, file) != NULL) {
         // add image path into the list
-        char *imagepath = calloc(MAX_BUFF, sizeof(char));
+        length = strlen(buffer);
+        char *imagepath = calloc(length + path_length, sizeof(char));
         strncpy(imagepath, buffer, MAX_BUFF);
+        strcat(imagepath, path);
         list_insert(imagepaths, imagepath);
     }
 
@@ -46,8 +50,7 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
 
     // convert the list into an array of elements
     char **imagepaths_array = (char **) list_to_array(imagepaths);
-    //int list_elements = imagepaths->size;
-    int list_elements = 3;
+    int list_elements = imagepaths->size;
 
     int i = 0;
     int top_predictions = net->outputs;
@@ -66,7 +69,9 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
     while (i < list_elements) {
 
         // catenate the path with the image name
-        char *imagename = path_extension(imagepaths_array[i], pathname);
+        // char *imagename = path_extension(imagepaths_array[i], pathname);
+
+        char *imagename = imagepaths_array[i];
 
         // load a new image 
         image im = load_image_color(imagename, 0, 0);
@@ -74,7 +79,7 @@ void execute_golden_prediction(network *net, list *imagepaths, char *pathname) {
 
         image_stream = r.data;
 
-        //fprintf(stderr, "begin the prediction for image %s\n", imagename);
+        // fprintf(stderr, "begin the prediction for image %s\n", imagename);
 
         predictions = network_predict(net, image_stream);
         int max_i = max_confidence_score(predictions, net->outputs);
@@ -119,6 +124,9 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     // create a new output prediction array 
     prediction_results_t *prediction_results = calloc(test_set_size, sizeof(prediction_results_t)); 
 
+    // only for debug 
+    fprintf(stderr, "begin the faulty prediction");
+
     for (i = 0; i < 1; i++) {
         fault_list_entry_t *entry = faultlist_array[i];
 
@@ -129,13 +137,14 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
             // create a new simulation for the selected image
             char *img = imagepath_array[j];
 
-            char *filename = path_extension(imagepath_array[i], pathname);
+            // pay attection here, i must change the image path 
+            //char *filename = path_extension(&imagepath_array[i], pathname);
 
             // load a new image
             image im = load_image_color(img, 0, 0);
             image r = letterbox_image(im, net->w, net->h);
 
-            // prediction 
+            // image prediction 
             image_data = r.data;
             predictions = network_predict(net, image_data);
 
@@ -180,8 +189,8 @@ void fault_simulation(char *datacfg, char *cfgfile, char *weightsfile, char *tes
     char buffer[256];     
     
     // load the image from the test set file and execute the golden prediction
-    list *image_list = load_imagepath_array(testsetfile);
-    execute_golden_prediction(net, image_list, path);     
+    list *image_list = load_imagepath_array(testsetfile, path);
+    //execute_golden_prediction(net, image_list, path);     
 
     // load the fault list from the fault_list.txt file
     list *fault_list = load_faultlist_file(faultlistfile);

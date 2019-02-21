@@ -17,7 +17,7 @@ void close_fault_list(FILE *fp) {
 
 void inject_fault(fault_list_entry_t fault_record, network *net, int target_layer) {
     // if the layer is 0 than the entire network must be tested
-    if (target_layer > 0) {
+    if (target_layer >= 0) {
 
         int mac_position = fault_record.fault_position;
         int bit = fault_record.faulty_bit;
