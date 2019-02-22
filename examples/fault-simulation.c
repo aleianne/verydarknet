@@ -120,6 +120,8 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     int test_set_size = image_list->size;
     int fault_list_size = image_list->size;
     
+    fault_list_size = (int) fault_list_size / 2;
+
     int i, j;
 
     float *image_data;
@@ -143,7 +145,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
         // inject the fault into the network
         inject_fault(*entry, net, target_layer);
 
-        for (j = 0; j < 1; j++) {
+        for (j = 0; j < fault_list_size; j++) {
             // create a new simulation for the selected image
             char *img = imagepath_array[j];
 
