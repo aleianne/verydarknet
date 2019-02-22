@@ -95,13 +95,10 @@ void gemm_nt(int M, int N, int K, float ALPHA,
         float *B, int ldb,
         float *C, int ldc)
 {
-<<<<<<< HEAD
     // if we are here for operation that happens into connected layers the paramters are:
     // M is the number of batch
     // N is the number of outputs
     // K is the number of inputs
-=======
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
     int i,j,k;
     #pragma omp parallel for
     for(i = 0; i < M; ++i){
@@ -151,27 +148,6 @@ void gemm_tt(int M, int N, int K, float ALPHA,
     }
 }
 
-<<<<<<< HEAD
-
-=======
-void gemm_nn_faulty(transition_fault fault, int M, int N, int K, float ALPHA, 
-        float *A, int lda, 
-        float *B, int ldb,
-        float *C, int ldc)
-{
-    int i,j,k;
-    #pragma omp parallel for
-    for(i = 0; i < M; ++i){
-        for(k = 0; k < K; ++k){
-            register float A_PART = ALPHA*A[i*lda+k];
-            for(j = 0; j < N; ++j){                          
-                C[i*ldc+j] += A_PART*B[k*ldb+j];
-                inject_transition_fault(fault, i, j, &C[i*ldc+j]);
-            }
-        }
-    }
-}
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 
 void gemm_cpu(int TA, int TB, int M, int N, int K, float ALPHA, 
         float *A, int lda, 
