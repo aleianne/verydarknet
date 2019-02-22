@@ -153,7 +153,7 @@ char *create_output_filename(fault_list_entry_t fault_list_entry, char *path) {
 
     char *resultname = faulty_prediction_name_generator(fault_list_entry);
 
-    if (path != NULL) {
+    if (path == NULL) {
         return resultname;
     }
     
