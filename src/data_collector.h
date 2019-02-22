@@ -4,6 +4,7 @@
 #include "darknet.h"
 #include "stdlib.h"
 #include "string.h"
+#include "utils.h"
 
 #define LABEL_N 10
 #define BIT_N 8
@@ -23,6 +24,7 @@ void update_sa_freq(int st_type, int bit, int label);*/
 FILE *handle_file_open(char *filename);
 char *path_extension(char *filename, char *path);
 char *faulty_prediction_name_generator(fault_list_entry_t fault_record);
+char *create_output_filename(fault_list_entry_t fault_list_entry, char *path);
 void write_golden_prediction_file(prediction_results_t *prediction_array, char *filename, int size);
 void write_faulty_prediction_file(prediction_results_t *prediction_array, char *filename, int size);
 void write_prediction_file(prediction_results_t *prediction_array, char *filename, int size, char *header);

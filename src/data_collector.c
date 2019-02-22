@@ -120,7 +120,7 @@ char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {
     {
         case NO_FAULT: {
             // this is a very strange case since the fault record has been already checked
-            fprintf(stderr, "no faults are been specified");
+            fprintf(stderr, "no faults have been specified\n");
         } break;
 
         case STUCK_AT_0: {
@@ -132,9 +132,10 @@ char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {
         } break;
 
         default: {
-            fprintf(stderr, "no faults are been specified");
+            fprintf(stderr, "no faults are been specified\n");
         } break;
     }
+    
 
     // concatenate to the filename string the mac position and the faulty bit
     strcat(filename, s_position);
@@ -144,6 +145,24 @@ char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {
 
     // only for debug
     fprintf(stderr, "the filename to be used during the simulation is %s\n\n", filename);
+    return filename;
+}
+
+char *create_output_filename(fault_list_entry_t fault_list_entry, char *path) {
+    int path_len, name_len;
+
+    char *resultname = faulty_prediction_name_generator(fault_list_entry);
+
+    if (path != NULL) {
+        return resultname;
+    }
+    
+    path_len = strlen(path);
+    name_len = strlen(resultname);
+
+    char *filename = calloc(path_len + name_len, sizeof(char));
+    strncpy(filename, path, path_len);
+    strcat(filename, resultname);
     return filename;
 }
 
