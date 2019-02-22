@@ -1218,12 +1218,9 @@ void run_classifier(int argc, char **argv)
     int top = find_int_arg(argc, argv, "-t", 0);
     int clear = find_arg(argc, argv, "-clear");
     char *fault_model_option = find_char_arg(argc, argv, "-faultModel", "no-faults");
-<<<<<<< HEAD
     char *testfile = find_char_arg(argc, argv, "-faultList", "test.txt");
     int fault_percentage = find_int_arg(argc, argv, "-fault-perc", 10);
     int network_layer = find_int_arg(argc, argv, "-layer", 0);
-=======
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
     //printf("the fault model is: %s", fault_model_option);
     char *data = argv[3];
     char *cfg = argv[4];
@@ -1231,11 +1228,7 @@ void run_classifier(int argc, char **argv)
     char *filename = (argc > 6) ? argv[6]: 0;
     char *layer_s = (argc > 7) ? argv[7]: 0;
     int layer = layer_s ? atoi(layer_s) : -1;
-<<<<<<< HEAD
     if(0==strcmp(argv[2], "predict")) predict_classifier(data, cfg, weights, filename, top, fault_model_option, fault_percentage, testfile, network_layer);
-=======
-    if(0==strcmp(argv[2], "predict")) predict_classifier(data, cfg, weights, filename, top, fault_model_option);
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
     else if(0==strcmp(argv[2], "fout")) file_output_classifier(data, cfg, weights, filename);
     else if(0==strcmp(argv[2], "try")) try_classifier(data, cfg, weights, filename, atoi(layer_s));
     else if(0==strcmp(argv[2], "train")) train_classifier(data, cfg, weights, gpus, ngpus, clear);
