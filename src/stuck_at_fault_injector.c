@@ -7,7 +7,7 @@ void inject_stuck_at_fault_into_layers(network *net, int layer_n, int bit, int t
     new_st_fault->type = type;
     new_st_fault->fault_location = fault_location;
 
-    if (layer_n < net->n) {
+    if (layer_n < 0) {
         if (net->layers[layer_n].type == CONVOLUTIONAL || net->layers[layer_n].type == CONNECTED) {
             inject_stuck_at_fault(net, layer_n, new_st_fault);
         } else {
