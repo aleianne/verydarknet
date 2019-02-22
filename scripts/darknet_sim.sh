@@ -5,16 +5,13 @@
 # initialize the variable that should be used during darknet simualation
 data="cfg/mnist.dataset"
 network_configuration="cfg/mnist_lenet.cfg"
-weight="/pretrained_weights/mnist_lenet.weights"
+weight="pretrained_weights/mnist_lenet.weights"
 test_set="data/mnist_data/mnist/images/validation_images.txt"
 fault_list="fault_list/fault_list.csv"
 
 results_output="sim_results"
 
 echo "begin the simulation"
-
-# change the current directory into the darknet directory
-cd ..
 
 if [ ! -f $fault_list ]; 
 then 
