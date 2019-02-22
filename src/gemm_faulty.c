@@ -161,9 +161,7 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
             register float A_PART = ALPHA*A[i*lda+k];
             for(j = 0; j < N; ++j){
 	            tmp = A_PART*B[k*ldb+j];
-                mul_counter--;
-                counter1++;
-                if (mul_counter == 0) {
+                if (mul_counter == 1) {
                     float tmp2 = compute_faulty_multiplication(tmp, f_parsed.bit, f_parsed.type);
                     C[i*ldc+j] += tmp2;
                     counter2++;
@@ -174,6 +172,8 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
                     C[i*ldc+j] += tmp;
                 }
                 //C[i*ldc+j] += A_PART*B[k*ldb+j];   
+                mul_counter--;
+                counter1++;
             }
         }
     }
