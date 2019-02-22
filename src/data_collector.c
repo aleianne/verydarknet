@@ -143,7 +143,7 @@ char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {
     strcat(filename, ".csv");
 
     // only for debug
-    fprintf(stderr, "the filename to be used during the simulation is %s", filename);
+    fprintf(stderr, "the filename to be used during the simulation is %s\n\n", filename);
     return filename;
 }
 

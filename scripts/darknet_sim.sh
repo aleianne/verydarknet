@@ -13,5 +13,5 @@ fault_list="../fault_list/fault_list.csv"
 echo "begin the simulation"
 
 # execute darknet 
-../darknet simulation $data $network_configuration $weight $test_set $fault_list -layer -1
+../darknet simulation $data $network_configuration $weight $test_set $fault_list -layer 0
 
