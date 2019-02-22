@@ -157,9 +157,9 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
             int predicted_label = max_confidence_score(predictions, top);
             float max_f = predictions[predicted_label];
 
-            prediction_results[i].c_score = max_f;
-            prediction_results[i].imagepath = img;
-            prediction_results[i].label_pred = predicted_label;
+            prediction_results[j].c_score = max_f;
+            prediction_results[j].imagepath = img;
+            prediction_results[j].label_pred = predicted_label;
 
             // release the memory used to store the image
             if(r.data != im.data) free_image(r);

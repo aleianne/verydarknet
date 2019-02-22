@@ -83,7 +83,6 @@ FILE *handle_file_open(char *filename) {
     return file;
 }
 
-
 // this method should be correct since 
 /*char *path_extension(char **filename, char *path) {
     int filename_size = strlen(*filename);
