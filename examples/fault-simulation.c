@@ -241,6 +241,8 @@ void run_simulation(int argc, char **argv) {
     // get the target layer, if is not included return 0
     int network_layer = find_int_arg(argc, argv, "-layer", 0);
 
+    fprintf(stderr, "print the network layer target %d", network_layer);
+
     // run the simulation 
     fault_simulation(data, network_configuration, weights, testset, faultlist, network_layer);
 }

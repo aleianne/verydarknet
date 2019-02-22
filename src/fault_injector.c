@@ -17,39 +17,34 @@ void close_fault_list(FILE *fp) {
 
 void inject_fault(fault_list_entry_t fault_record, network *net, int target_layer) {
     // if the layer is 0 than the entire network must be tested
-    if (target_layer >= 0) {
 
-        int mac_position = fault_record.fault_position;
-        int bit = fault_record.faulty_bit;
+    int mac_position = fault_record.fault_position;
+    int bit = fault_record.faulty_bit;
 
-        // inject the fault into the network 
-        FAULT_MODEL fault_model = fault_record.fault_type;
-        switch (fault_model) {
-            case PERMENANT_FAULT: {
+    // inject the fault into the network 
+    FAULT_MODEL fault_model = fault_record.fault_type;
+    
+    switch (fault_model) {
+        case PERMENANT_FAULT: {
             
-            } break;
+        } break;
 
-            case STUCK_AT_0: {
-                // only for debug
-                fprintf(stderr, "the fault injected into the network is a stuck at 0\n");
-                inject_stuck_at_fault_into_layers(net, target_layer, bit, 0, mac_position);
-            } break;
+        case STUCK_AT_0: {
+            // only for debug
+            fprintf(stderr, "the fault injected into the network is a stuck at 0\n");
+            inject_stuck_at_fault_into_layers(net, target_layer, bit, 0, mac_position);
+        } break;
 
-            case STUCK_AT_1: {
-                // only for debug 
-                fprintf(stderr, "the fault inejcted into the network is a stuck at 1\n");
-                inject_stuck_at_fault_into_layers(net, target_layer, bit, 1, mac_position);
-            } break;
+        case STUCK_AT_1: {
+            // only for debug 
+            fprintf(stderr, "the fault inejcted into the network is a stuck at 1\n");
+            inject_stuck_at_fault_into_layers(net, target_layer, bit, 1, mac_position);
+        } break;
 
-            default: {
-                fprintf(stderr, "no fault has been injected\n");
-            }
+        default: {
+            fprintf(stderr, "no fault has been injected\n");
         }
-
-    } else {
-        // only for debug 
-        fprintf(stderr, "the target layer must be greater or equal to 0\n");
-    }
+    }    
 }
 
 void remove_fault(fault_list_entry_t fault_record, network *net, int target_layer) {
