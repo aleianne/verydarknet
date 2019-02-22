@@ -120,7 +120,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     int test_set_size = image_list->size;
     int fault_list_size = image_list->size;
     
-    fault_list_size = (int) fault_list_size / 2;
+    //fault_list_size = (int) fault_list_size / 2;
 
     int i, j;
 
