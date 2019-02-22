@@ -493,8 +493,6 @@ void forward_convolutional_layer(convolutional_layer l, network net)
             float *a = l.weights + j*l.nweights/l.groups;
             float *b = net.workspace;
             float *c = l.output + (i*l.groups + j)*n*m;
-
-            // i don't understand how the image is resized from l.h l.h to l.out_h l.out_w
             float *im =  net.input + (i*l.groups + j)*l.c/l.groups*l.h*l.w;
 
             if (l.size == 1) {
@@ -510,6 +508,7 @@ void forward_convolutional_layer(convolutional_layer l, network net)
             } else if (l.f_model == SINGLE_EVENT_UPSET) {
                 //gemm_nn_faulty_seu(l.fault,m,n,k,1,a,k,b,n,c,n);
             } else if (l.f_model == STUCK_AT_0 || l.f_model == STUCK_AT_1) {
+                fprintf(stderr, "the fault has been injected into the network\n");
                 gemm_nn_faulty_stuck_at(l.fault,m,n,k,1,a,k,b,n,c,n);
             } else if (l.f_model == NO_FAULT) {
                 gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);

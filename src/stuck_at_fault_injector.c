@@ -25,7 +25,6 @@ void inject_stuck_at_fault_into_layers(network *net, int layer_n, int bit, int t
 
 void inject_stuck_at_fault(network *net, int layer_n, stuck_at_fault *fault) {
     layer *l = &net->layers[layer_n];
-    // set the faulty flag to 1 and inject the fault
     l->f_model = STUCK_AT_1;
     l->fault = fault;
 }

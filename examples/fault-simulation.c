@@ -131,16 +131,18 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     prediction_results_t *prediction_results = calloc(test_set_size, sizeof(prediction_results_t)); 
 
     // only for debug 
-    fprintf(stderr, "begin the faulty prediction\n");
+    fprintf(stderr, "begin the faulty prediction\n\n");
     clock_t begin;
 
     for (i = 0; i < 1; i++) {
         fault_list_entry_t *entry = faultlist_array[i];
 
+        fprintf(stderr, "inject the fault type %d at position %d, bit %d\n", entry->fault_type, entry->fault_position, entry->faulty_bit);
+
         // inject the fault into the network
         inject_fault(*entry, net, target_layer);
 
-        for (j = 0; j < 3; j++) {
+        for (j = 0; j < 1; j++) {
             // create a new simulation for the selected image
             char *img = imagepath_array[j];
 
@@ -168,7 +170,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
         }
 
         // only for debug
-        fprintf(stderr, "prediction completed in %f seconds", sec(clock() - begin));
+        fprintf(stderr, "prediction completed in %f seconds\n\n", sec(clock() - begin));
 
         // create a new filename in order to store the data contained into the prediction results array
         char *filename = faulty_prediction_name_generator(*entry);
