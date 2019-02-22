@@ -118,7 +118,9 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     fault_list_entry_t **faultlist_array = (fault_list_entry_t **) list_to_array(fault_list);
 
     int test_set_size = image_list->size;
-    int fault_list_size = image_list->size;
+    // int fault_list_size = image_list->size;
+    int fault_list_size = 3;
+
     int i, j;
 
     float *image_data;
@@ -165,7 +167,6 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
             if(r.data != im.data) free_image(r);
             free_image(im);
         }
-
 
         // only for debug
         fprintf(stderr, "prediction completed in %f seconds", sec(clock() - begin));
