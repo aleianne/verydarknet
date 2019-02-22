@@ -106,7 +106,6 @@ typedef struct{
     int t;
 } update_args;
 
-<<<<<<< HEAD
 typedef struct pred_struct_t {
     int correct_label;
     int wrong_label;
@@ -122,20 +121,6 @@ typedef enum {
     MULTI_FILTER_FAULT,
     STUCK_AT_1,
     STUCK_AT_0
-=======
-typedef struct transition_fault_t {
-    int bit;
-    int row;
-    int column;
-    int is_faulty;
-} transition_fault;
-
-typedef enum {
-    NO_FAULT,
-    TRANSACTION_FAULT,
-    PERMENANT_FAULT,
-    SINGLE_EVEN_UPSET
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 } FAULT_MODEL;
 
 struct network;
@@ -239,7 +224,6 @@ struct layer{
     float probability;
     float scale;
 
-<<<<<<< HEAD
     FAULT_MODEL f_model;
     void *fault;
     /*
@@ -249,9 +233,6 @@ struct layer{
     stuck_at_fault *st_fault; 
     */
 
-=======
-    transition_fault *fault;
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 
     char  * cweights;
     int   * indexes;
@@ -285,11 +266,7 @@ struct layer{
     float * weight_updates;
 
     float * delta;
-<<<<<<< HEAD
     float * output;             // this is used to store the information about the computed output into the layer
-=======
-    float * output;             // this is used to store the information about the compute output into the layer
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
     float * loss;
     float * squared;
     float * norms;
@@ -633,7 +610,6 @@ typedef struct{
     float left, right, top, bottom;
 } box_label;
 
-<<<<<<< HEAD
 // define a struct that contains the information about the golden prediction
 typedef struct prediction_results {
     char *imagepath;        
@@ -647,8 +623,6 @@ typedef struct fault_list_entry {
     int fault_position;
     int faulty_bit; 
 } fault_list_entry_t;
-=======
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 
 network *load_network(char *cfg, char *weights, int clear);
 load_args get_base_args(network *net);
