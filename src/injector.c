@@ -19,21 +19,13 @@ void init_inj (network *net) {
 	}
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 void create_fault_list (int connections, int bit_size, int perc) {
 
 	FILE *out;
 	int n_inj, i;
 	int w, bit;
 	
-<<<<<<< HEAD
 	out = fopen  ("fault_list.txt", "w");
-=======
-	out = fopen  ("fault_list4.txt", "w");
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 	srand (time (NULL));
 	n_inj =  (connections * bit_size) / perc ;
 	
@@ -71,11 +63,8 @@ void inject (network *net, fault_t *fault)
     memcpy (&w, &i_t, sizeof (w));
 //	printf ("faulty w = %f\n", w);
 	l.weights[fault->weigth] = w;
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 }
 
 void release (network *net, fault_t *fault) 
