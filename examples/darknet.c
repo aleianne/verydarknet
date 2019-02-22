@@ -448,10 +448,14 @@ int main(int argc, char **argv)
         run_coco(argc, argv);
     } else if (0 == strcmp(argv[1], "classify")){
         char *fault_model_option = find_char_arg(argc, argv, "-faultModel", "no-faults");
+<<<<<<< HEAD
         int fault_percentage = find_int_arg(argc, argv, "-fault-percentage", 10);
 	    char *filename = find_char_arg(argc, argv, "-faultList", "test.txt");
         int network_layer = find_int_arg(argc, argv, "-layer", 0);
         predict_classifier("cfg/imagenet1k.data", argv[2], argv[3], argv[4], 5, fault_model_option, fault_percentage, filename, network_layer);
+=======
+        predict_classifier("cfg/imagenet1k.data", argv[2], argv[3], argv[4], 5, fault_model_option);
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
     } else if (0 == strcmp(argv[1], "classifier")){
         run_classifier(argc, argv);
     } else if (0 == strcmp(argv[1], "regressor")){

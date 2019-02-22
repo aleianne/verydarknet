@@ -3,6 +3,7 @@
 
 #include "darknet.h"
 
+<<<<<<< HEAD
 typedef struct transition_fault_t {
     int bit;
     int filter;
@@ -35,3 +36,13 @@ float inject_transition_fault(transition_fault f, int i, int j, int k, float res
 float inject_fc_transition_fault(fc_transition_fault f, int i, int j, int k, float result);
 
 #endif
+=======
+static float previous_mul_result;
+
+void create_new_fault(int target_layer, network *net,  transition_fault *fault_i);
+
+void inject_transition_fault(transition_fault f, int i, int j, float *result);
+float check_bit_on_fault_transition(int shift, float old_value, float new_value);
+
+#endif
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d

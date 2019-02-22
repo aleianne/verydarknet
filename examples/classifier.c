@@ -1,11 +1,16 @@
 #include "darknet.h"
 #include "injector.h"
+<<<<<<< HEAD
 #include "fault_injector.h"
 #include "data_collector.h"
+=======
+#include "transition_fault_injector.h"
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 
 #include <sys/time.h>
 #include <assert.h>
 
+<<<<<<< HEAD
 /* void print_result(outcome_t outcome, float exec_time) {
 	printf("=== RESULTS ===\n");
     printf("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\nminutes = %f\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK, exec_time/60);
@@ -90,6 +95,93 @@ void print_layer_info(network *n, int layer_n, int filter) {
    fclose(fp);
 }
 */
+=======
+void permanent_fault_generation(float *X, network *net, int *indexes, float *predictions) {
+        int i;
+        int top = net->outputs;
+        float *g_pred  = calloc(top, sizeof(float));
+
+        for(i = 0; i < net->outputs; ++i){
+            //int index = indexes[i];
+            g_pred[i] = predictions[i];
+        }
+
+	    int max_i = max (g_pred, top);
+
+        fault_t fault;
+        outcome_t  outcome;
+        outcome.SDC = 0;
+        outcome.Crit_SDC = 0;
+        outcome.No_Crit_SDC = 0;
+        outcome.SDC = 0;
+        outcome.MSK = 0;
+	
+        int max_f;
+
+        FILE *fl;
+        fl = fopen ("fault_list6.txt","r");
+        if (fl == NULL) {
+            printf ("fault_list6.txt not found \n");
+            exit (-1);
+        }
+        fault.layer_index = 6;
+        while (fscanf (fl, "%d %d", &(fault.weigth), &(fault.bit)) != EOF) {
+            //	printf ("Inject in %d %d\n", fault.weigth, fault.bit);
+            inject (net, &fault);	
+            float *predictions = network_predict(net, X);
+            if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
+            top_k(predictions, net->outputs, net->outputs, indexes);
+            max_f = max (predictions, top);
+                
+            check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
+            //if (check_max_outcome (&outcome, predictions, g_pred, max_i, max_f)) 
+            //printf ("Critical SDC \n");
+            //printf ("\n");
+            release (net, &fault);	
+        } 
+	
+	    printf ("SDC = %d\nCritSDC = %d\nNo_Crit_SDC = %d\nMSK = %d\n", outcome.SDC, outcome.Crit_SDC, outcome.No_Crit_SDC, outcome.MSK);	
+}
+
+void transition_fault_generation(float *X, network *net, int *indexes, float *predictions) {
+    int i;
+    int top = net->outputs;
+    float *g_pred  = calloc(top, sizeof(float));
+
+    for(i = 0; i < net->outputs; ++i){
+        //int index = indexes[i];
+        g_pred[i] = predictions[i];
+    }
+
+	int max_i = max (g_pred, top);
+
+    fault_t fault;
+    outcome_t  outcome;
+    outcome.SDC = 0;
+    outcome.Crit_SDC = 0;
+    outcome.No_Crit_SDC = 0;
+    outcome.SDC = 0;
+    outcome.MSK = 0;
+	
+    int max_f;
+
+    transition_fault *t_fault = (transition_fault *) malloc(sizeof(transition_fault));
+    t_fault->bit = 23;
+    t_fault->column = 45;
+    t_fault->row = 34;
+    t_fault->is_faulty = 1;
+
+    // inject here the transition fault
+    create_new_fault(1, net, t_fault);
+
+    // predict the outcome
+    predictions = network_predict(net, X);
+    if(net->hierarchy) hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
+    top_k(predictions, net->outputs, net->outputs, indexes);
+    max_f = max (predictions, top);       
+    check_max_outcome (&outcome, predictions, g_pred, max_i, max_f); 
+}
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 
 float *get_regression_values(char **labels, int n)
 {
@@ -644,7 +736,11 @@ void try_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filena
     }
 }
 
+<<<<<<< HEAD
 void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top, char *fault_model_value, int fault_percentage, char *testfile, int network_layer)
+=======
+void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top, char *fault_model_value)
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 {
     network *net = load_network(cfgfile, weightfile, 0);
     set_batch_network(net, 1);
@@ -656,16 +752,24 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
     if(!name_list) name_list = option_find_str(options, "labels", "data/labels.list");
     // if(top == 0) top = option_find_int(options, "top", 1);
 
+<<<<<<< HEAD
     top = net->outputs; 
+=======
+	top = net->outputs; 
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 
     char **names = get_labels(name_list);
     clock_t time;
     int *indexes = calloc(top, sizeof(int));
     char buff[256];
     char *input = buff;
+<<<<<<< HEAD
 
     while(1){
 
+=======
+    while(1){
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
         if(filename){
             strncpy(input, filename, 256);
         }else{
@@ -677,13 +781,20 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
         }
         image im = load_image_color(input, 0, 0);
         image r = letterbox_image(im, net->w, net->h);
+<<<<<<< HEAD
         
+=======
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
         //image r = resize_min(im, 320);
         //printf("%d %d\n", r.w, r.h);
         //resize_network(net, r.w, r.h);
         //printf("%d %d\n", r.w, r.h);
 
+<<<<<<< HEAD
 	    //init_inj (net);	
+=======
+	    init_inj (net);	
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 
         float *X = r.data;
         time=clock();
@@ -693,6 +804,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
         top_k(predictions, net->outputs, net->outputs, indexes);
         fprintf(stderr, "%s: Predicted in %f seconds. \n", input, sec(clock()-time));
 
+<<<<<<< HEAD
         // in this point of the predict classifier function 
         // we print the informations about the filter output
         // print_layer_info(net, 2, 1);
@@ -755,6 +867,35 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
         }*/
 
         // release the memory used to store the image data
+=======
+        FAULT_MODEL fault_model;
+        
+        if (strcmp(fault_model_value, "transactional") == 0) {
+            fault_model = TRANSACTION_FAULT;
+        } else if (strcmp(fault_model_value, "no-faults") == 0) {
+            fault_model = NO_FAULT;
+        } else if (strcmp(fault_model_value, "seu") == 0) {
+            fault_model = SINGLE_EVEN_UPSET;
+        } else if (strcmp(fault_model_value, "permanent") == 0) {
+            fault_model = PERMENANT_FAULT;
+        } else {
+            fault_model = NO_FAULT;
+        }
+
+        switch(fault_model){
+            case NO_FAULT: break;
+            case PERMENANT_FAULT: 
+                permanent_fault_generation(X, net, indexes, predictions);   
+                break;
+            case TRANSACTION_FAULT:
+                break;
+            case SINGLE_EVEN_UPSET: 
+                break;
+            default:
+                break;
+        }
+	
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
         if(r.data != im.data) free_image(r);
         free_image(im);
         if (filename) break;
@@ -1218,9 +1359,12 @@ void run_classifier(int argc, char **argv)
     int top = find_int_arg(argc, argv, "-t", 0);
     int clear = find_arg(argc, argv, "-clear");
     char *fault_model_option = find_char_arg(argc, argv, "-faultModel", "no-faults");
+<<<<<<< HEAD
     char *testfile = find_char_arg(argc, argv, "-faultList", "test.txt");
     int fault_percentage = find_int_arg(argc, argv, "-fault-perc", 10);
     int network_layer = find_int_arg(argc, argv, "-layer", 0);
+=======
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
     //printf("the fault model is: %s", fault_model_option);
     char *data = argv[3];
     char *cfg = argv[4];
@@ -1228,7 +1372,11 @@ void run_classifier(int argc, char **argv)
     char *filename = (argc > 6) ? argv[6]: 0;
     char *layer_s = (argc > 7) ? argv[7]: 0;
     int layer = layer_s ? atoi(layer_s) : -1;
+<<<<<<< HEAD
     if(0==strcmp(argv[2], "predict")) predict_classifier(data, cfg, weights, filename, top, fault_model_option, fault_percentage, testfile, network_layer);
+=======
+    if(0==strcmp(argv[2], "predict")) predict_classifier(data, cfg, weights, filename, top, fault_model_option);
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
     else if(0==strcmp(argv[2], "fout")) file_output_classifier(data, cfg, weights, filename);
     else if(0==strcmp(argv[2], "try")) try_classifier(data, cfg, weights, filename, atoi(layer_s));
     else if(0==strcmp(argv[2], "train")) train_classifier(data, cfg, weights, gpus, ngpus, clear);

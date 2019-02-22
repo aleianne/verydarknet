@@ -5,8 +5,11 @@
 #include "layer.h"
 #include "network.h"
 
+<<<<<<< HEAD
 
 void print_activation_value(float *array, int n);
+=======
+>>>>>>> 6152de5e14c5ac698a167c8c7497721e7b7ed81d
 layer make_connected_layer(int batch, int inputs, int outputs, ACTIVATION activation, int batch_normalize, int adam);
 
 void forward_connected_layer(layer l, network net);
