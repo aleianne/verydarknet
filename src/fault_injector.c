@@ -31,13 +31,13 @@ void inject_fault(fault_list_entry_t fault_record, network *net, int target_laye
 
         case STUCK_AT_0: {
             // only for debug
-            fprintf(stderr, "the fault injected into the network is a stuck at 0\n");
+            //fprintf(stderr, "the fault injected into the network is a stuck at 0\n");
             inject_stuck_at_fault_into_layers(net, target_layer, bit, 0, mac_position);
         } break;
 
         case STUCK_AT_1: {
             // only for debug 
-            fprintf(stderr, "the fault inejcted into the network is a stuck at 1\n");
+            //fprintf(stderr, "the fault inejcted into the network is a stuck at 1\n");
             inject_stuck_at_fault_into_layers(net, target_layer, bit, 1, mac_position);
         } break;
 
