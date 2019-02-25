@@ -189,12 +189,20 @@ void write_golden_prediction_file(prediction_results_t *prediction_array, char *
     write_prediction_file(prediction_array, filename, size, header);
 }
 
-void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *filename, int size, char *header) {
+void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *filename, int size) {
 
-    FILE *file = handle_file_open(filename);
+    char prefix = "sim_results";
+    int l = strlen(prefix);
+    int l_filename = strlen(filename);
+
+    char *resultname = calloc(l + l_filename, sizeof(char));
+    strncpy(resultname, prefix, l);
+    strcat(resultname, filename);
+
+    FILE *file = handle_file_open(resultname);
     char fault_type[30];
 
-    fprintf(file, "%s\n", header);
+    fprintf(file, "fault type\tposition\tbit\tlabel\tconfidence score\n");
 
     int i;
     for (i = 0; i < size; i++) {
@@ -217,8 +225,10 @@ void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *
             }
         }
 
-        fprintf(file, "%s %d %d\t%d\t%f\n", fault_type, fault->fault_position, fault->faulty_bit, label, c_score);
+        fprintf(file, "%s\t%d\t%d\t%d\t%f\n", fault_type, fault->fault_position, fault->faulty_bit, label, c_score);
     }
+    
+    free(resultname);
     fclose(file);
 }
 

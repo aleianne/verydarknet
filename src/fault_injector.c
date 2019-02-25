@@ -16,7 +16,6 @@ void close_fault_list(FILE *fp) {
 }
 
 void inject_fault(fault_list_entry_t fault_record, network *net, int target_layer) {
-    // if the layer is 0 than the entire network must be tested
 
     int mac_position = fault_record.fault_position;
     int bit = fault_record.faulty_bit;
@@ -27,6 +26,7 @@ void inject_fault(fault_list_entry_t fault_record, network *net, int target_laye
     FAULT_MODEL fault_model = fault_record.fault_type;
     
     switch (fault_model) {
+
         case PERMENANT_FAULT: {
             
         } break;
