@@ -130,7 +130,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     int top = net->outputs;
 
     // create a new output prediction array 
-    prediction_results_t *prediction_results = calloc(test_set_size, sizeof(prediction_results_t)); 
+    prediction_result_fault_t *prediction_results = calloc(fault_list_size, sizeof(prediction_result_fault_t)); 
 
     // only for debug 
     fprintf(stderr, "begin the faulty prediction\n\n");
@@ -148,11 +148,11 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
         image r = letterbox_image(im, net->w, net->h);
         image_data = r.data;
 
-        for (j = 0; j < test_set_size; j++) {
+        for (j = 0; j < fault_list_size; j++) {
 
             fault_list_entry_t *entry = faultlist_array[j];
 
-            fprintf(stderr, "inject the fault type %d at position %d, bit %d\n", entry->fault_type, entry->fault_position, entry->faulty_bit);
+            //fprintf(stderr, "inject the fault type %d at position %d, bit %d\n", entry->fault_type, entry->fault_position, entry->faulty_bit);
 
             clock_t begin = clock();
 
@@ -165,7 +165,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
             float max_f = predictions[predicted_label];
 
             prediction_results[j].c_score = max_f;
-            prediction_results[j].imagepath = img;
+            prediction_results[j].fault = *entry;
             prediction_results[j].label_pred = predicted_label;
 
             remove_fault(*entry, net, target_layer);
@@ -180,6 +180,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
 
         // save the prediction into a file  
         //write_faulty_prediction_file(prediction_results, filename, test_set_size);
+        write_prediction_file_2(prediction_results, path, fault_list_size, "fault\tlabel\tconfidence score");
 
         // release the memory used to store the image
         if(r.data != im.data) free_image(r);
