@@ -724,3 +724,20 @@ float **one_hot_encode(float *a, int n, int k)
     return t;
 }
 
+char *change_ext(char* mystr, char *new_ext) {
+    char *retstr;
+    char *lastdot;
+    if (mystr == NULL)
+         return NULL;
+    if ((retstr = malloc (strlen (mystr) + strlen(new_ext))) == NULL)
+        return NULL;
+    strcpy (retstr, mystr);
+    lastdot = strrchr (retstr, '.');
+    if (lastdot != NULL)
+        *lastdot = '\0';
+    
+    strcat(retstr, new_ext);
+
+    return retstr;
+}
+

@@ -25,6 +25,7 @@ FILE *handle_file_open(char *filename);
 char *path_extension(char *filename, char *path);
 char *faulty_prediction_name_generator(fault_list_entry_t fault_record);
 char *create_output_filename(fault_list_entry_t fault_list_entry, char *path);
+char *generate_result_filename(char *filename);
 void write_golden_prediction_file(prediction_results_t *prediction_array, char *filename, int size);
 void write_faulty_prediction_file(prediction_results_t *prediction_array, char *filename, int size);
 void write_prediction_file(prediction_results_t *prediction_array, char *filename, int size, char *header);

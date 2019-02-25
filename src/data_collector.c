@@ -135,7 +135,6 @@ char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {
             fprintf(stderr, "no faults are been specified\n");
         } break;
     }
-    
 
     // concatenate to the filename string the mac position and the faulty bit
     strcat(filename, s_position);
@@ -146,6 +145,17 @@ char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {
     // only for debug
     fprintf(stderr, "the filename to be used during the simulation is %s\n\n", filename);
     return filename;
+}
+
+char *generate_result_filename(char *filename) {
+    char *prefix = "sim_results/";
+    int l = strlen(prefix);
+
+    char image = change_ext(filename, ".csv");
+
+    char *resultname = calloc(l + strlen(image), sizeof(char));
+    strncpy(resultname, prefix, l);
+    strcat(resultname, filename);
 }
 
 char *create_output_filename(fault_list_entry_t fault_list_entry, char *path) {
@@ -191,13 +201,8 @@ void write_golden_prediction_file(prediction_results_t *prediction_array, char *
 
 void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *filename, int size) {
 
-    char *prefix = "sim_results";
-    int l = strlen(prefix);
-    int l_filename = strlen(filename);
-
-    char *resultname = calloc(l + l_filename, sizeof(char));
-    strncpy(resultname, prefix, l);
-    strcat(resultname, filename);
+    // generate the result filename
+    char *resultname = generate_result_filename(filename);
 
     FILE *file = handle_file_open(resultname);
     char fault_type[30];

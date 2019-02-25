@@ -48,6 +48,7 @@ float **one_hot_encode(float *a, int n, int k);
 float sec(clock_t clocks);
 void print_statistics(float *a, int n);
 int int_index(int *a, int val, int n);
+char *change_ext(char *mystr, char *new_ext);
 
 #endif
 
