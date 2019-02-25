@@ -7,7 +7,7 @@ void inject_stuck_at_fault_into_layers(network *net, int layer_n, int bit, int t
     new_st_fault->type = type;
     new_st_fault->fault_location = fault_location;
 
-    if (layer_n > 0) {
+    if (layer_n >= 0) {
         if (net->layers[layer_n].type == CONVOLUTIONAL || net->layers[layer_n].type == CONNECTED) {
             inject_stuck_at_fault(net, layer_n, new_st_fault);
         } else {
@@ -45,7 +45,7 @@ float compute_faulty_multiplication(float value, int bit_position, int type) {
 }
 
 void remove_stuck_at_fault(network *net, int layer_n) {
-    if (layer_n > 0) {
+    if (layer_n >= 0) {
         layer *l = &net->layers[layer_n];
         if (l->type == CONVOLUTIONAL || l->type == CONNECTED) {
             free(l->fault);

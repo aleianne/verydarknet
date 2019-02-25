@@ -168,7 +168,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
             prediction_results[j].fault = entry;
             prediction_results[j].label_pred = predicted_label;
 
-            fprintf(stderr, "sono qui");
+            fprintf(stderr, "sono qui\n");
 
             remove_fault(*entry, net, target_layer);
         }
