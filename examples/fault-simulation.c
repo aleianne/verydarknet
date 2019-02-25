@@ -165,7 +165,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
             float max_f = predictions[predicted_label];
 
             prediction_results[j].c_score = max_f;
-            prediction_results[j].fault = *entry;
+            prediction_results[j].fault = entry;
             prediction_results[j].label_pred = predicted_label;
 
             fprintf(stderr, "sono qui");

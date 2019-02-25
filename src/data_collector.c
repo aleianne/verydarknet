@@ -198,11 +198,11 @@ void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *
 
     int i;
     for (i = 0; i < size; i++) {
-        fault_list_entry_t fault = prediction_array[i].fault;
+        fault_list_entry_t *fault = prediction_array[i].fault;
         int label = prediction_array[i].label_pred;
         float c_score = prediction_array[i].c_score;
 
-        switch (fault.fault_type) 
+        switch (fault->fault_type) 
         {
             case STUCK_AT_0: {
                 strcpy(fault_type, "stuck-at-0");
@@ -217,7 +217,7 @@ void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *
             }
         }
 
-        fprintf(file, "%s %d %d\t%d\t%f\n", fault_type, fault.fault_position, fault.faulty_bit, label, c_score);
+        fprintf(file, "%s %d %d\t%d\t%f\n", fault_type, fault->fault_position, fault->faulty_bit, label, c_score);
     }
     fclose(file);
 }

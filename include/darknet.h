@@ -626,7 +626,7 @@ typedef struct fault_list_entry {
 
 // define a struct that contains the information about the prediction for every fault
 typedef struct prediction_result_fault {
-    fault_list_entry_t fault;
+    fault_list_entry_t *fault;
     int label_pred;
     float c_score;
 } prediction_result_fault_t;
