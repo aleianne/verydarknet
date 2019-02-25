@@ -156,6 +156,7 @@ char *generate_result_filename(char *filename) {
     char *resultname = calloc(l + strlen(image), sizeof(char));
     strncpy(resultname, prefix, l);
     strcat(resultname, filename);
+    return resultname;
 }
 
 char *create_output_filename(fault_list_entry_t fault_list_entry, char *path) {
