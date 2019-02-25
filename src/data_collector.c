@@ -191,7 +191,7 @@ void write_golden_prediction_file(prediction_results_t *prediction_array, char *
 
 void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *filename, int size) {
 
-    char prefix = "sim_results";
+    char *prefix = "sim_results";
     int l = strlen(prefix);
     int l_filename = strlen(filename);
 
@@ -227,7 +227,7 @@ void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *
 
         fprintf(file, "%s\t%d\t%d\t%d\t%f\n", fault_type, fault->fault_position, fault->faulty_bit, label, c_score);
     }
-    
+
     free(resultname);
     fclose(file);
 }

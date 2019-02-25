@@ -34,11 +34,8 @@ list *load_imagepath_array(char *testsetfile) {
     while (fgets(buffer, MAX_BUFF, file) != NULL) {
         // add image path into the list
         length = strlen(buffer);
-
-        // delete the last \n in the buffer
-        buffer[length - 1] = '\0';
-
         char *imagepath = calloc(length, sizeof(char));
+        strncpy(imagepath, buffer, length - 1);
         list_insert(imagepaths, imagepath);
     }
 
