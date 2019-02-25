@@ -130,57 +130,61 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     int top = net->outputs;
 
     // create a new output prediction array 
-    prediction_results_t *prediction_results = calloc(test_set_size, sizeof(prediction_results_t)); 
+    prediction_result_fault_t *prediction_results = calloc(fault_list_size, sizeof(prediction_result_fault_t)); 
 
     // only for debug 
     fprintf(stderr, "begin the faulty prediction\n\n");
     
     for (i = 0; i < 1; i++) {
-        fault_list_entry_t *entry = faultlist_array[i];
 
-        fprintf(stderr, "inject the fault type %d at position %d, bit %d\n", entry->fault_type, entry->fault_position, entry->faulty_bit);
+        // create a new simulation for the selected image
+        char *img = imagepath_array[j];
 
-        clock_t begin = clock();
+        // pay attection here, i must change the image path 
+        //char *filename = path_extension(&imagepath_array[i], pathname);
 
-        // inject the fault into the network
-        inject_fault(*entry, net, target_layer);
+        // load a new image
+        image im = load_image_color(img, 0, 0);
+        image r = letterbox_image(im, net->w, net->h);
+        image_data = r.data;
 
         for (j = 0; j < fault_list_size; j++) {
-            // create a new simulation for the selected image
-            char *img = imagepath_array[j];
 
-            // pay attection here, i must change the image path 
-            //char *filename = path_extension(&imagepath_array[i], pathname);
+            fault_list_entry_t *entry = faultlist_array[j];
 
-            // load a new image
-            image im = load_image_color(img, 0, 0);
-            image r = letterbox_image(im, net->w, net->h);
+            //fprintf(stderr, "inject the fault type %d at position %d, bit %d\n", entry->fault_type, entry->fault_position, entry->faulty_bit);
 
-            // image prediction 
-            image_data = r.data;
+            clock_t begin = clock();
+
+            // inject the fault into the network
+            inject_fault(*entry, net, target_layer);            
+
             predictions = network_predict(net, image_data);
 
             int predicted_label = max_confidence_score(predictions, top);
             float max_f = predictions[predicted_label];
 
             prediction_results[j].c_score = max_f;
-            prediction_results[j].imagepath = img;
+            prediction_results[j].fault = *entry;
             prediction_results[j].label_pred = predicted_label;
 
-            // release the memory used to store the image
-            if(r.data != im.data) free_image(r);
-            free_image(im);
+            remove_fault(*entry, net, target_layer);
         }
 
         // only for debug
-        fprintf(stderr, "prediction completed in %f seconds\n\n", sec(clock() - begin));
+        //fprintf(stderr, "prediction completed in %f seconds\n\n", sec(clock() - begin));
 
         // create a new filename in order to store the data contained into the prediction results array
         char path[30] = "sim_results/";
-        char *filename = create_output_filename(*entry, path);
+        //char *filename = create_output_filename(*entry, path);
 
         // save the prediction into a file  
-        write_faulty_prediction_file(prediction_results, filename, test_set_size);
+        //write_faulty_prediction_file(prediction_results, filename, test_set_size);
+        write_prediction_file_2(prediction_results, path, fault_list_size, "fault\tlabel\tconfidence score");
+
+        // release the memory used to store the image
+        if(r.data != im.data) free_image(r);
+        free_image(im);
     }
 }
 

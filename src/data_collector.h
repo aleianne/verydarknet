@@ -28,5 +28,6 @@ char *create_output_filename(fault_list_entry_t fault_list_entry, char *path);
 void write_golden_prediction_file(prediction_results_t *prediction_array, char *filename, int size);
 void write_faulty_prediction_file(prediction_results_t *prediction_array, char *filename, int size);
 void write_prediction_file(prediction_results_t *prediction_array, char *filename, int size, char *header);
+void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *filename, int size, char *header);
 
 #endif

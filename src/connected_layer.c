@@ -225,7 +225,6 @@ void forward_connected_layer(layer l, network net)
     } else {
         add_bias(l.output, l.biases, l.batch, l.outputs, 1);
     }
-
     activate_array(l.output, l.outputs*l.batch, l.activation);
 }
 

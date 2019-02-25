@@ -189,3 +189,36 @@ void write_golden_prediction_file(prediction_results_t *prediction_array, char *
     write_prediction_file(prediction_array, filename, size, header);
 }
 
+void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *filename, int size, char *header) {
+
+    FILE *file = handle_file_open(filename);
+    char fault_type[30];
+
+    fprintf(file, "%s\n", header);
+
+    int i;
+    for (i = 0; i < size; i++) {
+        fault_list_entry_t fault = prediction_array[i].fault;
+        int label = prediction_array[i].label_pred;
+        float c_score = prediction_array[i].c_score;
+
+        switch (fault.fault_type) 
+        {
+            case STUCK_AT_0: {
+                strcpy(fault_type, "stuck-at-0");
+            } break;
+        
+            case STUCK_AT_1: {
+                strcpy(fault_type, "stuck-at-1");
+            } break;
+
+            default: {
+
+            }
+        }
+
+        fprintf(file, "%s %d %d\t%d\t%f\n", fault_type, fault.fault_position, fault.faulty_bit, label, c_score);
+    }
+    fclose(file);
+}
+

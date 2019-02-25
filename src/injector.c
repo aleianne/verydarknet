@@ -153,7 +153,6 @@ int check_max_outcome (outcome_t *o, float *f_out, float *g_out, int g_max_index
 			}
 
 		}
-
 	}
 		
 	return ret;

@@ -624,6 +624,13 @@ typedef struct fault_list_entry {
     int faulty_bit; 
 } fault_list_entry_t;
 
+// define a struct that contains the information about the prediction for every fault
+typedef struct prediction_result_fault {
+    fault_list_entry_t fault;
+    int label_pred;
+    float c_score;
+} prediction_result_fault_t;
+
 network *load_network(char *cfg, char *weights, int clear);
 load_args get_base_args(network *net);
 

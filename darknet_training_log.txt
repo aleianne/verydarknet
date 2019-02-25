@@ -1,0 +1,1430 @@
+yolov3
+layer     filters    size              input                output
+    0 conv     32  3 x 3 / 1   608 x 608 x   3   ->   608 x 608 x  32  0.639 BFLOPs
+    1 conv     64  3 x 3 / 2   608 x 608 x  32   ->   304 x 304 x  64  3.407 BFLOPs
+    2 conv     32  1 x 1 / 1   304 x 304 x  64   ->   304 x 304 x  32  0.379 BFLOPs
+    3 conv     64  3 x 3 / 1   304 x 304 x  32   ->   304 x 304 x  64  3.407 BFLOPs
+    4 res    1                 304 x 304 x  64   ->   304 x 304 x  64
+    5 conv    128  3 x 3 / 2   304 x 304 x  64   ->   152 x 152 x 128  3.407 BFLOPs
+    6 conv     64  1 x 1 / 1   152 x 152 x 128   ->   152 x 152 x  64  0.379 BFLOPs
+    7 conv    128  3 x 3 / 1   152 x 152 x  64   ->   152 x 152 x 128  3.407 BFLOPs
+    8 res    5                 152 x 152 x 128   ->   152 x 152 x 128
+    9 conv     64  1 x 1 / 1   152 x 152 x 128   ->   152 x 152 x  64  0.379 BFLOPs
+   10 conv    128  3 x 3 / 1   152 x 152 x  64   ->   152 x 152 x 128  3.407 BFLOPs
+   11 res    8                 152 x 152 x 128   ->   152 x 152 x 128
+   12 conv    256  3 x 3 / 2   152 x 152 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+   13 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128  0.379 BFLOPs
+   14 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+   15 res   12                  76 x  76 x 256   ->    76 x  76 x 256
+   16 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128  0.379 BFLOPs
+   17 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+   18 res   15                  76 x  76 x 256   ->    76 x  76 x 256
+   19 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128  0.379 BFLOPs
+   20 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+   21 res   18                  76 x  76 x 256   ->    76 x  76 x 256
+   22 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128  0.379 BFLOPs
+   23 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+   24 res   21                  76 x  76 x 256   ->    76 x  76 x 256
+   25 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128  0.379 BFLOPs
+   26 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+   27 res   24                  76 x  76 x 256   ->    76 x  76 x 256
+   28 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128  0.379 BFLOPs
+   29 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+   30 res   27                  76 x  76 x 256   ->    76 x  76 x 256
+   31 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128  0.379 BFLOPs
+   32 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+   33 res   30                  76 x  76 x 256   ->    76 x  76 x 256
+   34 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128  0.379 BFLOPs
+   35 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+   36 res   33                  76 x  76 x 256   ->    76 x  76 x 256
+   37 conv    512  3 x 3 / 2    76 x  76 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   38 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256  0.379 BFLOPs
+   39 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   40 res   37                  38 x  38 x 512   ->    38 x  38 x 512
+   41 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256  0.379 BFLOPs
+   42 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   43 res   40                  38 x  38 x 512   ->    38 x  38 x 512
+   44 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256  0.379 BFLOPs
+   45 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   46 res   43                  38 x  38 x 512   ->    38 x  38 x 512
+   47 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256  0.379 BFLOPs
+   48 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   49 res   46                  38 x  38 x 512   ->    38 x  38 x 512
+   50 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256  0.379 BFLOPs
+   51 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   52 res   49                  38 x  38 x 512   ->    38 x  38 x 512
+   53 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256  0.379 BFLOPs
+   54 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   55 res   52                  38 x  38 x 512   ->    38 x  38 x 512
+   56 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256  0.379 BFLOPs
+   57 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   58 res   55                  38 x  38 x 512   ->    38 x  38 x 512
+   59 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256  0.379 BFLOPs
+   60 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   61 res   58                  38 x  38 x 512   ->    38 x  38 x 512
+   62 conv   1024  3 x 3 / 2    38 x  38 x 512   ->    19 x  19 x1024  3.407 BFLOPs
+   63 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512  0.379 BFLOPs
+   64 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024  3.407 BFLOPs
+   65 res   62                  19 x  19 x1024   ->    19 x  19 x1024
+   66 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512  0.379 BFLOPs
+   67 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024  3.407 BFLOPs
+   68 res   65                  19 x  19 x1024   ->    19 x  19 x1024
+   69 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512  0.379 BFLOPs
+   70 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024  3.407 BFLOPs
+   71 res   68                  19 x  19 x1024   ->    19 x  19 x1024
+   72 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512  0.379 BFLOPs
+   73 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024  3.407 BFLOPs
+   74 res   71                  19 x  19 x1024   ->    19 x  19 x1024
+   75 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512  0.379 BFLOPs
+   76 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024  3.407 BFLOPs
+   77 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512  0.379 BFLOPs
+   78 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024  3.407 BFLOPs
+   79 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512  0.379 BFLOPs
+   80 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024  3.407 BFLOPs
+   81 conv    255  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 255  0.189 BFLOPs
+   82 yolo
+   83 route  79
+   84 conv    256  1 x 1 / 1    19 x  19 x 512   ->    19 x  19 x 256  0.095 BFLOPs
+   85 upsample            2x    19 x  19 x 256   ->    38 x  38 x 256
+   86 route  85 61
+   87 conv    256  1 x 1 / 1    38 x  38 x 768   ->    38 x  38 x 256  0.568 BFLOPs
+   88 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   89 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256  0.379 BFLOPs
+   90 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   91 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256  0.379 BFLOPs
+   92 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512  3.407 BFLOPs
+   93 conv    255  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 255  0.377 BFLOPs
+   94 yolo
+   95 route  91
+   96 conv    128  1 x 1 / 1    38 x  38 x 256   ->    38 x  38 x 128  0.095 BFLOPs
+   97 upsample            2x    38 x  38 x 128   ->    76 x  76 x 128
+   98 route  97 36
+   99 conv    128  1 x 1 / 1    76 x  76 x 384   ->    76 x  76 x 128  0.568 BFLOPs
+  100 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+  101 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128  0.379 BFLOPs
+  102 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+  103 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128  0.379 BFLOPs
+  104 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256  3.407 BFLOPs
+  105 conv    255  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 255  0.754 BFLOPs
+  106 yolo
+Loading weights from darknet53.conv.74...Done!
+Learning Rate: 0.001, Momentum: 0.9, Decay: 0.0005
+Resizing
+320
+Loaded: 0.133544 seconds
+Region 82 Avg IOU: 0.309955, Class: 0.452790, Obj: 0.811513, No Obj: 0.536135, .5R: 0.200000, .75R: 0.200000,  count: 5
+Region 94 Avg IOU: 0.217920, Class: 0.386026, Obj: 0.538851, No Obj: 0.519001, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.174671, Class: 0.590182, Obj: 0.263895, No Obj: 0.415995, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.130065, Class: 0.412978, Obj: 0.585733, No Obj: 0.533915, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.276505, Class: 0.565184, Obj: 0.454529, No Obj: 0.518848, .5R: 0.333333, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.197563, Class: 0.720060, Obj: 0.224651, No Obj: 0.416909, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.086761, Class: 0.864567, Obj: 0.859382, No Obj: 0.537709, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.115432, Class: 0.422418, Obj: 0.652000, No Obj: 0.519616, .5R: 0.000000, .75R: 0.000000,  count: 20
+Region 106 Avg IOU: 0.138763, Class: 0.613814, Obj: 0.336322, No Obj: 0.418121, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.114084, Class: 0.526082, Obj: 0.458478, No Obj: 0.535805, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.204148, Class: 0.441567, Obj: 0.415625, No Obj: 0.519642, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.219995, Class: 0.229460, Obj: 0.317423, No Obj: 0.414844, .5R: 0.000000, .75R: 0.000000,  count: 16
+Region 82 Avg IOU: 0.250261, Class: 0.732595, Obj: 0.433872, No Obj: 0.538081, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.230893, Class: 0.390137, Obj: 0.605410, No Obj: 0.520150, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.186438, Class: 0.490053, Obj: 0.352414, No Obj: 0.417037, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.141560, Class: 0.769790, Obj: 0.757119, No Obj: 0.531479, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 94 Avg IOU: 0.300996, Class: 0.542077, Obj: 0.628450, No Obj: 0.519926, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.157096, Class: 0.388473, Obj: 0.263303, No Obj: 0.419962, .5R: 0.000000, .75R: 0.000000,  count: 28
+Region 82 Avg IOU: 0.167062, Class: 0.498360, Obj: 0.567073, No Obj: 0.534629, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.285654, Class: 0.414906, Obj: 0.530381, No Obj: 0.519563, .5R: 0.238095, .75R: 0.000000,  count: 21
+Region 106 Avg IOU: 0.161300, Class: 0.462501, Obj: 0.435388, No Obj: 0.416307, .5R: 0.000000, .75R: 0.000000,  count: 21
+Region 82 Avg IOU: 0.189969, Class: 0.605040, Obj: 0.769231, No Obj: 0.534414, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.255184, Class: 0.487046, Obj: 0.552556, No Obj: 0.520099, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.142512, Class: 0.391978, Obj: 0.300978, No Obj: 0.414789, .5R: 0.000000, .75R: 0.000000,  count: 23
+Region 82 Avg IOU: 0.097567, Class: 0.446551, Obj: 0.561498, No Obj: 0.538682, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.177164, Class: 0.519691, Obj: 0.570396, No Obj: 0.518748, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.218138, Class: 0.499406, Obj: 0.424146, No Obj: 0.417424, .5R: 0.052632, .75R: 0.000000,  count: 19
+Region 82 Avg IOU: 0.438593, Class: 0.597538, Obj: 0.831305, No Obj: 0.534351, .5R: 0.800000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.216689, Class: 0.559506, Obj: 0.463158, No Obj: 0.518216, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.197943, Class: 0.607224, Obj: 0.369137, No Obj: 0.416388, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.147384, Class: 0.461934, Obj: 0.665941, No Obj: 0.533307, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.179626, Class: 0.535573, Obj: 0.415881, No Obj: 0.517770, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.114436, Class: 0.816576, Obj: 0.438924, No Obj: 0.419373, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.382800, Class: 0.449344, Obj: 0.654501, No Obj: 0.536080, .5R: 0.500000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.212332, Class: 0.599000, Obj: 0.541301, No Obj: 0.518839, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.124257, Class: 0.414870, Obj: 0.399311, No Obj: 0.417753, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.259299, Class: 0.526660, Obj: 0.524822, No Obj: 0.533684, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.298207, Class: 0.445759, Obj: 0.544843, No Obj: 0.519835, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.183048, Class: 0.316164, Obj: 0.252590, No Obj: 0.415324, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.151643, Class: 0.636829, Obj: 0.691659, No Obj: 0.535969, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.182318, Class: 0.502162, Obj: 0.412119, No Obj: 0.519769, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.189820, Class: 0.466405, Obj: 0.272078, No Obj: 0.415220, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.324536, Class: 0.535949, Obj: 0.512047, No Obj: 0.533877, .5R: 0.285714, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.520644, .5R: -nan, .75R: -nan,  count: 0
+Region 106 Avg IOU: 0.200507, Class: 0.596598, Obj: 0.383663, No Obj: 0.415092, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.234619, Class: 0.414679, Obj: 0.533287, No Obj: 0.537015, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.027937, Class: 0.905555, Obj: 0.356174, No Obj: 0.519839, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.362223, Class: 0.276594, Obj: 0.168710, No Obj: 0.414988, .5R: 0.000000, .75R: 0.000000,  count: 1
+1: 557.273560, 557.273560 avg, 0.000000 rate, 3960.064349 seconds, 64 images
+Loaded: 0.000158 seconds
+Region 82 Avg IOU: 0.217442, Class: 0.432665, Obj: 0.804010, No Obj: 0.533907, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.107815, Class: 0.403109, Obj: 0.644993, No Obj: 0.519929, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.207138, Class: 0.524473, Obj: 0.469099, No Obj: 0.415748, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.231761, Class: 0.324877, Obj: 0.558353, No Obj: 0.538785, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.245555, Class: 0.672436, Obj: 0.512959, No Obj: 0.518251, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.105683, Class: 0.583036, Obj: 0.349610, No Obj: 0.418243, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.133637, Class: 0.514198, Obj: 0.650038, No Obj: 0.537619, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.086998, Class: 0.279184, Obj: 0.382464, No Obj: 0.518749, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.281660, Class: 0.420801, Obj: 0.362470, No Obj: 0.414548, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.153614, Class: 0.577080, Obj: 0.543814, No Obj: 0.535391, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.306264, Class: 0.631966, Obj: 0.676167, No Obj: 0.520656, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.119082, Class: 0.614023, Obj: 0.363174, No Obj: 0.415261, .5R: 0.000000, .75R: 0.000000,  count: 31
+Region 82 Avg IOU: 0.107501, Class: 0.618318, Obj: 0.628718, No Obj: 0.533197, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.134979, Class: 0.692084, Obj: 0.267567, No Obj: 0.518516, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.074198, Class: 0.503351, Obj: 0.271121, No Obj: 0.419852, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.327239, Class: 0.234929, Obj: 0.622168, No Obj: 0.535274, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.126999, Class: 0.516915, Obj: 0.637668, No Obj: 0.517855, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.170300, Class: 0.583189, Obj: 0.297130, No Obj: 0.416688, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.267684, Class: 0.371584, Obj: 0.597690, No Obj: 0.535584, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.248590, Class: 0.595121, Obj: 0.671628, No Obj: 0.519055, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 106 Avg IOU: 0.166999, Class: 0.580200, Obj: 0.308989, No Obj: 0.415764, .5R: 0.048780, .75R: 0.000000,  count: 41
+Region 82 Avg IOU: 0.276505, Class: 0.551168, Obj: 0.552612, No Obj: 0.537762, .5R: 0.181818, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.253712, Class: 0.517252, Obj: 0.470276, No Obj: 0.519676, .5R: 0.200000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.394427, Class: 0.645945, Obj: 0.465048, No Obj: 0.414049, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.125828, Class: 0.606496, Obj: 0.723180, No Obj: 0.535525, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.253652, Class: 0.422573, Obj: 0.469578, No Obj: 0.519282, .5R: 0.142857, .75R: 0.142857,  count: 7
+Region 106 Avg IOU: 0.147929, Class: 0.695983, Obj: 0.362981, No Obj: 0.417015, .5R: 0.055556, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.175545, Class: 0.500224, Obj: 0.624867, No Obj: 0.537714, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.265399, Class: 0.437799, Obj: 0.555762, No Obj: 0.519621, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.178287, Class: 0.512442, Obj: 0.366719, No Obj: 0.415812, .5R: 0.024390, .75R: 0.000000,  count: 41
+Region 82 Avg IOU: 0.205558, Class: 0.378617, Obj: 0.675776, No Obj: 0.535175, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.037368, Class: 0.701661, Obj: 0.051774, No Obj: 0.520120, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.161732, Class: 0.387057, Obj: 0.361378, No Obj: 0.419361, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.296985, Class: 0.601772, Obj: 0.507990, No Obj: 0.536295, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.231404, Class: 0.478204, Obj: 0.468205, No Obj: 0.519454, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 106 Avg IOU: 0.252767, Class: 0.565547, Obj: 0.321192, No Obj: 0.415811, .5R: 0.093750, .75R: 0.031250,  count: 32
+Region 82 Avg IOU: 0.236361, Class: 0.370955, Obj: 0.484280, No Obj: 0.536360, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.149090, Class: 0.340089, Obj: 0.510617, No Obj: 0.519424, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.209674, Class: 0.469424, Obj: 0.261408, No Obj: 0.416393, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 82 Avg IOU: 0.169037, Class: 0.462078, Obj: 0.736870, No Obj: 0.536006, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.224708, Class: 0.300895, Obj: 0.526358, No Obj: 0.518529, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.197722, Class: 0.513044, Obj: 0.384287, No Obj: 0.416456, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 82 Avg IOU: 0.243354, Class: 0.416857, Obj: 0.565379, No Obj: 0.536274, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.094206, Class: 0.288731, Obj: 0.618908, No Obj: 0.520369, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.125966, Class: 0.532549, Obj: 0.326725, No Obj: 0.415442, .5R: 0.029412, .75R: 0.000000,  count: 34
+Region 82 Avg IOU: 0.181120, Class: 0.568885, Obj: 0.644649, No Obj: 0.534899, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.130814, Class: 0.335499, Obj: 0.533752, No Obj: 0.520044, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.128755, Class: 0.576517, Obj: 0.349100, No Obj: 0.415524, .5R: 0.000000, .75R: 0.000000,  count: 5
+2: 577.429871, 559.289185 avg, 0.000000 rate, 3910.024124 seconds, 128 images
+Loaded: 0.000155 seconds
+Region 82 Avg IOU: 0.307932, Class: 0.612126, Obj: 0.646690, No Obj: 0.536155, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.205350, Class: 0.569036, Obj: 0.579787, No Obj: 0.518249, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.251058, Class: 0.643381, Obj: 0.323446, No Obj: 0.414653, .5R: 0.105263, .75R: 0.000000,  count: 19
+Region 82 Avg IOU: 0.133729, Class: 0.567999, Obj: 0.485483, No Obj: 0.534862, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.175033, Class: 0.529524, Obj: 0.580246, No Obj: 0.517219, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.136650, Class: 0.594067, Obj: 0.373480, No Obj: 0.419150, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 82 Avg IOU: 0.255240, Class: 0.378440, Obj: 0.498947, No Obj: 0.536089, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.207755, Class: 0.610742, Obj: 0.528474, No Obj: 0.519078, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.168914, Class: 0.197201, Obj: 0.103043, No Obj: 0.416939, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.463759, Class: 0.534164, Obj: 0.611146, No Obj: 0.537742, .5R: 0.500000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.129655, Class: 0.289497, Obj: 0.560036, No Obj: 0.519890, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.212707, Class: 0.573321, Obj: 0.395411, No Obj: 0.414864, .5R: 0.085714, .75R: 0.000000,  count: 35
+Region 82 Avg IOU: 0.281156, Class: 0.702900, Obj: 0.391975, No Obj: 0.531215, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.166372, Class: 0.462479, Obj: 0.615389, No Obj: 0.519197, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.120649, Class: 0.539262, Obj: 0.352731, No Obj: 0.420463, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.199554, Class: 0.420172, Obj: 0.746740, No Obj: 0.532824, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.159067, Class: 0.559893, Obj: 0.604521, No Obj: 0.520611, .5R: 0.045455, .75R: 0.000000,  count: 22
+Region 106 Avg IOU: 0.189959, Class: 0.636347, Obj: 0.405719, No Obj: 0.418999, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.242495, Class: 0.411001, Obj: 0.672931, No Obj: 0.534129, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.395636, Class: 0.643105, Obj: 0.408625, No Obj: 0.518295, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.160972, Class: 0.547548, Obj: 0.274120, No Obj: 0.416103, .5R: 0.000000, .75R: 0.000000,  count: 20
+Region 82 Avg IOU: 0.193569, Class: 0.537101, Obj: 0.667570, No Obj: 0.536929, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.141069, Class: 0.443604, Obj: 0.386806, No Obj: 0.519297, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.293528, Class: 0.376270, Obj: 0.411472, No Obj: 0.416982, .5R: 0.142857, .75R: 0.071429,  count: 14
+Region 82 Avg IOU: 0.254595, Class: 0.411679, Obj: 0.557961, No Obj: 0.536472, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.238842, Class: 0.508114, Obj: 0.445719, No Obj: 0.519057, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.243652, Class: 0.445657, Obj: 0.391059, No Obj: 0.415965, .5R: 0.159091, .75R: 0.022727,  count: 44
+Region 82 Avg IOU: 0.254986, Class: 0.640838, Obj: 0.781787, No Obj: 0.535602, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.090531, Class: 0.494639, Obj: 0.446765, No Obj: 0.519519, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.153242, Class: 0.442455, Obj: 0.349213, No Obj: 0.418699, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.273781, Class: 0.609487, Obj: 0.698002, No Obj: 0.536409, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.269244, Class: 0.563707, Obj: 0.566948, No Obj: 0.518765, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.162309, Class: 0.440249, Obj: 0.406804, No Obj: 0.416769, .5R: 0.055556, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.260810, Class: 0.228564, Obj: 0.523902, No Obj: 0.533606, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.154664, Class: 0.478617, Obj: 0.564256, No Obj: 0.520948, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.138290, Class: 0.517368, Obj: 0.338779, No Obj: 0.415168, .5R: 0.000000, .75R: 0.000000,  count: 22
+Region 82 Avg IOU: 0.189237, Class: 0.626371, Obj: 0.650664, No Obj: 0.535681, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.156952, Class: 0.431693, Obj: 0.423637, No Obj: 0.520872, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.255237, Class: 0.494281, Obj: 0.305282, No Obj: 0.415415, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 82 Avg IOU: 0.268108, Class: 0.487884, Obj: 0.611794, No Obj: 0.534791, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.150647, Class: 0.625406, Obj: 0.569859, No Obj: 0.518058, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.183206, Class: 0.534231, Obj: 0.359086, No Obj: 0.416109, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.330649, Class: 0.540815, Obj: 0.536133, No Obj: 0.537208, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.278125, Class: 0.474907, Obj: 0.400885, No Obj: 0.520175, .5R: 0.076923, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.220756, Class: 0.547643, Obj: 0.444206, No Obj: 0.415903, .5R: 0.033333, .75R: 0.000000,  count: 30
+Region 82 Avg IOU: 0.143376, Class: 0.394698, Obj: 0.774173, No Obj: 0.533587, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.218374, Class: 0.568025, Obj: 0.679759, No Obj: 0.520114, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.240081, Class: 0.611133, Obj: 0.225193, No Obj: 0.414615, .5R: 0.000000, .75R: 0.000000,  count: 2
+3: 578.868958, 561.247192 avg, 0.000000 rate, 3917.227114 seconds, 192 images
+Loaded: 0.000198 seconds
+Region 82 Avg IOU: 0.203551, Class: 0.477559, Obj: 0.791493, No Obj: 0.535793, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.206821, Class: 0.567738, Obj: 0.426933, No Obj: 0.519735, .5R: 0.125000, .75R: 0.125000,  count: 8
+Region 106 Avg IOU: 0.109207, Class: 0.623911, Obj: 0.328535, No Obj: 0.415565, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 82 Avg IOU: 0.148913, Class: 0.515812, Obj: 0.559966, No Obj: 0.537509, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.248643, Class: 0.518016, Obj: 0.482501, No Obj: 0.519590, .5R: 0.111111, .75R: 0.000000,  count: 18
+Region 106 Avg IOU: 0.215335, Class: 0.535968, Obj: 0.360552, No Obj: 0.415876, .5R: 0.076923, .75R: 0.000000,  count: 26
+Region 82 Avg IOU: 0.152005, Class: 0.648239, Obj: 0.544142, No Obj: 0.537930, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.153049, Class: 0.567392, Obj: 0.594791, No Obj: 0.518487, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.085024, Class: 0.155163, Obj: 0.430323, No Obj: 0.413965, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.217392, Class: 0.401765, Obj: 0.790443, No Obj: 0.535618, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.269565, Class: 0.578405, Obj: 0.550448, No Obj: 0.520455, .5R: 0.055556, .75R: 0.000000,  count: 18
+Region 106 Avg IOU: 0.205773, Class: 0.512996, Obj: 0.315786, No Obj: 0.414345, .5R: 0.000000, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.174270, Class: 0.349674, Obj: 0.629989, No Obj: 0.537470, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.131582, Class: 0.407990, Obj: 0.537590, No Obj: 0.519927, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.177414, Class: 0.520593, Obj: 0.349476, No Obj: 0.416061, .5R: 0.043478, .75R: 0.000000,  count: 23
+Region 82 Avg IOU: 0.269206, Class: 0.487166, Obj: 0.622526, No Obj: 0.534819, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 94 Avg IOU: 0.263509, Class: 0.440766, Obj: 0.537742, No Obj: 0.520291, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.188002, Class: 0.524675, Obj: 0.305710, No Obj: 0.415912, .5R: 0.026316, .75R: 0.000000,  count: 38
+Region 82 Avg IOU: 0.285939, Class: 0.773383, Obj: 0.979056, No Obj: 0.535236, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 94 Avg IOU: 0.133262, Class: 0.516839, Obj: 0.423519, No Obj: 0.519505, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.203372, Class: 0.671179, Obj: 0.315810, No Obj: 0.417170, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.206930, Class: 0.551323, Obj: 0.800035, No Obj: 0.536537, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.055763, Class: 0.580928, Obj: 0.518230, No Obj: 0.518293, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.179552, Class: 0.463332, Obj: 0.300571, No Obj: 0.417491, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.264065, Class: 0.535072, Obj: 0.595541, No Obj: 0.536745, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.225733, Class: 0.473333, Obj: 0.481464, No Obj: 0.518841, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.290107, Class: 0.481555, Obj: 0.335044, No Obj: 0.416158, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.220803, Class: 0.410758, Obj: 0.541905, No Obj: 0.534029, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.094262, Class: 0.642901, Obj: 0.508651, No Obj: 0.518342, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.082658, Class: 0.464009, Obj: 0.394425, No Obj: 0.415934, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.271633, Class: 0.457306, Obj: 0.577502, No Obj: 0.535625, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.218472, Class: 0.382862, Obj: 0.558068, No Obj: 0.519994, .5R: 0.076923, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.167435, Class: 0.577581, Obj: 0.225679, No Obj: 0.415404, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.215876, Class: 0.836912, Obj: 0.809136, No Obj: 0.538565, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.206637, Class: 0.444216, Obj: 0.550164, No Obj: 0.519312, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.258671, Class: 0.657983, Obj: 0.313544, No Obj: 0.420381, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.108843, Class: 0.341622, Obj: 0.604415, No Obj: 0.532126, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.132453, Class: 0.286191, Obj: 0.500006, No Obj: 0.519355, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.090681, Class: 0.662749, Obj: 0.188340, No Obj: 0.416538, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 82 Avg IOU: 0.187519, Class: 0.582801, Obj: 0.666366, No Obj: 0.536959, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.091150, Class: 0.538409, Obj: 0.659806, No Obj: 0.518820, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.432948, Class: 0.676914, Obj: 0.323207, No Obj: 0.416439, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.131197, Class: 0.185706, Obj: 0.612008, No Obj: 0.537282, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.227239, Class: 0.712748, Obj: 0.592469, No Obj: 0.518090, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.142322, Class: 0.513848, Obj: 0.272927, No Obj: 0.417086, .5R: 0.000000, .75R: 0.000000,  count: 37
+Region 82 Avg IOU: 0.293184, Class: 0.545867, Obj: 0.407413, No Obj: 0.534719, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.086209, Class: 0.500555, Obj: 0.406124, No Obj: 0.518370, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.137011, Class: 0.607818, Obj: 0.340351, No Obj: 0.417252, .5R: 0.000000, .75R: 0.000000,  count: 11
+4: 576.331116, 562.755615 avg, 0.000000 rate, 3913.900734 seconds, 256 images
+Loaded: 0.000147 seconds
+Region 82 Avg IOU: 0.336091, Class: 0.510373, Obj: 0.492469, No Obj: 0.535080, .5R: 0.200000, .75R: 0.200000,  count: 5
+Region 94 Avg IOU: 0.095864, Class: 0.425314, Obj: 0.376257, No Obj: 0.519083, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.270349, Class: 0.493305, Obj: 0.262429, No Obj: 0.414952, .5R: 0.055556, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.146994, Class: 0.296877, Obj: 0.687284, No Obj: 0.534947, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.347699, Class: 0.424299, Obj: 0.357274, No Obj: 0.520047, .5R: 0.500000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.119261, Class: 0.503645, Obj: 0.467847, No Obj: 0.417726, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.158452, Class: 0.448384, Obj: 0.441984, No Obj: 0.535298, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.098887, Class: 0.254397, Obj: 0.355863, No Obj: 0.518680, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.167613, Class: 0.631733, Obj: 0.309008, No Obj: 0.415862, .5R: 0.000000, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.148177, Class: 0.394612, Obj: 0.538540, No Obj: 0.537516, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.211699, Class: 0.575078, Obj: 0.514140, No Obj: 0.519519, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.277785, Class: 0.549131, Obj: 0.438794, No Obj: 0.413579, .5R: 0.117647, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.110624, Class: 0.593697, Obj: 0.581256, No Obj: 0.536174, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.165029, Class: 0.754240, Obj: 0.691042, No Obj: 0.518972, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.240040, Class: 0.494919, Obj: 0.245271, No Obj: 0.416814, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.303483, Class: 0.588706, Obj: 0.661146, No Obj: 0.535853, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.212743, Class: 0.630078, Obj: 0.469949, No Obj: 0.520731, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.199894, Class: 0.548074, Obj: 0.515621, No Obj: 0.414296, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.199389, Class: 0.639229, Obj: 0.667629, No Obj: 0.534475, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.260895, Class: 0.537735, Obj: 0.555209, No Obj: 0.519353, .5R: 0.166667, .75R: 0.000000,  count: 18
+Region 106 Avg IOU: 0.208317, Class: 0.516450, Obj: 0.344571, No Obj: 0.414063, .5R: 0.047619, .75R: 0.000000,  count: 21
+Region 82 Avg IOU: 0.089727, Class: 0.360791, Obj: 0.537679, No Obj: 0.535859, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.152576, Class: 0.497629, Obj: 0.740917, No Obj: 0.517595, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.134663, Class: 0.420784, Obj: 0.326544, No Obj: 0.418814, .5R: 0.035714, .75R: 0.000000,  count: 28
+Region 82 Avg IOU: 0.340953, Class: 0.521618, Obj: 0.618329, No Obj: 0.536836, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.172224, Class: 0.373532, Obj: 0.576142, No Obj: 0.519328, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.145926, Class: 0.658780, Obj: 0.274763, No Obj: 0.421348, .5R: 0.028571, .75R: 0.000000,  count: 35
+Region 82 Avg IOU: 0.269297, Class: 0.745471, Obj: 0.673740, No Obj: 0.534733, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.261386, Class: 0.417129, Obj: 0.626731, No Obj: 0.518011, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.188438, Class: 0.567402, Obj: 0.297460, No Obj: 0.415964, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.280257, Class: 0.553958, Obj: 0.696545, No Obj: 0.535942, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.183592, Class: 0.456752, Obj: 0.429944, No Obj: 0.518597, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.075712, Class: 0.690573, Obj: 0.245767, No Obj: 0.418001, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.322726, Class: 0.538681, Obj: 0.835141, No Obj: 0.535387, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.237119, Class: 0.454575, Obj: 0.548697, No Obj: 0.519613, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.161828, Class: 0.598306, Obj: 0.271477, No Obj: 0.415912, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.208042, Class: 0.417198, Obj: 0.413211, No Obj: 0.536015, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.150845, Class: 0.487098, Obj: 0.556339, No Obj: 0.519170, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.150052, Class: 0.541194, Obj: 0.249496, No Obj: 0.419745, .5R: 0.031250, .75R: 0.000000,  count: 32
+Region 82 Avg IOU: 0.148717, Class: 0.439714, Obj: 0.523638, No Obj: 0.536705, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.171478, Class: 0.561682, Obj: 0.603578, No Obj: 0.520331, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.147786, Class: 0.462716, Obj: 0.219755, No Obj: 0.416801, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.216440, Class: 0.498337, Obj: 0.460173, No Obj: 0.537385, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.251384, Class: 0.462229, Obj: 0.503027, No Obj: 0.519929, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.414505, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.161149, Class: 0.511396, Obj: 0.606793, No Obj: 0.538527, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.228538, Class: 0.539109, Obj: 0.410162, No Obj: 0.517825, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.204004, Class: 0.543680, Obj: 0.252418, No Obj: 0.416684, .5R: 0.000000, .75R: 0.000000,  count: 10
+5: 567.582092, 563.238281 avg, 0.000000 rate, 3969.278077 seconds, 320 images
+Loaded: 0.000112 seconds
+Region 82 Avg IOU: 0.200935, Class: 0.421611, Obj: 0.609575, No Obj: 0.535659, .5R: 0.200000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.151597, Class: 0.529851, Obj: 0.480180, No Obj: 0.519294, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.082089, Class: 0.398218, Obj: 0.134141, No Obj: 0.418046, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.271296, Class: 0.485989, Obj: 0.721432, No Obj: 0.535794, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.097635, Class: 0.572827, Obj: 0.590825, No Obj: 0.519527, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.149986, Class: 0.583016, Obj: 0.376938, No Obj: 0.415671, .5R: 0.000000, .75R: 0.000000,  count: 21
+Region 82 Avg IOU: 0.126315, Class: 0.536063, Obj: 0.688191, No Obj: 0.533588, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.242939, Class: 0.537844, Obj: 0.587390, No Obj: 0.518517, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.189019, Class: 0.417025, Obj: 0.308154, No Obj: 0.416086, .5R: 0.047619, .75R: 0.000000,  count: 21
+Region 82 Avg IOU: 0.168679, Class: 0.482395, Obj: 0.630090, No Obj: 0.535039, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.289072, Class: 0.491814, Obj: 0.505485, No Obj: 0.519041, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.207715, Class: 0.470097, Obj: 0.342410, No Obj: 0.416399, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.170680, Class: 0.634419, Obj: 0.731102, No Obj: 0.535381, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.253414, Class: 0.450879, Obj: 0.488813, No Obj: 0.518912, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.182576, Class: 0.533655, Obj: 0.280004, No Obj: 0.417150, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.310691, Class: 0.456124, Obj: 0.701656, No Obj: 0.533953, .5R: 0.400000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.224365, Class: 0.402110, Obj: 0.567699, No Obj: 0.519848, .5R: 0.150000, .75R: 0.050000,  count: 20
+Region 106 Avg IOU: 0.171281, Class: 0.527002, Obj: 0.321570, No Obj: 0.416489, .5R: 0.035714, .75R: 0.035714,  count: 28
+Region 82 Avg IOU: 0.250246, Class: 0.521201, Obj: 0.527606, No Obj: 0.533244, .5R: 0.200000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.240236, Class: 0.534211, Obj: 0.510591, No Obj: 0.520087, .5R: 0.166667, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.170829, Class: 0.530033, Obj: 0.348636, No Obj: 0.414411, .5R: 0.047619, .75R: 0.000000,  count: 21
+Region 82 Avg IOU: 0.178244, Class: 0.187529, Obj: 0.717795, No Obj: 0.535652, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.213142, Class: 0.403388, Obj: 0.410770, No Obj: 0.520439, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.231063, Class: 0.523796, Obj: 0.312852, No Obj: 0.420171, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.129377, Class: 0.294867, Obj: 0.519606, No Obj: 0.534669, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.250613, Class: 0.514857, Obj: 0.545740, No Obj: 0.518653, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.132622, Class: 0.529948, Obj: 0.414343, No Obj: 0.416964, .5R: 0.000000, .75R: 0.000000,  count: 35
+Region 82 Avg IOU: 0.273074, Class: 0.331928, Obj: 0.640414, No Obj: 0.537535, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.291277, Class: 0.288866, Obj: 0.554695, No Obj: 0.519925, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.187412, Class: 0.637713, Obj: 0.331645, No Obj: 0.414931, .5R: 0.037037, .75R: 0.000000,  count: 27
+Region 82 Avg IOU: 0.245977, Class: 0.421566, Obj: 0.767557, No Obj: 0.534135, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.147574, Class: 0.441962, Obj: 0.663180, No Obj: 0.518673, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.213402, Class: 0.517715, Obj: 0.247620, No Obj: 0.416906, .5R: 0.103448, .75R: 0.000000,  count: 29
+Region 82 Avg IOU: 0.287175, Class: 0.442473, Obj: 0.598212, No Obj: 0.536066, .5R: 0.200000, .75R: 0.200000,  count: 10
+Region 94 Avg IOU: 0.221964, Class: 0.426786, Obj: 0.633853, No Obj: 0.519086, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 106 Avg IOU: 0.294520, Class: 0.559234, Obj: 0.317913, No Obj: 0.415002, .5R: 0.250000, .75R: 0.000000,  count: 20
+Region 82 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.535573, .5R: -nan, .75R: -nan,  count: 0
+Region 94 Avg IOU: 0.197152, Class: 0.386189, Obj: 0.562791, No Obj: 0.520840, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 106 Avg IOU: 0.205979, Class: 0.566612, Obj: 0.362258, No Obj: 0.415645, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.367056, Class: 0.617265, Obj: 0.604423, No Obj: 0.534408, .5R: 0.500000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.128536, Class: 0.771411, Obj: 0.381407, No Obj: 0.520239, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.189522, Class: 0.561914, Obj: 0.384024, No Obj: 0.416038, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.244510, Class: 0.497864, Obj: 0.520505, No Obj: 0.537429, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.250979, Class: 0.447154, Obj: 0.661086, No Obj: 0.520270, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.168029, Class: 0.494671, Obj: 0.375484, No Obj: 0.415879, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.235963, Class: 0.515772, Obj: 0.582213, No Obj: 0.533068, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.142370, Class: 0.591103, Obj: 0.487778, No Obj: 0.518560, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.161457, Class: 0.478595, Obj: 0.389119, No Obj: 0.416176, .5R: 0.066667, .75R: 0.000000,  count: 15
+6: 582.069641, 565.121399 avg, 0.000000 rate, 3959.426652 seconds, 384 images
+Loaded: 0.000130 seconds
+Region 82 Avg IOU: 0.099897, Class: 0.425665, Obj: 0.474092, No Obj: 0.536659, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.065792, Class: 0.508235, Obj: 0.237939, No Obj: 0.518556, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.324402, Class: 0.107585, Obj: 0.781535, No Obj: 0.419249, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.093209, Class: 0.744472, Obj: 0.543260, No Obj: 0.535600, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.412331, Class: 0.686634, Obj: 0.498616, No Obj: 0.518607, .5R: 0.666667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.107942, Class: 0.731732, Obj: 0.447086, No Obj: 0.414876, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.176944, Class: 0.442604, Obj: 0.506254, No Obj: 0.537780, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.204757, Class: 0.396092, Obj: 0.378307, No Obj: 0.520618, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.124741, Class: 0.485032, Obj: 0.369464, No Obj: 0.414540, .5R: 0.058824, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.203202, Class: 0.518076, Obj: 0.908406, No Obj: 0.533021, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.131909, Class: 0.579011, Obj: 0.410887, No Obj: 0.521315, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.322091, Class: 0.236147, Obj: 0.249389, No Obj: 0.416129, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.257912, Class: 0.713867, Obj: 0.533268, No Obj: 0.533038, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.290996, Class: 0.369472, Obj: 0.245399, No Obj: 0.520644, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.199190, Class: 0.262103, Obj: 0.044711, No Obj: 0.417624, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.350014, Class: 0.465162, Obj: 0.692406, No Obj: 0.537565, .5R: 0.400000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.198134, Class: 0.579853, Obj: 0.428371, No Obj: 0.520699, .5R: 0.050000, .75R: 0.000000,  count: 20
+Region 106 Avg IOU: 0.069818, Class: 0.512531, Obj: 0.395533, No Obj: 0.418226, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.195998, Class: 0.502367, Obj: 0.726709, No Obj: 0.533903, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.191498, Class: 0.416205, Obj: 0.447672, No Obj: 0.519463, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.214303, Class: 0.088029, Obj: 0.248973, No Obj: 0.415082, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.231512, Class: 0.542965, Obj: 0.531114, No Obj: 0.537696, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.107296, Class: 0.159585, Obj: 0.701754, No Obj: 0.519649, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.376676, Class: 0.295694, Obj: 0.500451, No Obj: 0.414760, .5R: 0.500000, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.196554, Class: 0.505815, Obj: 0.519276, No Obj: 0.537722, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.181534, Class: 0.485187, Obj: 0.588308, No Obj: 0.520018, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.230427, Class: 0.636948, Obj: 0.365200, No Obj: 0.414123, .5R: 0.058824, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.140689, Class: 0.521354, Obj: 0.635686, No Obj: 0.535834, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.165734, Class: 0.375672, Obj: 0.765611, No Obj: 0.520691, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.347375, Class: 0.522815, Obj: 0.316198, No Obj: 0.417095, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.157394, Class: 0.504572, Obj: 0.723788, No Obj: 0.534547, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.163153, Class: 0.495642, Obj: 0.450783, No Obj: 0.520805, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.198253, Class: 0.436111, Obj: 0.243823, No Obj: 0.416258, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.311359, Class: 0.704240, Obj: 0.482445, No Obj: 0.535436, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.195471, Class: 0.575486, Obj: 0.424664, No Obj: 0.520672, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.202504, Class: 0.524422, Obj: 0.323103, No Obj: 0.417356, .5R: 0.055556, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.259555, Class: 0.659652, Obj: 0.432025, No Obj: 0.536170, .5R: 0.230769, .75R: 0.000000,  count: 13
+Region 94 Avg IOU: 0.148237, Class: 0.413466, Obj: 0.353706, No Obj: 0.520888, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.079743, Class: 0.578979, Obj: 0.336169, No Obj: 0.417329, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.327162, Class: 0.694472, Obj: 0.632439, No Obj: 0.535448, .5R: 0.200000, .75R: 0.200000,  count: 5
+Region 94 Avg IOU: 0.207418, Class: 0.666309, Obj: 0.584296, No Obj: 0.521065, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.211939, Class: 0.605549, Obj: 0.344907, No Obj: 0.416016, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.285987, Class: 0.494518, Obj: 0.531785, No Obj: 0.534945, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.185858, Class: 0.497127, Obj: 0.406274, No Obj: 0.518213, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.117475, Class: 0.480353, Obj: 0.340610, No Obj: 0.415245, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.193364, Class: 0.518856, Obj: 0.629565, No Obj: 0.535152, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.131812, Class: 0.470046, Obj: 0.561901, No Obj: 0.519667, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.212478, Class: 0.613875, Obj: 0.506485, No Obj: 0.415567, .5R: 0.000000, .75R: 0.000000,  count: 9
+7: 549.552795, 563.564514 avg, 0.000000 rate, 3931.998643 seconds, 448 images
+Loaded: 0.000139 seconds
+Region 82 Avg IOU: 0.106585, Class: 0.479731, Obj: 0.731063, No Obj: 0.534791, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.119599, Class: 0.475066, Obj: 0.567622, No Obj: 0.519696, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.416374, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.319072, Class: 0.414703, Obj: 0.741119, No Obj: 0.533480, .5R: 0.250000, .75R: 0.125000,  count: 8
+Region 94 Avg IOU: 0.174328, Class: 0.464095, Obj: 0.554060, No Obj: 0.517898, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.112910, Class: 0.616317, Obj: 0.448248, No Obj: 0.417880, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.117059, Class: 0.772671, Obj: 0.668105, No Obj: 0.535139, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.245438, Class: 0.618129, Obj: 0.666852, No Obj: 0.519020, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.133618, Class: 0.536847, Obj: 0.309750, No Obj: 0.417543, .5R: 0.045455, .75R: 0.000000,  count: 22
+Region 82 Avg IOU: 0.330994, Class: 0.679214, Obj: 0.666550, No Obj: 0.534471, .5R: 0.500000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.184964, Class: 0.587745, Obj: 0.552744, No Obj: 0.520769, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.417692, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.109636, Class: 0.270499, Obj: 0.869656, No Obj: 0.537264, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.267045, Class: 0.310433, Obj: 0.606506, No Obj: 0.519322, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.159479, Class: 0.537653, Obj: 0.354684, No Obj: 0.416916, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.237971, Class: 0.617823, Obj: 0.677511, No Obj: 0.537193, .5R: 0.166667, .75R: 0.166667,  count: 6
+Region 94 Avg IOU: 0.219560, Class: 0.523091, Obj: 0.443208, No Obj: 0.519686, .5R: 0.111111, .75R: 0.000000,  count: 18
+Region 106 Avg IOU: 0.155238, Class: 0.562007, Obj: 0.355217, No Obj: 0.414887, .5R: 0.033333, .75R: 0.000000,  count: 30
+Region 82 Avg IOU: 0.105144, Class: 0.338584, Obj: 0.754303, No Obj: 0.535960, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.120072, Class: 0.607033, Obj: 0.627050, No Obj: 0.518896, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.271420, Class: 0.596070, Obj: 0.420383, No Obj: 0.416529, .5R: 0.166667, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.118571, Class: 0.467011, Obj: 0.656917, No Obj: 0.535980, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.183990, Class: 0.388939, Obj: 0.549593, No Obj: 0.521188, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.205445, Class: 0.496369, Obj: 0.461085, No Obj: 0.413814, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 82 Avg IOU: 0.265317, Class: 0.422962, Obj: 0.733616, No Obj: 0.535710, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.222348, Class: 0.456038, Obj: 0.455003, No Obj: 0.518953, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 106 Avg IOU: 0.246727, Class: 0.437172, Obj: 0.430700, No Obj: 0.416273, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 82 Avg IOU: 0.291961, Class: 0.522703, Obj: 0.766020, No Obj: 0.539918, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.192743, Class: 0.399214, Obj: 0.446869, No Obj: 0.518357, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.222924, Class: 0.533842, Obj: 0.380782, No Obj: 0.414484, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.272391, Class: 0.372800, Obj: 0.656722, No Obj: 0.533507, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.287982, Class: 0.711269, Obj: 0.671521, No Obj: 0.518843, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.245121, Class: 0.610857, Obj: 0.195149, No Obj: 0.418897, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.221247, Class: 0.420902, Obj: 0.771280, No Obj: 0.537485, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.118543, Class: 0.574444, Obj: 0.434864, No Obj: 0.518284, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.161908, Class: 0.557365, Obj: 0.518283, No Obj: 0.415115, .5R: 0.000000, .75R: 0.000000,  count: 19
+Region 82 Avg IOU: 0.190738, Class: 0.438795, Obj: 0.719677, No Obj: 0.536551, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.411162, Class: 0.559555, Obj: 0.596101, No Obj: 0.521117, .5R: 0.333333, .75R: 0.166667,  count: 6
+Region 106 Avg IOU: 0.515835, Class: 0.563374, Obj: 0.593318, No Obj: 0.414675, .5R: 0.666667, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.297813, Class: 0.487483, Obj: 0.608447, No Obj: 0.533013, .5R: 0.428571, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.233747, Class: 0.424158, Obj: 0.574840, No Obj: 0.519640, .5R: 0.285714, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.417088, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.252728, Class: 0.633584, Obj: 0.423546, No Obj: 0.536562, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.194636, Class: 0.555432, Obj: 0.643926, No Obj: 0.518187, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 106 Avg IOU: 0.133228, Class: 0.384878, Obj: 0.176531, No Obj: 0.417290, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.270575, Class: 0.576154, Obj: 0.480730, No Obj: 0.537828, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.521355, .5R: -nan, .75R: -nan,  count: 0
+Region 106 Avg IOU: 0.202842, Class: 0.542776, Obj: 0.191028, No Obj: 0.416200, .5R: 0.066667, .75R: 0.000000,  count: 15
+8: 561.188721, 563.326904 avg, 0.000000 rate, 4031.644202 seconds, 512 images
+Loaded: 0.000139 seconds
+Region 82 Avg IOU: 0.167485, Class: 0.520876, Obj: 0.487458, No Obj: 0.533819, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.240819, Class: 0.630749, Obj: 0.442641, No Obj: 0.518802, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.209413, Class: 0.613213, Obj: 0.452261, No Obj: 0.417918, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.310107, Class: 0.371708, Obj: 0.525844, No Obj: 0.534610, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.180289, Class: 0.633092, Obj: 0.394366, No Obj: 0.518487, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.351116, Class: 0.813404, Obj: 0.587732, No Obj: 0.415441, .5R: 0.500000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.270510, Class: 0.319363, Obj: 0.617582, No Obj: 0.536449, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.264423, Class: 0.435553, Obj: 0.508777, No Obj: 0.518601, .5R: 0.153846, .75R: 0.076923,  count: 13
+Region 106 Avg IOU: 0.234316, Class: 0.518399, Obj: 0.410749, No Obj: 0.416190, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 82 Avg IOU: 0.213526, Class: 0.337426, Obj: 0.470723, No Obj: 0.533307, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.179224, Class: 0.601752, Obj: 0.590313, No Obj: 0.519224, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.170211, Class: 0.481764, Obj: 0.258795, No Obj: 0.418408, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.193805, Class: 0.379402, Obj: 0.529175, No Obj: 0.537748, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.127088, Class: 0.406192, Obj: 0.778292, No Obj: 0.520408, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.153252, Class: 0.480946, Obj: 0.317845, No Obj: 0.414894, .5R: 0.000000, .75R: 0.000000,  count: 31
+Region 82 Avg IOU: 0.218927, Class: 0.510740, Obj: 0.583101, No Obj: 0.535317, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.095307, Class: 0.519641, Obj: 0.593902, No Obj: 0.519583, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.199351, Class: 0.633376, Obj: 0.369502, No Obj: 0.418678, .5R: 0.058824, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.344300, Class: 0.535883, Obj: 0.597287, No Obj: 0.535467, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.182738, Class: 0.483251, Obj: 0.499003, No Obj: 0.517965, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.180083, Class: 0.601197, Obj: 0.305349, No Obj: 0.415232, .5R: 0.000000, .75R: 0.000000,  count: 39
+Region 82 Avg IOU: 0.191636, Class: 0.655192, Obj: 0.715226, No Obj: 0.534574, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.071856, Class: 0.416388, Obj: 0.604437, No Obj: 0.520385, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.310796, Class: 0.472385, Obj: 0.354065, No Obj: 0.418561, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.172663, Class: 0.520332, Obj: 0.460429, No Obj: 0.535774, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.182242, Class: 0.454485, Obj: 0.594059, No Obj: 0.520383, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.169091, Class: 0.587878, Obj: 0.377456, No Obj: 0.417756, .5R: 0.022727, .75R: 0.000000,  count: 44
+Region 82 Avg IOU: 0.271542, Class: 0.441796, Obj: 0.611369, No Obj: 0.535146, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.246296, Class: 0.446859, Obj: 0.501651, No Obj: 0.520060, .5R: 0.076923, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.184077, Class: 0.602078, Obj: 0.329208, No Obj: 0.416788, .5R: 0.000000, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.232423, Class: 0.445901, Obj: 0.715909, No Obj: 0.532499, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.160485, Class: 0.641577, Obj: 0.583440, No Obj: 0.520732, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.292869, Class: 0.597793, Obj: 0.251425, No Obj: 0.416139, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.248255, Class: 0.652263, Obj: 0.838536, No Obj: 0.537995, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.217402, Class: 0.396239, Obj: 0.629212, No Obj: 0.520959, .5R: 0.000000, .75R: 0.000000,  count: 22
+Region 106 Avg IOU: 0.172497, Class: 0.468672, Obj: 0.373476, No Obj: 0.415267, .5R: 0.065217, .75R: 0.000000,  count: 46
+Region 82 Avg IOU: 0.235512, Class: 0.663394, Obj: 0.602442, No Obj: 0.535061, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.152270, Class: 0.556870, Obj: 0.580567, No Obj: 0.518880, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.294023, Class: 0.315798, Obj: 0.296741, No Obj: 0.417354, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.288968, Class: 0.566082, Obj: 0.464375, No Obj: 0.538518, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.217036, Class: 0.520008, Obj: 0.517344, No Obj: 0.519609, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.231338, Class: 0.697054, Obj: 0.384841, No Obj: 0.415209, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.167872, Class: 0.636978, Obj: 0.569194, No Obj: 0.534723, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.096796, Class: 0.846361, Obj: 0.660271, No Obj: 0.519127, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.232660, Class: 0.767384, Obj: 0.486674, No Obj: 0.415595, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.303784, Class: 0.419644, Obj: 0.699543, No Obj: 0.533374, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.099673, Class: 0.463672, Obj: 0.527507, No Obj: 0.518289, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.209089, Class: 0.616344, Obj: 0.309216, No Obj: 0.416877, .5R: 0.125000, .75R: 0.000000,  count: 8
+9: 574.977661, 564.492004 avg, 0.000000 rate, 4270.861090 seconds, 576 images
+Loaded: 0.000183 seconds
+Region 82 Avg IOU: 0.194748, Class: 0.533849, Obj: 0.749710, No Obj: 0.531684, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.146736, Class: 0.526934, Obj: 0.502963, No Obj: 0.518714, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.141056, Class: 0.520110, Obj: 0.442804, No Obj: 0.417437, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.267724, Class: 0.458803, Obj: 0.570446, No Obj: 0.535162, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.152402, Class: 0.449707, Obj: 0.570406, No Obj: 0.519217, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.231280, Class: 0.489903, Obj: 0.325684, No Obj: 0.415075, .5R: 0.080000, .75R: 0.000000,  count: 25
+Region 82 Avg IOU: 0.193460, Class: 0.499995, Obj: 0.611355, No Obj: 0.532640, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.188564, Class: 0.458793, Obj: 0.569358, No Obj: 0.519203, .5R: 0.000000, .75R: 0.000000,  count: 22
+Region 106 Avg IOU: 0.173279, Class: 0.439760, Obj: 0.376497, No Obj: 0.414760, .5R: 0.025641, .75R: 0.000000,  count: 39
+Region 82 Avg IOU: 0.228030, Class: 0.641847, Obj: 0.617847, No Obj: 0.536856, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.277887, Class: 0.477333, Obj: 0.437564, No Obj: 0.519029, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.357163, Class: 0.546052, Obj: 0.199060, No Obj: 0.414859, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.198706, Class: 0.407779, Obj: 0.577281, No Obj: 0.535586, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.235324, Class: 0.257575, Obj: 0.547444, No Obj: 0.518854, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.198354, Class: 0.494506, Obj: 0.269881, No Obj: 0.419317, .5R: 0.000000, .75R: 0.000000,  count: 23
+Region 82 Avg IOU: 0.299856, Class: 0.498198, Obj: 0.705300, No Obj: 0.536868, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.197522, Class: 0.415528, Obj: 0.497327, No Obj: 0.520389, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.155829, Class: 0.448881, Obj: 0.249567, No Obj: 0.414609, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.115846, Class: 0.486776, Obj: 0.525012, No Obj: 0.535515, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.113006, Class: 0.057496, Obj: 0.230849, No Obj: 0.518182, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.119860, Class: 0.558046, Obj: 0.218512, No Obj: 0.417191, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.280239, Class: 0.304126, Obj: 0.595774, No Obj: 0.533782, .5R: 0.250000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.177553, Class: 0.544278, Obj: 0.527168, No Obj: 0.518597, .5R: 0.000000, .75R: 0.000000,  count: 20
+Region 106 Avg IOU: 0.176548, Class: 0.595547, Obj: 0.462251, No Obj: 0.418124, .5R: 0.076923, .75R: 0.000000,  count: 13
+Region 82 Avg IOU: 0.384608, Class: 0.417020, Obj: 0.470071, No Obj: 0.537519, .5R: 0.571429, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.066822, Class: 0.581327, Obj: 0.523687, No Obj: 0.518452, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.205320, Class: 0.612532, Obj: 0.346656, No Obj: 0.416732, .5R: 0.036364, .75R: 0.018182,  count: 55
+Region 82 Avg IOU: 0.200099, Class: 0.538116, Obj: 0.742476, No Obj: 0.534952, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.281907, Class: 0.330739, Obj: 0.453945, No Obj: 0.518903, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.214623, Class: 0.526885, Obj: 0.316088, No Obj: 0.416196, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.162346, Class: 0.388992, Obj: 0.545789, No Obj: 0.535480, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.185492, Class: 0.625065, Obj: 0.384217, No Obj: 0.520107, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.274727, Class: 0.489907, Obj: 0.285051, No Obj: 0.415033, .5R: 0.176471, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.070738, Class: 0.477838, Obj: 0.521223, No Obj: 0.535918, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 94 Avg IOU: 0.237949, Class: 0.110818, Obj: 0.657170, No Obj: 0.518509, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.154164, Class: 0.601534, Obj: 0.327377, No Obj: 0.417492, .5R: 0.000000, .75R: 0.000000,  count: 28
+Region 82 Avg IOU: 0.146458, Class: 0.455665, Obj: 0.508952, No Obj: 0.534296, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.220839, Class: 0.326531, Obj: 0.601471, No Obj: 0.518572, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.236470, Class: 0.591512, Obj: 0.282132, No Obj: 0.415124, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.176677, Class: 0.622967, Obj: 0.669298, No Obj: 0.537400, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.307626, Class: 0.501890, Obj: 0.651234, No Obj: 0.520696, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.172446, Class: 0.583885, Obj: 0.385887, No Obj: 0.413677, .5R: 0.111111, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.208754, Class: 0.316302, Obj: 0.456073, No Obj: 0.537645, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.219156, Class: 0.475347, Obj: 0.501455, No Obj: 0.519499, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.137628, Class: 0.551798, Obj: 0.302098, No Obj: 0.416032, .5R: 0.000000, .75R: 0.000000,  count: 41
+Region 82 Avg IOU: 0.196069, Class: 0.530313, Obj: 0.239032, No Obj: 0.536365, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.164993, Class: 0.526115, Obj: 0.573984, No Obj: 0.518634, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.167523, Class: 0.516065, Obj: 0.355950, No Obj: 0.416784, .5R: 0.034483, .75R: 0.034483,  count: 29
+10: 590.666748, 567.109497 avg, 0.000000 rate, 3924.874842 seconds, 640 images
+Resizing
+576
+Loaded: 0.059362 seconds
+Region 82 Avg IOU: 0.401777, Class: 0.482899, Obj: 0.543400, No Obj: 0.534237, .5R: 0.500000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.147890, Class: 0.387510, Obj: 0.709317, No Obj: 0.518846, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.117242, Class: 0.621681, Obj: 0.321962, No Obj: 0.420858, .5R: 0.058824, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.205266, Class: 0.593751, Obj: 0.575202, No Obj: 0.533461, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.111709, Class: 0.292491, Obj: 0.460124, No Obj: 0.518165, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.314479, Class: 0.691689, Obj: 0.335174, No Obj: 0.419193, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.157148, Class: 0.364270, Obj: 0.604420, No Obj: 0.535615, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.249887, Class: 0.441286, Obj: 0.640656, No Obj: 0.519290, .5R: 0.090909, .75R: 0.000000,  count: 22
+Region 106 Avg IOU: 0.198860, Class: 0.493778, Obj: 0.470398, No Obj: 0.414863, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.239147, Class: 0.480404, Obj: 0.570938, No Obj: 0.531830, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.156864, Class: 0.393089, Obj: 0.675771, No Obj: 0.517759, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.315490, Class: 0.798188, Obj: 0.331455, No Obj: 0.417281, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.343958, Class: 0.453032, Obj: 0.543007, No Obj: 0.534933, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.124475, Class: 0.459288, Obj: 0.714316, No Obj: 0.520216, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.156581, Class: 0.508920, Obj: 0.349083, No Obj: 0.419415, .5R: 0.000000, .75R: 0.000000,  count: 30
+Region 82 Avg IOU: 0.219562, Class: 0.542145, Obj: 0.582572, No Obj: 0.534359, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.159876, Class: 0.629276, Obj: 0.508030, No Obj: 0.519892, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.108339, Class: 0.551704, Obj: 0.405638, No Obj: 0.417661, .5R: 0.000000, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.228844, Class: 0.544789, Obj: 0.464844, No Obj: 0.533238, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.128076, Class: 0.343203, Obj: 0.630517, No Obj: 0.519035, .5R: 0.000000, .75R: 0.000000,  count: 15
+Region 106 Avg IOU: 0.202402, Class: 0.520076, Obj: 0.341868, No Obj: 0.418862, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 82 Avg IOU: 0.491129, Class: 0.494317, Obj: 0.666248, No Obj: 0.532790, .5R: 0.333333, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.108839, Class: 0.647551, Obj: 0.632475, No Obj: 0.518102, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.054511, Class: 0.743336, Obj: 0.290603, No Obj: 0.420289, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.274959, Class: 0.552139, Obj: 0.619912, No Obj: 0.533587, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.132204, Class: 0.486708, Obj: 0.354964, No Obj: 0.519734, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.212008, Class: 0.614576, Obj: 0.382901, No Obj: 0.417519, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.249876, Class: 0.475096, Obj: 0.358325, No Obj: 0.532577, .5R: 0.200000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.083401, Class: 0.304017, Obj: 0.729870, No Obj: 0.518545, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.161272, Class: 0.652705, Obj: 0.321474, No Obj: 0.418300, .5R: 0.105263, .75R: 0.000000,  count: 19
+Region 82 Avg IOU: 0.245539, Class: 0.498586, Obj: 0.653498, No Obj: 0.532977, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.229916, Class: 0.494709, Obj: 0.655394, No Obj: 0.519398, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.118026, Class: 0.515416, Obj: 0.354551, No Obj: 0.416633, .5R: 0.030303, .75R: 0.000000,  count: 33
+Region 82 Avg IOU: 0.194356, Class: 0.601553, Obj: 0.375144, No Obj: 0.534647, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.147269, Class: 0.649288, Obj: 0.570691, No Obj: 0.518239, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.086753, Class: 0.727069, Obj: 0.402211, No Obj: 0.421286, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.150924, Class: 0.454514, Obj: 0.694460, No Obj: 0.533148, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.121676, Class: 0.696821, Obj: 0.781803, No Obj: 0.518773, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.108595, Class: 0.439509, Obj: 0.306662, No Obj: 0.421018, .5R: 0.000000, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.262390, Class: 0.426635, Obj: 0.616412, No Obj: 0.531498, .5R: 0.272727, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.154693, Class: 0.383680, Obj: 0.532600, No Obj: 0.519760, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.250714, Class: 0.637598, Obj: 0.394111, No Obj: 0.417197, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.231380, Class: 0.436742, Obj: 0.486268, No Obj: 0.533222, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.184587, Class: 0.475450, Obj: 0.566707, No Obj: 0.519221, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 106 Avg IOU: 0.162222, Class: 0.437497, Obj: 0.349121, No Obj: 0.416798, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 82 Avg IOU: 0.412716, Class: 0.489423, Obj: 0.656867, No Obj: 0.534064, .5R: 0.300000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.153869, Class: 0.452550, Obj: 0.396145, No Obj: 0.518854, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.166496, Class: 0.291184, Obj: 0.332043, No Obj: 0.417367, .5R: 0.090909, .75R: 0.000000,  count: 11
+11: 1672.204102, 677.618958 avg, 0.000000 rate, 13354.582010 seconds, 704 images
+Loaded: 0.000124 seconds
+Region 82 Avg IOU: 0.266626, Class: 0.599036, Obj: 0.611560, No Obj: 0.534511, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.111571, Class: 0.399969, Obj: 0.429921, No Obj: 0.518930, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.149952, Class: 0.523305, Obj: 0.417535, No Obj: 0.416739, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.215618, Class: 0.534807, Obj: 0.656948, No Obj: 0.533476, .5R: 0.200000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.231073, Class: 0.452849, Obj: 0.368298, No Obj: 0.520201, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.191093, Class: 0.616888, Obj: 0.323477, No Obj: 0.418201, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.265109, Class: 0.608936, Obj: 0.755205, No Obj: 0.534034, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.253120, Class: 0.466339, Obj: 0.503361, No Obj: 0.518620, .5R: 0.166667, .75R: 0.166667,  count: 6
+Region 106 Avg IOU: 0.429803, Class: 0.668355, Obj: 0.635073, No Obj: 0.420795, .5R: 0.500000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.228986, Class: 0.479992, Obj: 0.544447, No Obj: 0.535042, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.307388, Class: 0.670707, Obj: 0.381004, No Obj: 0.518439, .5R: 0.200000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.196451, Class: 0.629462, Obj: 0.319343, No Obj: 0.417940, .5R: 0.000000, .75R: 0.000000,  count: 22
+Region 82 Avg IOU: 0.234920, Class: 0.552354, Obj: 0.590839, No Obj: 0.536106, .5R: 0.142857, .75R: 0.142857,  count: 7
+Region 94 Avg IOU: 0.201421, Class: 0.476067, Obj: 0.495853, No Obj: 0.518440, .5R: 0.100000, .75R: 0.000000,  count: 20
+Region 106 Avg IOU: 0.171722, Class: 0.429891, Obj: 0.378202, No Obj: 0.418138, .5R: 0.000000, .75R: 0.000000,  count: 19
+Region 82 Avg IOU: 0.205521, Class: 0.496849, Obj: 0.579438, No Obj: 0.531976, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 94 Avg IOU: 0.133409, Class: 0.450745, Obj: 0.336407, No Obj: 0.519015, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.132584, Class: 0.581248, Obj: 0.321794, No Obj: 0.417997, .5R: 0.000000, .75R: 0.000000,  count: 28
+Region 82 Avg IOU: 0.275221, Class: 0.565137, Obj: 0.467748, No Obj: 0.534559, .5R: 0.133333, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.217512, Class: 0.422008, Obj: 0.457336, No Obj: 0.519466, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.112017, Class: 0.087201, Obj: 0.452126, No Obj: 0.414273, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.175159, Class: 0.453711, Obj: 0.637474, No Obj: 0.532196, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.225497, Class: 0.446348, Obj: 0.562997, No Obj: 0.519456, .5R: 0.117647, .75R: 0.000000,  count: 17
+Region 106 Avg IOU: 0.213966, Class: 0.502064, Obj: 0.427326, No Obj: 0.415509, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.250024, Class: 0.457361, Obj: 0.673303, No Obj: 0.534305, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.031077, Class: 0.203084, Obj: 0.534981, No Obj: 0.518800, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.199791, Class: 0.646761, Obj: 0.535663, No Obj: 0.416733, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.247286, Class: 0.460392, Obj: 0.473009, No Obj: 0.534477, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.176913, Class: 0.500481, Obj: 0.424419, No Obj: 0.519614, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.153989, Class: 0.351954, Obj: 0.472267, No Obj: 0.417767, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.192304, Class: 0.618414, Obj: 0.808894, No Obj: 0.534298, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.048303, Class: 0.153770, Obj: 0.851995, No Obj: 0.519561, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.184227, Class: 0.355844, Obj: 0.329660, No Obj: 0.416871, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.268368, Class: 0.478034, Obj: 0.560403, No Obj: 0.533823, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 94 Avg IOU: 0.160299, Class: 0.492895, Obj: 0.530322, No Obj: 0.518480, .5R: 0.000000, .75R: 0.000000,  count: 22
+Region 106 Avg IOU: 0.253796, Class: 0.558410, Obj: 0.302888, No Obj: 0.418896, .5R: 0.076923, .75R: 0.000000,  count: 39
+Region 82 Avg IOU: 0.171982, Class: 0.528233, Obj: 0.411330, No Obj: 0.533435, .5R: 0.000000, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.192516, Class: 0.611820, Obj: 0.476330, No Obj: 0.519510, .5R: 0.055556, .75R: 0.000000,  count: 18
+Region 106 Avg IOU: 0.152884, Class: 0.472786, Obj: 0.318187, No Obj: 0.416339, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.275094, Class: 0.501159, Obj: 0.528573, No Obj: 0.532184, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.115356, Class: 0.575419, Obj: 0.549206, No Obj: 0.518994, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.161809, Class: 0.566637, Obj: 0.293194, No Obj: 0.421908, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 82 Avg IOU: 0.394252, Class: 0.556801, Obj: 0.687429, No Obj: 0.533948, .5R: 0.250000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.144173, Class: 0.608106, Obj: 0.484310, No Obj: 0.519282, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.193829, Class: 0.597464, Obj: 0.396084, No Obj: 0.418595, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 82 Avg IOU: 0.251686, Class: 0.499592, Obj: 0.574273, No Obj: 0.535396, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.152579, Class: 0.310540, Obj: 0.397623, No Obj: 0.519240, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.258717, Class: 0.499161, Obj: 0.101638, No Obj: 0.417055, .5R: 0.166667, .75R: 0.000000,  count: 6
+12: 1677.970459, 777.654114 avg, 0.000000 rate, 13381.802761 seconds, 768 images
+Loaded: 0.000202 seconds
+Region 82 Avg IOU: 0.142514, Class: 0.463995, Obj: 0.564308, No Obj: 0.534550, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.178262, Class: 0.427443, Obj: 0.546015, No Obj: 0.518436, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.118711, Class: 0.590823, Obj: 0.308273, No Obj: 0.421567, .5R: 0.000000, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.230631, Class: 0.559989, Obj: 0.599183, No Obj: 0.536172, .5R: 0.133333, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.212450, Class: 0.436979, Obj: 0.473167, No Obj: 0.518964, .5R: 0.038462, .75R: 0.000000,  count: 26
+Region 106 Avg IOU: 0.116489, Class: 0.678442, Obj: 0.452465, No Obj: 0.414843, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.166774, Class: 0.378677, Obj: 0.507107, No Obj: 0.532989, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.133451, Class: 0.376667, Obj: 0.538085, No Obj: 0.517533, .5R: 0.052632, .75R: 0.000000,  count: 19
+Region 106 Avg IOU: 0.154438, Class: 0.624363, Obj: 0.266412, No Obj: 0.421889, .5R: 0.000000, .75R: 0.000000,  count: 27
+Region 82 Avg IOU: 0.262424, Class: 0.450110, Obj: 0.790167, No Obj: 0.531635, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.198236, Class: 0.447317, Obj: 0.428042, No Obj: 0.519246, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.130225, Class: 0.457764, Obj: 0.299014, No Obj: 0.419990, .5R: 0.000000, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.299845, Class: 0.477640, Obj: 0.492932, No Obj: 0.533616, .5R: 0.133333, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.142782, Class: 0.450748, Obj: 0.646032, No Obj: 0.519380, .5R: 0.041667, .75R: 0.000000,  count: 24
+Region 106 Avg IOU: 0.167822, Class: 0.517140, Obj: 0.420831, No Obj: 0.417380, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 82 Avg IOU: 0.211499, Class: 0.551126, Obj: 0.504937, No Obj: 0.532462, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.227833, Class: 0.363787, Obj: 0.374225, No Obj: 0.518409, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.210826, Class: 0.604292, Obj: 0.388401, No Obj: 0.416878, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.174782, Class: 0.642978, Obj: 0.456730, No Obj: 0.531699, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.210804, Class: 0.428072, Obj: 0.625468, No Obj: 0.518832, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.252293, Class: 0.439666, Obj: 0.321071, No Obj: 0.423582, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.060642, Class: 0.536977, Obj: 0.701137, No Obj: 0.529690, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.157224, Class: 0.514155, Obj: 0.452253, No Obj: 0.519367, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.210882, Class: 0.481839, Obj: 0.250418, No Obj: 0.420002, .5R: 0.000000, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.306932, Class: 0.645620, Obj: 0.610024, No Obj: 0.534758, .5R: 0.250000, .75R: 0.125000,  count: 8
+Region 94 Avg IOU: 0.154284, Class: 0.572779, Obj: 0.427768, No Obj: 0.519227, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.081636, Class: 0.550879, Obj: 0.781289, No Obj: 0.417212, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.243584, Class: 0.487115, Obj: 0.608081, No Obj: 0.534286, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.056577, Class: 0.464443, Obj: 0.506052, No Obj: 0.519600, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.172216, Class: 0.695544, Obj: 0.240426, No Obj: 0.416858, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.174145, Class: 0.541575, Obj: 0.781186, No Obj: 0.533049, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.208874, Class: 0.458751, Obj: 0.630214, No Obj: 0.518142, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.235230, Class: 0.390250, Obj: 0.430229, No Obj: 0.420475, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.107536, Class: 0.339982, Obj: 0.441793, No Obj: 0.533473, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.159424, Class: 0.455349, Obj: 0.447567, No Obj: 0.519389, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.208403, Class: 0.431622, Obj: 0.362125, No Obj: 0.415929, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.235386, Class: 0.549253, Obj: 0.370939, No Obj: 0.535072, .5R: 0.076923, .75R: 0.000000,  count: 13
+Region 94 Avg IOU: 0.202859, Class: 0.449748, Obj: 0.423731, No Obj: 0.519923, .5R: 0.058824, .75R: 0.000000,  count: 17
+Region 106 Avg IOU: 0.148226, Class: 0.498461, Obj: 0.284655, No Obj: 0.415109, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.216734, Class: 0.456729, Obj: 0.566417, No Obj: 0.536117, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.210937, Class: 0.562599, Obj: 0.532532, No Obj: 0.519096, .5R: 0.066667, .75R: 0.066667,  count: 15
+Region 106 Avg IOU: 0.182591, Class: 0.665972, Obj: 0.278980, No Obj: 0.418380, .5R: 0.153846, .75R: 0.000000,  count: 13
+Region 82 Avg IOU: 0.242861, Class: 0.549417, Obj: 0.496362, No Obj: 0.533871, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.044415, Class: 0.698906, Obj: 0.546199, No Obj: 0.519643, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.018506, Class: 0.387511, Obj: 0.057585, No Obj: 0.414541, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.208564, Class: 0.499004, Obj: 0.512609, No Obj: 0.534853, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.168436, Class: 0.531083, Obj: 0.554829, No Obj: 0.518441, .5R: 0.055556, .75R: 0.000000,  count: 18
+Region 106 Avg IOU: 0.343341, Class: 0.335535, Obj: 0.319268, No Obj: 0.417646, .5R: 0.000000, .75R: 0.000000,  count: 6
+13: 1675.402710, 867.428955 avg, 0.000000 rate, 13377.426227 seconds, 832 images
+Loaded: 0.000124 seconds
+Region 82 Avg IOU: 0.165957, Class: 0.426412, Obj: 0.560511, No Obj: 0.531695, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.174128, Class: 0.415753, Obj: 0.330895, No Obj: 0.517860, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.223850, Class: 0.629474, Obj: 0.220374, No Obj: 0.420636, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.141308, Class: 0.262344, Obj: 0.444060, No Obj: 0.533298, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.262272, Class: 0.412296, Obj: 0.722759, No Obj: 0.517181, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.090306, Class: 0.587570, Obj: 0.369527, No Obj: 0.422365, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.194857, Class: 0.528493, Obj: 0.647047, No Obj: 0.534212, .5R: 0.076923, .75R: 0.000000,  count: 13
+Region 94 Avg IOU: 0.166193, Class: 0.483973, Obj: 0.557875, No Obj: 0.518069, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.308656, Class: 0.524355, Obj: 0.390235, No Obj: 0.418032, .5R: 0.500000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.184187, Class: 0.570688, Obj: 0.630106, No Obj: 0.532794, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.028047, Class: 0.842692, Obj: 0.313675, No Obj: 0.518758, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.095620, Class: 0.602879, Obj: 0.314277, No Obj: 0.416406, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.375405, Class: 0.587285, Obj: 0.537414, No Obj: 0.535841, .5R: 0.555556, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.519028, .5R: -nan, .75R: -nan,  count: 0
+Region 106 Avg IOU: 0.038319, Class: 0.343087, Obj: 0.018480, No Obj: 0.420270, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.251416, Class: 0.579708, Obj: 0.498484, No Obj: 0.532397, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.122959, Class: 0.534860, Obj: 0.424808, No Obj: 0.519064, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.211111, Class: 0.603589, Obj: 0.403566, No Obj: 0.416382, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.229124, Class: 0.425255, Obj: 0.504371, No Obj: 0.530772, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.200484, Class: 0.561740, Obj: 0.578319, No Obj: 0.519725, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.196392, Class: 0.401393, Obj: 0.372225, No Obj: 0.416493, .5R: 0.095238, .75R: 0.000000,  count: 21
+Region 82 Avg IOU: 0.149060, Class: 0.379214, Obj: 0.549049, No Obj: 0.532598, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.164075, Class: 0.415238, Obj: 0.628473, No Obj: 0.518002, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.249753, Class: 0.718729, Obj: 0.382553, No Obj: 0.417013, .5R: 0.250000, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.251311, Class: 0.528194, Obj: 0.670074, No Obj: 0.533304, .5R: 0.142857, .75R: 0.000000,  count: 21
+Region 94 Avg IOU: 0.177701, Class: 0.402279, Obj: 0.543564, No Obj: 0.520002, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 106 Avg IOU: 0.272580, Class: 0.654951, Obj: 0.415025, No Obj: 0.414949, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.224130, Class: 0.464433, Obj: 0.668226, No Obj: 0.535185, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.250804, Class: 0.481291, Obj: 0.396061, No Obj: 0.519299, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.093355, Class: 0.726291, Obj: 0.268917, No Obj: 0.416080, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.256383, Class: 0.532382, Obj: 0.709926, No Obj: 0.531132, .5R: 0.285714, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.146236, Class: 0.569608, Obj: 0.488882, No Obj: 0.519149, .5R: 0.142857, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.263433, Class: 0.566884, Obj: 0.297491, No Obj: 0.418335, .5R: 0.125000, .75R: 0.000000,  count: 16
+Region 82 Avg IOU: 0.170242, Class: 0.517208, Obj: 0.485453, No Obj: 0.534678, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.240028, Class: 0.516647, Obj: 0.647455, No Obj: 0.519308, .5R: 0.111111, .75R: 0.000000,  count: 18
+Region 106 Avg IOU: 0.150002, Class: 0.429126, Obj: 0.148133, No Obj: 0.416749, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.249158, Class: 0.505503, Obj: 0.523755, No Obj: 0.532361, .5R: 0.285714, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.104137, Class: 0.041431, Obj: 0.494311, No Obj: 0.518590, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.025021, Class: 0.573753, Obj: 0.388089, No Obj: 0.418886, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.230034, Class: 0.372551, Obj: 0.660715, No Obj: 0.531101, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.187729, Class: 0.308863, Obj: 0.637490, No Obj: 0.518933, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.209059, Class: 0.531105, Obj: 0.415793, No Obj: 0.417836, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.281304, Class: 0.417449, Obj: 0.604638, No Obj: 0.533549, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.035622, Class: 0.947318, Obj: 0.393170, No Obj: 0.520185, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.219280, Class: 0.361428, Obj: 0.280552, No Obj: 0.416565, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.208574, Class: 0.477915, Obj: 0.514880, No Obj: 0.534814, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.184703, Class: 0.485330, Obj: 0.429327, No Obj: 0.518828, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.413937, .5R: -nan, .75R: -nan,  count: 0
+14: 1648.405151, 945.526550 avg, 0.000000 rate, 13327.355297 seconds, 896 images
+Loaded: 0.000148 seconds
+Region 82 Avg IOU: 0.158645, Class: 0.410397, Obj: 0.640034, No Obj: 0.533784, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.114766, Class: 0.397208, Obj: 0.694770, No Obj: 0.519295, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.254328, Class: 0.672250, Obj: 0.376344, No Obj: 0.416523, .5R: 0.050000, .75R: 0.000000,  count: 20
+Region 82 Avg IOU: 0.238545, Class: 0.476053, Obj: 0.674841, No Obj: 0.532752, .5R: 0.153846, .75R: 0.000000,  count: 13
+Region 94 Avg IOU: 0.136081, Class: 0.344697, Obj: 0.471810, No Obj: 0.518264, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.160713, Class: 0.575186, Obj: 0.337703, No Obj: 0.417895, .5R: 0.052632, .75R: 0.000000,  count: 19
+Region 82 Avg IOU: 0.283006, Class: 0.509780, Obj: 0.627478, No Obj: 0.533857, .5R: 0.181818, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.205490, Class: 0.547861, Obj: 0.688256, No Obj: 0.519443, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.095872, Class: 0.641206, Obj: 0.390471, No Obj: 0.416985, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.202255, Class: 0.509058, Obj: 0.688423, No Obj: 0.533994, .5R: 0.200000, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.077512, Class: 0.683896, Obj: 0.457825, No Obj: 0.518498, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.229672, Class: 0.401029, Obj: 0.437531, No Obj: 0.417160, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.134183, Class: 0.441926, Obj: 0.630931, No Obj: 0.533682, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.041658, Class: 0.859705, Obj: 0.746522, No Obj: 0.518963, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.186070, Class: 0.581020, Obj: 0.312130, No Obj: 0.417337, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 82 Avg IOU: 0.282096, Class: 0.468938, Obj: 0.518309, No Obj: 0.535468, .5R: 0.153846, .75R: 0.000000,  count: 13
+Region 94 Avg IOU: 0.205889, Class: 0.454931, Obj: 0.406423, No Obj: 0.518930, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.185272, Class: 0.515769, Obj: 0.163573, No Obj: 0.416513, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 82 Avg IOU: 0.179187, Class: 0.511219, Obj: 0.673401, No Obj: 0.533706, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.139869, Class: 0.505339, Obj: 0.621156, No Obj: 0.518746, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.242358, Class: 0.420201, Obj: 0.285648, No Obj: 0.419245, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.184661, Class: 0.563086, Obj: 0.449462, No Obj: 0.533422, .5R: 0.000000, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.145502, Class: 0.513825, Obj: 0.629739, No Obj: 0.518513, .5R: 0.045455, .75R: 0.000000,  count: 22
+Region 106 Avg IOU: 0.146051, Class: 0.522517, Obj: 0.344163, No Obj: 0.419450, .5R: 0.043478, .75R: 0.000000,  count: 23
+Region 82 Avg IOU: 0.283538, Class: 0.398988, Obj: 0.429467, No Obj: 0.534905, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.208822, Class: 0.583730, Obj: 0.507254, No Obj: 0.518677, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.313059, Class: 0.403725, Obj: 0.229941, No Obj: 0.415640, .5R: 0.500000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.205331, Class: 0.515882, Obj: 0.675000, No Obj: 0.534650, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.198437, Class: 0.426091, Obj: 0.618387, No Obj: 0.519278, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.170860, Class: 0.633300, Obj: 0.307685, No Obj: 0.416410, .5R: 0.000000, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.297781, Class: 0.460595, Obj: 0.718208, No Obj: 0.533640, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.147278, Class: 0.341975, Obj: 0.570402, No Obj: 0.519292, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.188388, Class: 0.518550, Obj: 0.358554, No Obj: 0.414845, .5R: 0.000000, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.324398, Class: 0.521656, Obj: 0.672804, No Obj: 0.533380, .5R: 0.333333, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.517174, .5R: -nan, .75R: -nan,  count: 0
+Region 106 Avg IOU: 0.039886, Class: 0.435197, Obj: 0.619313, No Obj: 0.422109, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.354775, Class: 0.549325, Obj: 0.564355, No Obj: 0.532135, .5R: 0.333333, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.266634, Class: 0.318849, Obj: 0.789661, No Obj: 0.517796, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.253420, Class: 0.350737, Obj: 0.332469, No Obj: 0.418280, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.133472, Class: 0.377653, Obj: 0.654543, No Obj: 0.532452, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.201067, Class: 0.393912, Obj: 0.459627, No Obj: 0.518962, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 106 Avg IOU: 0.167208, Class: 0.534148, Obj: 0.274337, No Obj: 0.417111, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.265270, Class: 0.449757, Obj: 0.607893, No Obj: 0.535666, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.158748, Class: 0.530111, Obj: 0.648600, No Obj: 0.518901, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.118456, Class: 0.434356, Obj: 0.212674, No Obj: 0.415231, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.253824, Class: 0.557201, Obj: 0.582712, No Obj: 0.531537, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.152234, Class: 0.629749, Obj: 0.527120, No Obj: 0.518769, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.179525, Class: 0.391646, Obj: 0.334670, No Obj: 0.418782, .5R: 0.333333, .75R: 0.000000,  count: 3
+15: 1665.482056, 1017.522095 avg, 0.000000 rate, 13277.467279 seconds, 960 images
+Loaded: 0.000121 seconds
+Region 82 Avg IOU: 0.229169, Class: 0.556269, Obj: 0.567179, No Obj: 0.533491, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.188024, Class: 0.488548, Obj: 0.489656, No Obj: 0.519434, .5R: 0.000000, .75R: 0.000000,  count: 24
+Region 106 Avg IOU: 0.195884, Class: 0.546721, Obj: 0.334643, No Obj: 0.415065, .5R: 0.000000, .75R: 0.000000,  count: 25
+Region 82 Avg IOU: 0.224776, Class: 0.460526, Obj: 0.588327, No Obj: 0.532865, .5R: 0.125000, .75R: 0.000000,  count: 16
+Region 94 Avg IOU: 0.199904, Class: 0.525286, Obj: 0.467010, No Obj: 0.519054, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.148956, Class: 0.608889, Obj: 0.448372, No Obj: 0.417188, .5R: 0.000000, .75R: 0.000000,  count: 16
+Region 82 Avg IOU: 0.247404, Class: 0.476306, Obj: 0.557696, No Obj: 0.531340, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.123579, Class: 0.703454, Obj: 0.534084, No Obj: 0.519479, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.157872, Class: 0.578779, Obj: 0.260615, No Obj: 0.416493, .5R: 0.000000, .75R: 0.000000,  count: 16
+Region 82 Avg IOU: 0.231298, Class: 0.516705, Obj: 0.462281, No Obj: 0.533588, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.122022, Class: 0.290579, Obj: 0.506157, No Obj: 0.519537, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.192399, Class: 0.419452, Obj: 0.343885, No Obj: 0.416814, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.118505, Class: 0.498292, Obj: 0.588389, No Obj: 0.534937, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.157437, Class: 0.621978, Obj: 0.482065, No Obj: 0.518578, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.203038, Class: 0.499064, Obj: 0.351200, No Obj: 0.417418, .5R: 0.045455, .75R: 0.045455,  count: 22
+Region 82 Avg IOU: 0.583253, Class: 0.363144, Obj: 0.403948, No Obj: 0.533970, .5R: 1.000000, .75R: 0.000000,  count: 1
+Region 94 Avg IOU: 0.158525, Class: 0.691665, Obj: 0.309828, No Obj: 0.518630, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.182961, Class: 0.658198, Obj: 0.303187, No Obj: 0.417299, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.197400, Class: 0.481953, Obj: 0.620170, No Obj: 0.536090, .5R: 0.000000, .75R: 0.000000,  count: 16
+Region 94 Avg IOU: 0.282854, Class: 0.511721, Obj: 0.410110, No Obj: 0.520046, .5R: 0.086957, .75R: 0.043478,  count: 23
+Region 106 Avg IOU: 0.232366, Class: 0.522337, Obj: 0.352230, No Obj: 0.415181, .5R: 0.030303, .75R: 0.000000,  count: 33
+Region 82 Avg IOU: 0.351040, Class: 0.426278, Obj: 0.505316, No Obj: 0.535073, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.241022, Class: 0.259122, Obj: 0.212574, No Obj: 0.518902, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.274613, Class: 0.572998, Obj: 0.307417, No Obj: 0.419341, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.241000, Class: 0.593526, Obj: 0.515641, No Obj: 0.534884, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.193845, Class: 0.460254, Obj: 0.366024, No Obj: 0.518311, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.177913, Class: 0.483405, Obj: 0.389984, No Obj: 0.416757, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 82 Avg IOU: 0.299296, Class: 0.483530, Obj: 0.455384, No Obj: 0.535344, .5R: 0.222222, .75R: 0.055556,  count: 18
+Region 94 Avg IOU: 0.201982, Class: 0.497272, Obj: 0.564815, No Obj: 0.518843, .5R: 0.058824, .75R: 0.000000,  count: 34
+Region 106 Avg IOU: 0.110258, Class: 0.421185, Obj: 0.244694, No Obj: 0.416334, .5R: 0.000000, .75R: 0.000000,  count: 29
+Region 82 Avg IOU: 0.293800, Class: 0.480251, Obj: 0.573965, No Obj: 0.531581, .5R: 0.238095, .75R: 0.000000,  count: 21
+Region 94 Avg IOU: 0.183725, Class: 0.521415, Obj: 0.370112, No Obj: 0.517337, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.184217, Class: 0.648666, Obj: 0.384932, No Obj: 0.418449, .5R: 0.000000, .75R: 0.000000,  count: 20
+Region 82 Avg IOU: 0.291905, Class: 0.606184, Obj: 0.632532, No Obj: 0.534209, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.189233, Class: 0.437729, Obj: 0.446408, No Obj: 0.519923, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.208066, Class: 0.525462, Obj: 0.264847, No Obj: 0.416750, .5R: 0.052632, .75R: 0.000000,  count: 19
+Region 82 Avg IOU: 0.320005, Class: 0.537713, Obj: 0.487144, No Obj: 0.532990, .5R: 0.200000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.136289, Class: 0.218504, Obj: 0.472406, No Obj: 0.517902, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.210624, Class: 0.522255, Obj: 0.186827, No Obj: 0.416514, .5R: 0.150000, .75R: 0.000000,  count: 20
+Region 82 Avg IOU: 0.260752, Class: 0.440436, Obj: 0.618774, No Obj: 0.531723, .5R: 0.187500, .75R: 0.000000,  count: 16
+Region 94 Avg IOU: 0.222367, Class: 0.502156, Obj: 0.489359, No Obj: 0.519009, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.100385, Class: 0.446881, Obj: 0.258641, No Obj: 0.415491, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.179779, Class: 0.411426, Obj: 0.680169, No Obj: 0.530877, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.097251, Class: 0.544694, Obj: 0.396689, No Obj: 0.519220, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.218085, Class: 0.540488, Obj: 0.183608, No Obj: 0.418672, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.155203, Class: 0.584709, Obj: 0.549966, No Obj: 0.534056, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 94 Avg IOU: 0.317487, Class: 0.543447, Obj: 0.524768, No Obj: 0.518929, .5R: 0.250000, .75R: 0.062500,  count: 16
+Region 106 Avg IOU: 0.255336, Class: 0.453951, Obj: 0.405577, No Obj: 0.416346, .5R: 0.161290, .75R: 0.000000,  count: 31
+16: 1697.115234, 1085.481445 avg, 0.000000 rate, 13383.158516 seconds, 1024 images
+Loaded: 0.000147 seconds
+Region 82 Avg IOU: 0.180077, Class: 0.424215, Obj: 0.624692, No Obj: 0.531415, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.111752, Class: 0.486803, Obj: 0.388715, No Obj: 0.517610, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.095778, Class: 0.594681, Obj: 0.360879, No Obj: 0.421393, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.116040, Class: 0.424293, Obj: 0.639248, No Obj: 0.531938, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.184600, Class: 0.490484, Obj: 0.480775, No Obj: 0.517689, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.138822, Class: 0.528635, Obj: 0.198072, No Obj: 0.418903, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.173176, Class: 0.590298, Obj: 0.491823, No Obj: 0.531792, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.253694, Class: 0.442858, Obj: 0.455708, No Obj: 0.517574, .5R: 0.166667, .75R: 0.083333,  count: 12
+Region 106 Avg IOU: 0.110665, Class: 0.450361, Obj: 0.210421, No Obj: 0.419631, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.150536, Class: 0.447117, Obj: 0.543204, No Obj: 0.534963, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.135658, Class: 0.324483, Obj: 0.337329, No Obj: 0.519203, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.204150, Class: 0.405501, Obj: 0.660094, No Obj: 0.414817, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.209176, Class: 0.512010, Obj: 0.554738, No Obj: 0.536472, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.237487, Class: 0.614094, Obj: 0.581997, No Obj: 0.519112, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.107350, Class: 0.477879, Obj: 0.353071, No Obj: 0.415501, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.121159, Class: 0.532611, Obj: 0.532901, No Obj: 0.531301, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.171720, Class: 0.466916, Obj: 0.533281, No Obj: 0.519584, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.307538, Class: 0.653212, Obj: 0.327534, No Obj: 0.420158, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.222463, Class: 0.494639, Obj: 0.564724, No Obj: 0.533458, .5R: 0.111111, .75R: 0.111111,  count: 9
+Region 94 Avg IOU: 0.174407, Class: 0.555772, Obj: 0.568623, No Obj: 0.519986, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.139621, Class: 0.376117, Obj: 0.385280, No Obj: 0.418344, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.236735, Class: 0.438486, Obj: 0.698380, No Obj: 0.532957, .5R: 0.153846, .75R: 0.000000,  count: 13
+Region 94 Avg IOU: 0.264803, Class: 0.561640, Obj: 0.595660, No Obj: 0.520306, .5R: 0.210526, .75R: 0.000000,  count: 19
+Region 106 Avg IOU: 0.187438, Class: 0.662698, Obj: 0.358828, No Obj: 0.417661, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.170879, Class: 0.465129, Obj: 0.531450, No Obj: 0.534602, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.125525, Class: 0.597568, Obj: 0.555974, No Obj: 0.518881, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.148599, Class: 0.662230, Obj: 0.160724, No Obj: 0.419418, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.197728, Class: 0.461204, Obj: 0.468507, No Obj: 0.533968, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.092166, Class: 0.323392, Obj: 0.524297, No Obj: 0.519622, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.117012, Class: 0.579432, Obj: 0.384630, No Obj: 0.419529, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.246403, Class: 0.392354, Obj: 0.656548, No Obj: 0.535590, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.118001, Class: 0.446340, Obj: 0.595936, No Obj: 0.519818, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.134395, Class: 0.583870, Obj: 0.343256, No Obj: 0.417007, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 82 Avg IOU: 0.212376, Class: 0.545089, Obj: 0.681669, No Obj: 0.533851, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.170689, Class: 0.448083, Obj: 0.499419, No Obj: 0.519600, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.195411, Class: 0.543417, Obj: 0.315655, No Obj: 0.414460, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.174631, Class: 0.388922, Obj: 0.663382, No Obj: 0.531685, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.224575, Class: 0.402459, Obj: 0.419271, No Obj: 0.518163, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.417380, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.233206, Class: 0.579767, Obj: 0.519986, No Obj: 0.532020, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.144815, Class: 0.316215, Obj: 0.606778, No Obj: 0.519615, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.138410, Class: 0.589810, Obj: 0.360052, No Obj: 0.420116, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.300977, Class: 0.366244, Obj: 0.366834, No Obj: 0.532701, .5R: 0.250000, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.122703, Class: 0.434438, Obj: 0.511320, No Obj: 0.518797, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.251136, Class: 0.560477, Obj: 0.406054, No Obj: 0.418940, .5R: 0.055556, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.057251, Class: 0.424448, Obj: 0.585057, No Obj: 0.531325, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.357175, Class: 0.527163, Obj: 0.549476, No Obj: 0.518393, .5R: 0.333333, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.148990, Class: 0.571149, Obj: 0.322194, No Obj: 0.417780, .5R: 0.037037, .75R: 0.000000,  count: 27
+17: 1656.177368, 1142.551025 avg, 0.000000 rate, 13248.437902 seconds, 1088 images
+Loaded: 0.000132 seconds
+Region 82 Avg IOU: 0.222937, Class: 0.398855, Obj: 0.610285, No Obj: 0.533584, .5R: 0.153846, .75R: 0.076923,  count: 13
+Region 94 Avg IOU: 0.169569, Class: 0.471778, Obj: 0.612512, No Obj: 0.519100, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.238486, Class: 0.523884, Obj: 0.438175, No Obj: 0.415990, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.171649, Class: 0.442760, Obj: 0.584103, No Obj: 0.530891, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.038409, Class: 0.304938, Obj: 0.744508, No Obj: 0.519324, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.091674, Class: 0.162455, Obj: 0.149273, No Obj: 0.416141, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.165157, Class: 0.461311, Obj: 0.513581, No Obj: 0.531284, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.059594, Class: 0.210879, Obj: 0.759373, No Obj: 0.518872, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.290157, Class: 0.414192, Obj: 0.297789, No Obj: 0.419797, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.262599, Class: 0.391333, Obj: 0.508890, No Obj: 0.535821, .5R: 0.181818, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.169259, Class: 0.465891, Obj: 0.727273, No Obj: 0.518851, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.284706, Class: 0.343822, Obj: 0.313832, No Obj: 0.416291, .5R: 0.153846, .75R: 0.038462,  count: 26
+Region 82 Avg IOU: 0.216078, Class: 0.670016, Obj: 0.580025, No Obj: 0.534784, .5R: 0.142857, .75R: 0.071429,  count: 14
+Region 94 Avg IOU: 0.244908, Class: 0.560156, Obj: 0.604335, No Obj: 0.518847, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.277742, Class: 0.570312, Obj: 0.339399, No Obj: 0.417419, .5R: 0.136364, .75R: 0.000000,  count: 22
+Region 82 Avg IOU: 0.338638, Class: 0.460075, Obj: 0.519459, No Obj: 0.534387, .5R: 0.300000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.174691, Class: 0.484410, Obj: 0.635873, No Obj: 0.519166, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 106 Avg IOU: 0.221917, Class: 0.451696, Obj: 0.442260, No Obj: 0.415814, .5R: 0.117647, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.228320, Class: 0.588539, Obj: 0.306850, No Obj: 0.534201, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.187926, Class: 0.318124, Obj: 0.131636, No Obj: 0.518560, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.118642, Class: 0.534248, Obj: 0.281755, No Obj: 0.420864, .5R: 0.000000, .75R: 0.000000,  count: 19
+Region 82 Avg IOU: 0.261140, Class: 0.509163, Obj: 0.424285, No Obj: 0.531558, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.196998, Class: 0.457214, Obj: 0.367017, No Obj: 0.519314, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.042732, Class: 0.634825, Obj: 0.292417, No Obj: 0.421325, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.235161, Class: 0.536293, Obj: 0.493685, No Obj: 0.534498, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.069042, Class: 0.347340, Obj: 0.336586, No Obj: 0.519554, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.414701, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.171942, Class: 0.562955, Obj: 0.628599, No Obj: 0.534324, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 94 Avg IOU: 0.199863, Class: 0.426431, Obj: 0.544663, No Obj: 0.518260, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.217384, Class: 0.452074, Obj: 0.301215, No Obj: 0.416634, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.309776, Class: 0.554541, Obj: 0.624386, No Obj: 0.530224, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.178035, Class: 0.347965, Obj: 0.589218, No Obj: 0.518749, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.173643, Class: 0.624689, Obj: 0.328245, No Obj: 0.420511, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 82 Avg IOU: 0.305276, Class: 0.533493, Obj: 0.431942, No Obj: 0.533597, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.166238, Class: 0.483979, Obj: 0.576375, No Obj: 0.519219, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.176219, Class: 0.285648, Obj: 0.485602, No Obj: 0.416481, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.254414, Class: 0.419325, Obj: 0.655341, No Obj: 0.534451, .5R: 0.222222, .75R: 0.111111,  count: 9
+Region 94 Avg IOU: 0.319202, Class: 0.692317, Obj: 0.383652, No Obj: 0.520002, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.263031, Class: 0.719904, Obj: 0.735254, No Obj: 0.414330, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.260691, Class: 0.610435, Obj: 0.615315, No Obj: 0.533206, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.200417, Class: 0.499387, Obj: 0.582457, No Obj: 0.518648, .5R: 0.035714, .75R: 0.000000,  count: 28
+Region 106 Avg IOU: 0.167600, Class: 0.601498, Obj: 0.279939, No Obj: 0.416391, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.389758, Class: 0.493237, Obj: 0.536513, No Obj: 0.533678, .5R: 0.333333, .75R: 0.111111,  count: 9
+Region 94 Avg IOU: 0.301965, Class: 0.515525, Obj: 0.479311, No Obj: 0.519354, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.337314, Class: 0.545567, Obj: 0.222473, No Obj: 0.416705, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.313316, Class: 0.480560, Obj: 0.600681, No Obj: 0.532669, .5R: 0.250000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.051235, Class: 0.733749, Obj: 0.426932, No Obj: 0.518257, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.419118, .5R: -nan, .75R: -nan,  count: 0
+18: 1648.809326, 1193.176880 avg, 0.000000 rate, 13340.061138 seconds, 1152 images
+Loaded: 0.000140 seconds
+Region 82 Avg IOU: 0.214789, Class: 0.416429, Obj: 0.358177, No Obj: 0.535497, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.077215, Class: 0.159518, Obj: 0.587870, No Obj: 0.519339, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.189171, Class: 0.488881, Obj: 0.343907, No Obj: 0.414505, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.280489, Class: 0.577046, Obj: 0.643876, No Obj: 0.534341, .5R: 0.166667, .75R: 0.083333,  count: 12
+Region 94 Avg IOU: 0.163697, Class: 0.387321, Obj: 0.556439, No Obj: 0.519215, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.271762, Class: 0.405706, Obj: 0.316280, No Obj: 0.417250, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.211264, Class: 0.465065, Obj: 0.604393, No Obj: 0.532752, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.073720, Class: 0.621443, Obj: 0.595118, No Obj: 0.519163, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.417948, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.151948, Class: 0.568682, Obj: 0.515376, No Obj: 0.531030, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.151409, Class: 0.470594, Obj: 0.556397, No Obj: 0.518648, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.134018, Class: 0.656595, Obj: 0.512013, No Obj: 0.419482, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.341258, Class: 0.705585, Obj: 0.269252, No Obj: 0.533665, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.202153, Class: 0.333302, Obj: 0.513127, No Obj: 0.517961, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.083565, Class: 0.836038, Obj: 0.196908, No Obj: 0.416983, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.161019, Class: 0.648310, Obj: 0.494254, No Obj: 0.533500, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.191690, Class: 0.384942, Obj: 0.616093, No Obj: 0.519419, .5R: 0.038462, .75R: 0.000000,  count: 26
+Region 106 Avg IOU: 0.212358, Class: 0.612488, Obj: 0.432059, No Obj: 0.415137, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.251428, Class: 0.543625, Obj: 0.502675, No Obj: 0.533881, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.241578, Class: 0.322197, Obj: 0.416860, No Obj: 0.518875, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.152169, Class: 0.382062, Obj: 0.283527, No Obj: 0.417747, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 82 Avg IOU: 0.415978, Class: 0.166548, Obj: 0.369897, No Obj: 0.534643, .5R: 0.250000, .75R: 0.250000,  count: 4
+Region 94 Avg IOU: 0.148255, Class: 0.572217, Obj: 0.440027, No Obj: 0.519218, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.184912, Class: 0.522843, Obj: 0.267447, No Obj: 0.418357, .5R: 0.103448, .75R: 0.000000,  count: 29
+Region 82 Avg IOU: 0.218725, Class: 0.442493, Obj: 0.685640, No Obj: 0.533860, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 94 Avg IOU: 0.036304, Class: 0.540474, Obj: 0.468767, No Obj: 0.518943, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.086768, Class: 0.570167, Obj: 0.146650, No Obj: 0.417512, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.200782, Class: 0.678276, Obj: 0.576156, No Obj: 0.532386, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.173416, Class: 0.462885, Obj: 0.647225, No Obj: 0.519576, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.102014, Class: 0.485523, Obj: 0.359726, No Obj: 0.416772, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.277002, Class: 0.481186, Obj: 0.640290, No Obj: 0.530838, .5R: 0.181818, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.101523, Class: 0.487282, Obj: 0.601161, No Obj: 0.518939, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.139180, Class: 0.632251, Obj: 0.286982, No Obj: 0.417248, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.289661, Class: 0.597554, Obj: 0.630764, No Obj: 0.533628, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.140185, Class: 0.407377, Obj: 0.391771, No Obj: 0.517740, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.209354, Class: 0.555743, Obj: 0.416324, No Obj: 0.420434, .5R: 0.064516, .75R: 0.032258,  count: 31
+Region 82 Avg IOU: 0.230002, Class: 0.451056, Obj: 0.446333, No Obj: 0.533852, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.167746, Class: 0.543369, Obj: 0.675370, No Obj: 0.519339, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.155020, Class: 0.675310, Obj: 0.368294, No Obj: 0.417481, .5R: 0.032258, .75R: 0.000000,  count: 31
+Region 82 Avg IOU: 0.231414, Class: 0.519325, Obj: 0.441507, No Obj: 0.531911, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.202254, Class: 0.581771, Obj: 0.546219, No Obj: 0.519100, .5R: 0.090909, .75R: 0.090909,  count: 11
+Region 106 Avg IOU: 0.166834, Class: 0.425914, Obj: 0.360351, No Obj: 0.419098, .5R: 0.000000, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.143106, Class: 0.482167, Obj: 0.598217, No Obj: 0.533083, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.194425, Class: 0.340374, Obj: 0.581448, No Obj: 0.518241, .5R: 0.000000, .75R: 0.000000,  count: 21
+Region 106 Avg IOU: 0.163615, Class: 0.582671, Obj: 0.394113, No Obj: 0.416831, .5R: 0.054054, .75R: 0.000000,  count: 37
+Region 82 Avg IOU: 0.128157, Class: 0.594883, Obj: 0.733683, No Obj: 0.533749, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 94 Avg IOU: 0.140291, Class: 0.404312, Obj: 0.725365, No Obj: 0.519176, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.416131, .5R: -nan, .75R: -nan,  count: 0
+19: 1672.143433, 1241.073486 avg, 0.000000 rate, 13329.603353 seconds, 1216 images
+Loaded: 0.000145 seconds
+Region 82 Avg IOU: 0.206225, Class: 0.464947, Obj: 0.619946, No Obj: 0.535205, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.218903, Class: 0.546559, Obj: 0.588598, No Obj: 0.519366, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.164492, Class: 0.414938, Obj: 0.431795, No Obj: 0.415456, .5R: 0.000000, .75R: 0.000000,  count: 14
+Region 82 Avg IOU: 0.232923, Class: 0.306089, Obj: 0.622965, No Obj: 0.534198, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.175089, Class: 0.705074, Obj: 0.539242, No Obj: 0.518885, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.169010, Class: 0.397255, Obj: 0.504292, No Obj: 0.415972, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.209887, Class: 0.642276, Obj: 0.504346, No Obj: 0.533690, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.216069, Class: 0.535481, Obj: 0.519873, No Obj: 0.519085, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.249969, Class: 0.663573, Obj: 0.393342, No Obj: 0.418336, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.123267, Class: 0.578659, Obj: 0.531487, No Obj: 0.532595, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.204707, Class: 0.523678, Obj: 0.536824, No Obj: 0.518512, .5R: 0.043478, .75R: 0.000000,  count: 23
+Region 106 Avg IOU: 0.108472, Class: 0.533428, Obj: 0.297380, No Obj: 0.419546, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 82 Avg IOU: 0.328339, Class: 0.514535, Obj: 0.643661, No Obj: 0.532653, .5R: 0.250000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.152977, Class: 0.539743, Obj: 0.528989, No Obj: 0.519093, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.201805, Class: 0.422108, Obj: 0.352832, No Obj: 0.417758, .5R: 0.125000, .75R: 0.062500,  count: 16
+Region 82 Avg IOU: 0.346987, Class: 0.567582, Obj: 0.586343, No Obj: 0.535392, .5R: 0.300000, .75R: 0.100000,  count: 10
+Region 94 Avg IOU: 0.080188, Class: 0.416949, Obj: 0.429497, No Obj: 0.520097, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.192586, Class: 0.521231, Obj: 0.332285, No Obj: 0.415163, .5R: 0.000000, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.251560, Class: 0.505102, Obj: 0.544229, No Obj: 0.536096, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.208669, Class: 0.612086, Obj: 0.334715, No Obj: 0.519911, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.195568, Class: 0.556294, Obj: 0.435591, No Obj: 0.418297, .5R: 0.040000, .75R: 0.000000,  count: 25
+Region 82 Avg IOU: 0.204375, Class: 0.585912, Obj: 0.643796, No Obj: 0.535138, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 94 Avg IOU: 0.172501, Class: 0.511016, Obj: 0.568405, No Obj: 0.519145, .5R: 0.125000, .75R: 0.000000,  count: 16
+Region 106 Avg IOU: 0.247604, Class: 0.544880, Obj: 0.217165, No Obj: 0.418189, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.215390, Class: 0.614694, Obj: 0.461305, No Obj: 0.534239, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.096398, Class: 0.461922, Obj: 0.309823, No Obj: 0.519300, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.353088, Class: 0.375632, Obj: 0.443348, No Obj: 0.415992, .5R: 0.500000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.222255, Class: 0.452132, Obj: 0.538728, No Obj: 0.533222, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.244769, Class: 0.395452, Obj: 0.549505, No Obj: 0.518972, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.120951, Class: 0.334607, Obj: 0.316652, No Obj: 0.413957, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.172233, Class: 0.475428, Obj: 0.474602, No Obj: 0.534926, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.112770, Class: 0.457141, Obj: 0.248551, No Obj: 0.518976, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.007374, Class: 0.020376, Obj: 0.562005, No Obj: 0.417184, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.210152, Class: 0.511649, Obj: 0.500809, No Obj: 0.534057, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.207608, Class: 0.556111, Obj: 0.523375, No Obj: 0.519064, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.414535, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.175746, Class: 0.532810, Obj: 0.527508, No Obj: 0.531525, .5R: 0.133333, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.153448, Class: 0.394186, Obj: 0.560803, No Obj: 0.517905, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.092283, Class: 0.461272, Obj: 0.364889, No Obj: 0.417527, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.229796, Class: 0.533544, Obj: 0.662663, No Obj: 0.534671, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.159175, Class: 0.576301, Obj: 0.521593, No Obj: 0.519023, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.416337, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.146020, Class: 0.435855, Obj: 0.663430, No Obj: 0.534128, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.014303, Class: 0.739380, Obj: 0.082745, No Obj: 0.518063, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.420324, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.244299, Class: 0.570057, Obj: 0.617184, No Obj: 0.533938, .5R: 0.166667, .75R: 0.055556,  count: 18
+Region 94 Avg IOU: 0.126468, Class: 0.573996, Obj: 0.524672, No Obj: 0.519150, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.097236, Class: 0.521163, Obj: 0.333932, No Obj: 0.416163, .5R: 0.000000, .75R: 0.000000,  count: 10
+20: 1656.875488, 1282.653687 avg, 0.000000 rate, 13344.385805 seconds, 1280 images
+Resizing
+480
+Loaded: 0.039485 seconds
+Region 82 Avg IOU: 0.344448, Class: 0.484867, Obj: 0.427708, No Obj: 0.533662, .5R: 0.285714, .75R: 0.142857,  count: 7
+Region 94 Avg IOU: 0.181874, Class: 0.430354, Obj: 0.558397, No Obj: 0.519984, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.328073, Class: 0.476553, Obj: 0.340472, No Obj: 0.414728, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.168127, Class: 0.435423, Obj: 0.832121, No Obj: 0.532243, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.281903, Class: 0.568570, Obj: 0.644091, No Obj: 0.517748, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.299141, Class: 0.444326, Obj: 0.371168, No Obj: 0.419942, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.319678, Class: 0.406232, Obj: 0.428739, No Obj: 0.533215, .5R: 0.200000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.225747, Class: 0.378225, Obj: 0.535020, No Obj: 0.519149, .5R: 0.000000, .75R: 0.000000,  count: 16
+Region 106 Avg IOU: 0.085301, Class: 0.607455, Obj: 0.452393, No Obj: 0.418900, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.257531, Class: 0.421918, Obj: 0.569187, No Obj: 0.534443, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.158961, Class: 0.209105, Obj: 0.452126, No Obj: 0.519914, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.131637, Class: 0.544138, Obj: 0.310138, No Obj: 0.416610, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 82 Avg IOU: 0.241546, Class: 0.558434, Obj: 0.732125, No Obj: 0.533336, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.221056, Class: 0.498653, Obj: 0.549647, No Obj: 0.518411, .5R: 0.142857, .75R: 0.000000,  count: 14
+Region 106 Avg IOU: 0.370160, Class: 0.678894, Obj: 0.305057, No Obj: 0.415499, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.222767, Class: 0.313826, Obj: 0.676786, No Obj: 0.534214, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.140625, Class: 0.682447, Obj: 0.659873, No Obj: 0.518423, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.285204, Class: 0.707283, Obj: 0.519336, No Obj: 0.416868, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.267047, Class: 0.623919, Obj: 0.729107, No Obj: 0.533837, .5R: 0.181818, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.100464, Class: 0.458863, Obj: 0.499940, No Obj: 0.518926, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.147999, Class: 0.588497, Obj: 0.471704, No Obj: 0.418269, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.182380, Class: 0.462739, Obj: 0.491954, No Obj: 0.535363, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.189048, Class: 0.491038, Obj: 0.284043, No Obj: 0.518969, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.164019, Class: 0.526352, Obj: 0.373346, No Obj: 0.421080, .5R: 0.040000, .75R: 0.000000,  count: 25
+Region 82 Avg IOU: 0.215027, Class: 0.517820, Obj: 0.542403, No Obj: 0.533061, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 94 Avg IOU: 0.213323, Class: 0.390756, Obj: 0.464480, No Obj: 0.519291, .5R: 0.058824, .75R: 0.000000,  count: 17
+Region 106 Avg IOU: 0.174781, Class: 0.386403, Obj: 0.145164, No Obj: 0.415117, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.154503, Class: 0.442218, Obj: 0.616839, No Obj: 0.533148, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.087973, Class: 0.720655, Obj: 0.422717, No Obj: 0.519407, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.119277, Class: 0.528286, Obj: 0.417711, No Obj: 0.417628, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.192098, Class: 0.374284, Obj: 0.738247, No Obj: 0.535030, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.168429, Class: 0.558024, Obj: 0.599451, No Obj: 0.519045, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.184132, Class: 0.595803, Obj: 0.250908, No Obj: 0.420150, .5R: 0.095238, .75R: 0.000000,  count: 21
+Region 82 Avg IOU: 0.114321, Class: 0.563590, Obj: 0.601580, No Obj: 0.532303, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.109610, Class: 0.644974, Obj: 0.344827, No Obj: 0.518204, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.121130, Class: 0.598714, Obj: 0.336572, No Obj: 0.422267, .5R: 0.058824, .75R: 0.000000,  count: 34
+Region 82 Avg IOU: 0.193957, Class: 0.448124, Obj: 0.809529, No Obj: 0.533634, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.043971, Class: 0.398895, Obj: 0.619765, No Obj: 0.519629, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.165564, Class: 0.508792, Obj: 0.296927, No Obj: 0.418185, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.213166, Class: 0.466362, Obj: 0.568504, No Obj: 0.534388, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.148582, Class: 0.509677, Obj: 0.598289, No Obj: 0.519427, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.283047, Class: 0.492047, Obj: 0.388737, No Obj: 0.417085, .5R: 0.166667, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.334632, Class: 0.263168, Obj: 0.469756, No Obj: 0.534131, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.104634, Class: 0.542608, Obj: 0.501074, No Obj: 0.518596, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.194194, Class: 0.593529, Obj: 0.274309, No Obj: 0.420673, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.191621, Class: 0.522533, Obj: 0.797348, No Obj: 0.534874, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.200416, Class: 0.529806, Obj: 0.538963, No Obj: 0.519488, .5R: 0.150000, .75R: 0.000000,  count: 20
+Region 106 Avg IOU: 0.222091, Class: 0.503352, Obj: 0.394479, No Obj: 0.416038, .5R: 0.000000, .75R: 0.000000,  count: 13
+21: 1186.554688, 1273.043823 avg, 0.000000 rate, 9655.204869 seconds, 1344 images
+Loaded: 0.000111 seconds
+Region 82 Avg IOU: 0.150317, Class: 0.415012, Obj: 0.640169, No Obj: 0.535886, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.170512, Class: 0.491524, Obj: 0.660149, No Obj: 0.519072, .5R: 0.047619, .75R: 0.000000,  count: 21
+Region 106 Avg IOU: 0.205811, Class: 0.517129, Obj: 0.407720, No Obj: 0.415628, .5R: 0.028571, .75R: 0.000000,  count: 35
+Region 82 Avg IOU: 0.257515, Class: 0.534933, Obj: 0.556986, No Obj: 0.533518, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.149897, Class: 0.414709, Obj: 0.662362, No Obj: 0.518109, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.415574, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.277911, Class: 0.420053, Obj: 0.515312, No Obj: 0.534409, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.105745, Class: 0.495679, Obj: 0.605424, No Obj: 0.519869, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.338338, Class: 0.683691, Obj: 0.579071, No Obj: 0.417452, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.128538, Class: 0.542972, Obj: 0.704771, No Obj: 0.534333, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.180334, Class: 0.456676, Obj: 0.567726, No Obj: 0.518271, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.212425, Class: 0.488192, Obj: 0.400167, No Obj: 0.419443, .5R: 0.187500, .75R: 0.000000,  count: 16
+Region 82 Avg IOU: 0.204216, Class: 0.505192, Obj: 0.515538, No Obj: 0.534825, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.176491, Class: 0.347255, Obj: 0.481022, No Obj: 0.519302, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.141617, Class: 0.651300, Obj: 0.403240, No Obj: 0.418031, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.245601, Class: 0.549175, Obj: 0.627388, No Obj: 0.535463, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.210228, Class: 0.551386, Obj: 0.464115, No Obj: 0.519680, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.223016, Class: 0.497163, Obj: 0.420229, No Obj: 0.415499, .5R: 0.142857, .75R: 0.000000,  count: 14
+Region 82 Avg IOU: 0.126066, Class: 0.927765, Obj: 0.122780, No Obj: 0.533060, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.189839, Class: 0.570105, Obj: 0.525854, No Obj: 0.519219, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.158724, Class: 0.564755, Obj: 0.223924, No Obj: 0.418968, .5R: 0.000000, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.225267, Class: 0.480594, Obj: 0.430855, No Obj: 0.532488, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.089634, Class: 0.387385, Obj: 0.472985, No Obj: 0.518605, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.114963, Class: 0.648361, Obj: 0.322524, No Obj: 0.419026, .5R: 0.000000, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.233296, Class: 0.541096, Obj: 0.407265, No Obj: 0.534416, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.161292, Class: 0.492595, Obj: 0.567600, No Obj: 0.519450, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.257631, Class: 0.532368, Obj: 0.269233, No Obj: 0.416113, .5R: 0.111111, .75R: 0.055556,  count: 18
+Region 82 Avg IOU: 0.100200, Class: 0.497974, Obj: 0.817809, No Obj: 0.532717, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.157331, Class: 0.596065, Obj: 0.637400, No Obj: 0.519056, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.100385, Class: 0.629432, Obj: 0.278298, No Obj: 0.420736, .5R: 0.000000, .75R: 0.000000,  count: 27
+Region 82 Avg IOU: 0.310666, Class: 0.474004, Obj: 0.555081, No Obj: 0.534511, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.153000, Class: 0.469332, Obj: 0.464908, No Obj: 0.519447, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.171324, Class: 0.606571, Obj: 0.334068, No Obj: 0.416160, .5R: 0.028571, .75R: 0.000000,  count: 35
+Region 82 Avg IOU: 0.255009, Class: 0.454032, Obj: 0.601487, No Obj: 0.533708, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.113903, Class: 0.275192, Obj: 0.659490, No Obj: 0.517798, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.170687, Class: 0.565009, Obj: 0.421062, No Obj: 0.420997, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 82 Avg IOU: 0.220990, Class: 0.346273, Obj: 0.504745, No Obj: 0.534930, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.199725, Class: 0.473980, Obj: 0.715620, No Obj: 0.518797, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.309103, Class: 0.554322, Obj: 0.320907, No Obj: 0.415906, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.177276, Class: 0.617539, Obj: 0.685704, No Obj: 0.531905, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.199008, Class: 0.565459, Obj: 0.922041, No Obj: 0.519096, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.092570, Class: 0.625467, Obj: 0.249887, No Obj: 0.424571, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.179942, Class: 0.446506, Obj: 0.669737, No Obj: 0.537300, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.217664, Class: 0.490908, Obj: 0.510981, No Obj: 0.518258, .5R: 0.105263, .75R: 0.000000,  count: 19
+Region 106 Avg IOU: 0.098698, Class: 0.576278, Obj: 0.300727, No Obj: 0.416014, .5R: 0.000000, .75R: 0.000000,  count: 27
+Region 82 Avg IOU: 0.169011, Class: 0.568262, Obj: 0.499272, No Obj: 0.533607, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.158681, Class: 0.392118, Obj: 0.501428, No Obj: 0.517932, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 106 Avg IOU: 0.201948, Class: 0.603663, Obj: 0.410617, No Obj: 0.417656, .5R: 0.000000, .75R: 0.000000,  count: 17
+22: 1196.469727, 1265.386475 avg, 0.000000 rate, 9282.401352 seconds, 1408 images
+Loaded: 0.000124 seconds
+Region 82 Avg IOU: 0.152685, Class: 0.527709, Obj: 0.408823, No Obj: 0.534810, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.315109, Class: 0.530195, Obj: 0.751117, No Obj: 0.519828, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.239270, Class: 0.369668, Obj: 0.365178, No Obj: 0.415672, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.390777, Class: 0.203615, Obj: 0.335988, No Obj: 0.535365, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.249973, Class: 0.593141, Obj: 0.393883, No Obj: 0.518724, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.417399, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.135797, Class: 0.497087, Obj: 0.656810, No Obj: 0.533551, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.224268, Class: 0.534238, Obj: 0.456159, No Obj: 0.520127, .5R: 0.000000, .75R: 0.000000,  count: 16
+Region 106 Avg IOU: 0.232823, Class: 0.581583, Obj: 0.378303, No Obj: 0.414984, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.286861, Class: 0.384882, Obj: 0.714951, No Obj: 0.533551, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.297013, Class: 0.523526, Obj: 0.357801, No Obj: 0.519306, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.173611, Class: 0.542080, Obj: 0.289085, No Obj: 0.416289, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.222865, Class: 0.320469, Obj: 0.527271, No Obj: 0.534164, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.221455, Class: 0.509521, Obj: 0.433208, No Obj: 0.519318, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.042975, Class: 0.908734, Obj: 0.303718, No Obj: 0.416994, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 82 Avg IOU: 0.197394, Class: 0.504919, Obj: 0.688727, No Obj: 0.535269, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.212424, Class: 0.417326, Obj: 0.547285, No Obj: 0.519648, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.220815, Class: 0.520270, Obj: 0.366283, No Obj: 0.415926, .5R: 0.033333, .75R: 0.000000,  count: 30
+Region 82 Avg IOU: 0.314567, Class: 0.461735, Obj: 0.712745, No Obj: 0.532319, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.257636, Class: 0.509801, Obj: 0.480967, No Obj: 0.519119, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.259745, Class: 0.312699, Obj: 0.329154, No Obj: 0.416994, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.118928, Class: 0.417029, Obj: 0.701023, No Obj: 0.534842, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.284455, Class: 0.444091, Obj: 0.620683, No Obj: 0.519008, .5R: 0.153846, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.087753, Class: 0.492584, Obj: 0.375293, No Obj: 0.417601, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.291423, Class: 0.570913, Obj: 0.519081, No Obj: 0.532773, .5R: 0.090909, .75R: 0.000000,  count: 11
+Region 94 Avg IOU: 0.232129, Class: 0.507674, Obj: 0.352384, No Obj: 0.518531, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.209042, Class: 0.519806, Obj: 0.309550, No Obj: 0.415253, .5R: 0.142857, .75R: 0.000000,  count: 21
+Region 82 Avg IOU: 0.088977, Class: 0.474451, Obj: 0.610037, No Obj: 0.534926, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 94 Avg IOU: 0.109293, Class: 0.610414, Obj: 0.583623, No Obj: 0.518364, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.032842, Class: 0.175706, Obj: 0.065059, No Obj: 0.415867, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.217912, Class: 0.568293, Obj: 0.771438, No Obj: 0.533680, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.134288, Class: 0.530196, Obj: 0.502101, No Obj: 0.520099, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.216300, Class: 0.562069, Obj: 0.345183, No Obj: 0.415817, .5R: 0.027778, .75R: 0.000000,  count: 36
+Region 82 Avg IOU: 0.141221, Class: 0.690926, Obj: 0.612195, No Obj: 0.534497, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.204114, Class: 0.592195, Obj: 0.570970, No Obj: 0.518676, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 106 Avg IOU: 0.206022, Class: 0.638728, Obj: 0.529551, No Obj: 0.420259, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.192704, Class: 0.558261, Obj: 0.629727, No Obj: 0.535133, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 94 Avg IOU: 0.204229, Class: 0.385874, Obj: 0.625506, No Obj: 0.519166, .5R: 0.076923, .75R: 0.000000,  count: 13
+Region 106 Avg IOU: 0.200187, Class: 0.361039, Obj: 0.361903, No Obj: 0.415257, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.253893, Class: 0.531371, Obj: 0.572509, No Obj: 0.533762, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.153197, Class: 0.541456, Obj: 0.552432, No Obj: 0.518810, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.271353, Class: 0.575878, Obj: 0.249243, No Obj: 0.417342, .5R: 0.153846, .75R: 0.000000,  count: 26
+Region 82 Avg IOU: 0.217298, Class: 0.330582, Obj: 0.487835, No Obj: 0.533884, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.248005, Class: 0.304244, Obj: 0.625316, No Obj: 0.519058, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.234944, Class: 0.423212, Obj: 0.355865, No Obj: 0.415255, .5R: 0.055556, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.313819, Class: 0.409153, Obj: 0.605735, No Obj: 0.536175, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.301953, Class: 0.567573, Obj: 0.706593, No Obj: 0.518613, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 106 Avg IOU: 0.122689, Class: 0.602296, Obj: 0.366431, No Obj: 0.416266, .5R: 0.000000, .75R: 0.000000,  count: 9
+23: 1168.820190, 1255.729858 avg, 0.000000 rate, 9266.215432 seconds, 1472 images
+Loaded: 0.000116 seconds
+Region 82 Avg IOU: 0.293180, Class: 0.517574, Obj: 0.819152, No Obj: 0.535463, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.201425, Class: 0.620323, Obj: 0.646208, No Obj: 0.517938, .5R: 0.111111, .75R: 0.111111,  count: 9
+Region 106 Avg IOU: 0.193847, Class: 0.359902, Obj: 0.461273, No Obj: 0.417004, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 82 Avg IOU: 0.277631, Class: 0.519006, Obj: 0.488281, No Obj: 0.535378, .5R: 0.142857, .75R: 0.000000,  count: 14
+Region 94 Avg IOU: 0.292463, Class: 0.566606, Obj: 0.578694, No Obj: 0.518662, .5R: 0.333333, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.186089, Class: 0.370911, Obj: 0.389022, No Obj: 0.415303, .5R: 0.032258, .75R: 0.000000,  count: 31
+Region 82 Avg IOU: 0.230699, Class: 0.611771, Obj: 0.569653, No Obj: 0.533024, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.104469, Class: 0.697882, Obj: 0.440229, No Obj: 0.518639, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.207958, Class: 0.363964, Obj: 0.326960, No Obj: 0.416615, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.229896, Class: 0.405962, Obj: 0.712054, No Obj: 0.534670, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.107268, Class: 0.404586, Obj: 0.606139, No Obj: 0.520283, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.204413, Class: 0.428728, Obj: 0.273357, No Obj: 0.415786, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.068827, Class: 0.606121, Obj: 0.610508, No Obj: 0.534679, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.284974, Class: 0.298033, Obj: 0.366994, No Obj: 0.518926, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.129137, Class: 0.592820, Obj: 0.175988, No Obj: 0.420149, .5R: 0.000000, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.157260, Class: 0.622958, Obj: 0.582039, No Obj: 0.535169, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.223713, Class: 0.495061, Obj: 0.560881, No Obj: 0.520128, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.167053, Class: 0.571239, Obj: 0.234259, No Obj: 0.416524, .5R: 0.000000, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.244213, Class: 0.494203, Obj: 0.675222, No Obj: 0.533552, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.084413, Class: 0.543365, Obj: 0.571003, No Obj: 0.519009, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.245875, Class: 0.809741, Obj: 0.303139, No Obj: 0.417177, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.246784, Class: 0.443957, Obj: 0.446825, No Obj: 0.535638, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.183113, Class: 0.340557, Obj: 0.504805, No Obj: 0.518155, .5R: 0.000000, .75R: 0.000000,  count: 18
+Region 106 Avg IOU: 0.195512, Class: 0.398528, Obj: 0.399032, No Obj: 0.416066, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.295737, Class: 0.557425, Obj: 0.612580, No Obj: 0.532497, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.139517, Class: 0.486750, Obj: 0.628572, No Obj: 0.518992, .5R: 0.000000, .75R: 0.000000,  count: 16
+Region 106 Avg IOU: 0.210156, Class: 0.661589, Obj: 0.342540, No Obj: 0.416431, .5R: 0.095238, .75R: 0.000000,  count: 21
+Region 82 Avg IOU: 0.169191, Class: 0.570199, Obj: 0.696219, No Obj: 0.534337, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.052158, Class: 0.259876, Obj: 0.193481, No Obj: 0.517547, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.146388, Class: 0.682500, Obj: 0.377231, No Obj: 0.417457, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.257081, Class: 0.320054, Obj: 0.459194, No Obj: 0.534187, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.167151, Class: 0.546330, Obj: 0.688668, No Obj: 0.518459, .5R: 0.111111, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.209949, Class: 0.520594, Obj: 0.374087, No Obj: 0.415697, .5R: 0.057143, .75R: 0.000000,  count: 35
+Region 82 Avg IOU: 0.221733, Class: 0.563092, Obj: 0.604243, No Obj: 0.536752, .5R: 0.071429, .75R: 0.000000,  count: 14
+Region 94 Avg IOU: 0.264224, Class: 0.528853, Obj: 0.483165, No Obj: 0.519871, .5R: 0.136364, .75R: 0.045455,  count: 22
+Region 106 Avg IOU: 0.329270, Class: 0.617580, Obj: 0.362616, No Obj: 0.413904, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 82 Avg IOU: 0.158354, Class: 0.601617, Obj: 0.696699, No Obj: 0.533541, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.643623, Class: 0.250912, Obj: 0.744038, No Obj: 0.518582, .5R: 1.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.312438, Class: 0.653352, Obj: 0.467758, No Obj: 0.416513, .5R: 0.250000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.236426, Class: 0.466125, Obj: 0.588786, No Obj: 0.535340, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.519511, .5R: -nan, .75R: -nan,  count: 0
+Region 106 Avg IOU: 0.143909, Class: 0.059951, Obj: 0.389202, No Obj: 0.418560, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.351503, Class: 0.511012, Obj: 0.754351, No Obj: 0.533005, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.196833, Class: 0.414068, Obj: 0.547586, No Obj: 0.518233, .5R: 0.181818, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.085833, Class: 0.665790, Obj: 0.203608, No Obj: 0.422623, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.176383, Class: 0.475109, Obj: 0.844935, No Obj: 0.535670, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.187466, Class: 0.384012, Obj: 0.497839, No Obj: 0.519541, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.183412, Class: 0.536704, Obj: 0.382232, No Obj: 0.415451, .5R: 0.059701, .75R: 0.000000,  count: 67
+24: 1197.588379, 1249.915771 avg, 0.000000 rate, 9180.482043 seconds, 1536 images
+Loaded: 0.000336 seconds
+Region 82 Avg IOU: 0.394509, Class: 0.341855, Obj: 0.421699, No Obj: 0.536431, .5R: 0.250000, .75R: 0.250000,  count: 4
+Region 94 Avg IOU: 0.201251, Class: 0.591133, Obj: 0.578264, No Obj: 0.519035, .5R: 0.100000, .75R: 0.100000,  count: 10
+Region 106 Avg IOU: 0.138022, Class: 0.668423, Obj: 0.351357, No Obj: 0.414972, .5R: 0.000000, .75R: 0.000000,  count: 18
+Region 82 Avg IOU: 0.243043, Class: 0.463108, Obj: 0.510627, No Obj: 0.536127, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.171645, Class: 0.434775, Obj: 0.559802, No Obj: 0.519281, .5R: 0.052632, .75R: 0.000000,  count: 19
+Region 106 Avg IOU: 0.190804, Class: 0.585105, Obj: 0.507213, No Obj: 0.415170, .5R: 0.076923, .75R: 0.000000,  count: 13
+Region 82 Avg IOU: 0.175378, Class: 0.470496, Obj: 0.666506, No Obj: 0.534329, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.211541, Class: 0.450907, Obj: 0.540007, No Obj: 0.520149, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.181935, Class: 0.486735, Obj: 0.313874, No Obj: 0.417144, .5R: 0.035714, .75R: 0.000000,  count: 28
+Region 82 Avg IOU: 0.361784, Class: 0.480082, Obj: 0.418647, No Obj: 0.534896, .5R: 0.285714, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.169676, Class: 0.335996, Obj: 0.744392, No Obj: 0.518628, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.155947, Class: 0.750034, Obj: 0.381140, No Obj: 0.417864, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.266050, Class: 0.401171, Obj: 0.580667, No Obj: 0.534457, .5R: 0.285714, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.136497, Class: 0.530015, Obj: 0.542526, No Obj: 0.519737, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.165945, Class: 0.501898, Obj: 0.188251, No Obj: 0.417604, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 82 Avg IOU: 0.172804, Class: 0.395474, Obj: 0.731813, No Obj: 0.534379, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.156535, Class: 0.478914, Obj: 0.576705, No Obj: 0.519405, .5R: 0.058824, .75R: 0.000000,  count: 17
+Region 106 Avg IOU: 0.168267, Class: 0.583976, Obj: 0.381119, No Obj: 0.414886, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.221476, Class: 0.444317, Obj: 0.617173, No Obj: 0.535562, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.124035, Class: 0.624272, Obj: 0.611598, No Obj: 0.518750, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 106 Avg IOU: 0.056500, Class: 0.711918, Obj: 0.455363, No Obj: 0.416610, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 82 Avg IOU: 0.392288, Class: 0.495368, Obj: 0.561339, No Obj: 0.532963, .5R: 0.285714, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.222116, Class: 0.490163, Obj: 0.517581, No Obj: 0.518435, .5R: 0.083333, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.138512, Class: 0.718969, Obj: 0.231107, No Obj: 0.417254, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 82 Avg IOU: 0.296319, Class: 0.416489, Obj: 0.639965, No Obj: 0.533077, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.132305, Class: 0.501163, Obj: 0.457845, No Obj: 0.518833, .5R: 0.000000, .75R: 0.000000,  count: 16
+Region 106 Avg IOU: 0.206487, Class: 0.474656, Obj: 0.392474, No Obj: 0.418234, .5R: 0.117647, .75R: 0.000000,  count: 17
+Region 82 Avg IOU: 0.198813, Class: 0.372453, Obj: 0.441428, No Obj: 0.533888, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.235446, Class: 0.353259, Obj: 0.537865, No Obj: 0.519121, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.213708, Class: 0.643325, Obj: 0.307657, No Obj: 0.414999, .5R: 0.083333, .75R: 0.000000,  count: 24
+Region 82 Avg IOU: 0.236986, Class: 0.604608, Obj: 0.587207, No Obj: 0.533691, .5R: 0.100000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.128490, Class: 0.572571, Obj: 0.483776, No Obj: 0.518320, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.203806, Class: 0.345942, Obj: 0.268006, No Obj: 0.415927, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 82 Avg IOU: 0.206914, Class: 0.548561, Obj: 0.609249, No Obj: 0.534097, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.003499, Class: 0.255843, Obj: 0.207450, No Obj: 0.518983, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: 0.121529, Class: 0.333636, Obj: 0.407801, No Obj: 0.418427, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.243628, Class: 0.359900, Obj: 0.616540, No Obj: 0.536508, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.132976, Class: 0.433478, Obj: 0.290110, No Obj: 0.518512, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.188094, Class: 0.691328, Obj: 0.347455, No Obj: 0.417147, .5R: 0.034483, .75R: 0.000000,  count: 29
+Region 82 Avg IOU: 0.178564, Class: 0.403767, Obj: 0.589281, No Obj: 0.535529, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.226300, Class: 0.477484, Obj: 0.563091, No Obj: 0.518484, .5R: 0.095238, .75R: 0.000000,  count: 21
+Region 106 Avg IOU: 0.153016, Class: 0.521818, Obj: 0.309142, No Obj: 0.418366, .5R: 0.037037, .75R: 0.000000,  count: 27
+Region 82 Avg IOU: 0.292425, Class: 0.593939, Obj: 0.632518, No Obj: 0.533708, .5R: 0.200000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.105124, Class: 0.406451, Obj: 0.588131, No Obj: 0.518071, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 106 Avg IOU: 0.163487, Class: 0.520879, Obj: 0.301511, No Obj: 0.418116, .5R: 0.086957, .75R: 0.000000,  count: 23
+Region 82 Avg IOU: 0.204875, Class: 0.640601, Obj: 0.467488, No Obj: 0.531738, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.193293, Class: 0.567989, Obj: 0.229193, No Obj: 0.519131, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.241759, Class: 0.561542, Obj: 0.310814, No Obj: 0.416524, .5R: 0.090909, .75R: 0.000000,  count: 11
+25: 1198.087036, 1244.732910 avg, 0.000000 rate, 9033.070326 seconds, 1600 images
+Loaded: 0.000363 seconds
+Region 82 Avg IOU: 0.195826, Class: 0.463353, Obj: 0.392489, No Obj: 0.533658, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.218789, Class: 0.514357, Obj: 0.397290, No Obj: 0.519303, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.192861, Class: 0.485605, Obj: 0.336141, No Obj: 0.414370, .5R: 0.000000, .75R: 0.000000,  count: 12
+Region 82 Avg IOU: 0.281414, Class: 0.482438, Obj: 0.522426, No Obj: 0.535789, .5R: 0.125000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.280454, Class: 0.470052, Obj: 0.544546, No Obj: 0.518454, .5R: 0.086957, .75R: 0.000000,  count: 23
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.415659, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.164355, Class: 0.363431, Obj: 0.649701, No Obj: 0.535017, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.046182, Class: 0.614669, Obj: 0.426432, No Obj: 0.519553, .5R: 0.000000, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.185354, Class: 0.801615, Obj: 0.403128, No Obj: 0.415871, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 82 Avg IOU: 0.059972, Class: 0.300270, Obj: 0.750282, No Obj: 0.534571, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.166572, Class: 0.405606, Obj: 0.482322, No Obj: 0.518915, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.159870, Class: 0.572824, Obj: 0.392834, No Obj: 0.416292, .5R: 0.043478, .75R: 0.000000,  count: 23
+Region 82 Avg IOU: 0.271785, Class: 0.465645, Obj: 0.781717, No Obj: 0.531082, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.137728, Class: 0.428185, Obj: 0.583763, No Obj: 0.518186, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 106 Avg IOU: 0.166986, Class: 0.623859, Obj: 0.314232, No Obj: 0.417250, .5R: 0.000000, .75R: 0.000000,  count: 22
+Region 82 Avg IOU: 0.233629, Class: 0.480794, Obj: 0.546265, No Obj: 0.534699, .5R: 0.066667, .75R: 0.000000,  count: 15
+Region 94 Avg IOU: 0.265394, Class: 0.456475, Obj: 0.478196, No Obj: 0.518657, .5R: 0.058824, .75R: 0.000000,  count: 17
+Region 106 Avg IOU: 0.136205, Class: 0.460911, Obj: 0.335627, No Obj: 0.417577, .5R: 0.000000, .75R: 0.000000,  count: 13
+Region 82 Avg IOU: 0.269977, Class: 0.557836, Obj: 0.550642, No Obj: 0.534686, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 94 Avg IOU: 0.257452, Class: 0.352425, Obj: 0.759710, No Obj: 0.519031, .5R: 0.333333, .75R: 0.000000,  count: 3
+Region 106 Avg IOU: 0.178113, Class: 0.428575, Obj: 0.390331, No Obj: 0.414394, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 82 Avg IOU: 0.223701, Class: 0.521137, Obj: 0.592662, No Obj: 0.534494, .5R: 0.055556, .75R: 0.055556,  count: 18
+Region 94 Avg IOU: 0.204159, Class: 0.458923, Obj: 0.514387, No Obj: 0.519536, .5R: 0.041667, .75R: 0.000000,  count: 24
+Region 106 Avg IOU: 0.130735, Class: 0.501911, Obj: 0.272502, No Obj: 0.416893, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 82 Avg IOU: 0.190003, Class: 0.394191, Obj: 0.506835, No Obj: 0.532419, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.212121, Class: 0.528398, Obj: 0.527313, No Obj: 0.518775, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.139235, Class: 0.760722, Obj: 0.431427, No Obj: 0.416776, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.369462, Class: 0.546642, Obj: 0.614624, No Obj: 0.532945, .5R: 0.222222, .75R: 0.000000,  count: 9
+Region 94 Avg IOU: 0.115983, Class: 0.407743, Obj: 0.564671, No Obj: 0.518131, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 106 Avg IOU: 0.206636, Class: 0.560945, Obj: 0.240800, No Obj: 0.418326, .5R: 0.000000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.168655, Class: 0.465638, Obj: 0.457261, No Obj: 0.534906, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.228563, Class: 0.491845, Obj: 0.454687, No Obj: 0.518851, .5R: 0.058824, .75R: 0.000000,  count: 17
+Region 106 Avg IOU: 0.214730, Class: 0.651478, Obj: 0.315704, No Obj: 0.417049, .5R: 0.000000, .75R: 0.000000,  count: 21
+Region 82 Avg IOU: 0.247758, Class: 0.594725, Obj: 0.777760, No Obj: 0.531428, .5R: 0.000000, .75R: 0.000000,  count: 4
+Region 94 Avg IOU: 0.141643, Class: 0.455566, Obj: 0.576230, No Obj: 0.518395, .5R: 0.000000, .75R: 0.000000,  count: 29
+Region 106 Avg IOU: 0.153077, Class: 0.523540, Obj: 0.346129, No Obj: 0.421737, .5R: 0.066667, .75R: 0.000000,  count: 30
+Region 82 Avg IOU: 0.229387, Class: 0.442924, Obj: 0.591428, No Obj: 0.533414, .5R: 0.000000, .75R: 0.000000,  count: 10
+Region 94 Avg IOU: 0.128331, Class: 0.475888, Obj: 0.525240, No Obj: 0.517784, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.154707, Class: 0.524142, Obj: 0.390713, No Obj: 0.418972, .5R: 0.041667, .75R: 0.000000,  count: 24
+Region 82 Avg IOU: 0.192724, Class: 0.470247, Obj: 0.562234, No Obj: 0.533237, .5R: 0.000000, .75R: 0.000000,  count: 8
+Region 94 Avg IOU: 0.147918, Class: 0.520125, Obj: 0.541960, No Obj: 0.517418, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.126639, Class: 0.542291, Obj: 0.358793, No Obj: 0.417261, .5R: 0.000000, .75R: 0.000000,  count: 35
+Region 82 Avg IOU: 0.260130, Class: 0.662358, Obj: 0.820386, No Obj: 0.535355, .5R: 0.000000, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.009535, Class: 0.920721, Obj: 0.215451, No Obj: 0.520394, .5R: 0.000000, .75R: 0.000000,  count: 1
+Region 106 Avg IOU: -nan, Class: -nan, Obj: -nan, No Obj: 0.417953, .5R: -nan, .75R: -nan,  count: 0
+Region 82 Avg IOU: 0.213525, Class: 0.619332, Obj: 0.489024, No Obj: 0.534565, .5R: 0.076923, .75R: 0.000000,  count: 13
+Region 94 Avg IOU: 0.208422, Class: 0.458698, Obj: 0.543432, No Obj: 0.519163, .5R: 0.062500, .75R: 0.000000,  count: 16
+Region 106 Avg IOU: 0.236164, Class: 0.641854, Obj: 0.398426, No Obj: 0.414716, .5R: 0.100000, .75R: 0.000000,  count: 10
+26: 1202.516479, 1240.511230 avg, 0.000000 rate, 9051.713387 seconds, 1664 images
+Loaded: 0.000366 seconds
+Region 82 Avg IOU: 0.286556, Class: 0.468013, Obj: 0.619515, No Obj: 0.531745, .5R: 0.142857, .75R: 0.000000,  count: 7
+Region 94 Avg IOU: 0.124074, Class: 0.451203, Obj: 0.570882, No Obj: 0.518124, .5R: 0.058824, .75R: 0.058824,  count: 17
+Region 106 Avg IOU: 0.207633, Class: 0.453623, Obj: 0.263514, No Obj: 0.420178, .5R: 0.085714, .75R: 0.000000,  count: 35
+Region 82 Avg IOU: 0.429879, Class: 0.331666, Obj: 0.653022, No Obj: 0.534798, .5R: 0.500000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.164969, Class: 0.447089, Obj: 0.601137, No Obj: 0.518391, .5R: 0.000000, .75R: 0.000000,  count: 6
+Region 106 Avg IOU: 0.270315, Class: 0.649324, Obj: 0.288329, No Obj: 0.414910, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.388754, Class: 0.604972, Obj: 0.639352, No Obj: 0.532467, .5R: 0.166667, .75R: 0.000000,  count: 6
+Region 94 Avg IOU: 0.115579, Class: 0.461911, Obj: 0.443404, No Obj: 0.518491, .5R: 0.000000, .75R: 0.000000,  count: 9
+Region 106 Avg IOU: 0.174639, Class: 0.676311, Obj: 0.155451, No Obj: 0.418148, .5R: 0.200000, .75R: 0.000000,  count: 5
+Region 82 Avg IOU: 0.076976, Class: 0.210491, Obj: 0.217501, No Obj: 0.533198, .5R: 0.000000, .75R: 0.000000,  count: 2
+Region 94 Avg IOU: 0.144506, Class: 0.473774, Obj: 0.655071, No Obj: 0.517665, .5R: 0.000000, .75R: 0.000000,  count: 11
+Region 106 Avg IOU: 0.146779, Class: 0.452558, Obj: 0.250084, No Obj: 0.420485, .5R: 0.076923, .75R: 0.000000,  count: 13
