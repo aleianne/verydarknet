@@ -155,7 +155,7 @@ char *generate_result_filename(char *filename) {
 
     char *resultname = calloc(l + strlen(image), sizeof(char));
     strncpy(resultname, prefix, l);
-    strcat(resultname, resultname);
+    strcat(resultname, image);
     return resultname;
 }
 

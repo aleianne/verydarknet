@@ -206,6 +206,7 @@ void fault_simulation(char *datacfg, char *cfgfile, char *weightsfile, char *tes
         free_list(image_list);
         return;
     }
+    
     execute_faulty_prediction(net, image_list, fault_list, target_layer, path);
 
     // release the memory used by the list
