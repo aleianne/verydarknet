@@ -151,7 +151,7 @@ char *generate_result_filename(char *filename) {
     char *prefix = "sim_results/";
     int l = strlen(prefix);
 
-    char image = change_ext(filename, ".csv");
+    char *image = change_ext(filename, ".csv");
 
     char *resultname = calloc(l + strlen(image), sizeof(char));
     strncpy(resultname, prefix, l);
