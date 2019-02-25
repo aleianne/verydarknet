@@ -177,12 +177,11 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
         //fprintf(stderr, "prediction completed in %f seconds\n\n", sec(clock() - begin));
 
         // create a new filename in order to store the data contained into the prediction results array
-        char path[30] = "sim_results/";
-        //char *filename = create_output_filename(*entry, path);
+        char filename[256] = "sim_results/";
+        strcat(filename, img);
 
         // save the prediction into a file  
-        //write_faulty_prediction_file(prediction_results, filename, test_set_size);
-        write_prediction_file_2(prediction_results, path, 3, "fault\tlabel\tconfidence score");
+        write_prediction_file_2(prediction_results, filename, 3, "fault\tlabel\tconfidence score");
 
         fprintf(stderr, "prediction terminated in %f sec", sec(clock() - begin));
 
