@@ -148,13 +148,11 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
         image r = letterbox_image(im, net->w, net->h);
         image_data = r.data;
 
+        begin = clock();
+
         for (j = 0; j < fault_list_size; j++) {
 
             fault_list_entry_t *entry = faultlist_array[j];
-
-            //fprintf(stderr, "inject the fault type %d at position %d, bit %d\n", entry->fault_type, entry->fault_position, entry->faulty_bit);
-
-            begin = clock();
 
             // inject the fault into the network
             inject_fault(*entry, net, target_layer);            
