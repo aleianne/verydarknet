@@ -134,6 +134,8 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
 
     // only for debug 
     fprintf(stderr, "begin the faulty prediction\n\n");
+
+    clock_t begin;
     
     for (i = 0; i < 1; i++) {
 
@@ -154,7 +156,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
 
             //fprintf(stderr, "inject the fault type %d at position %d, bit %d\n", entry->fault_type, entry->fault_position, entry->faulty_bit);
 
-            clock_t begin = clock();
+            begin = clock();
 
             // inject the fault into the network
             inject_fault(*entry, net, target_layer);            
@@ -181,6 +183,8 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
         // save the prediction into a file  
         //write_faulty_prediction_file(prediction_results, filename, test_set_size);
         write_prediction_file_2(prediction_results, path, fault_list_size, "fault\tlabel\tconfidence score");
+
+        fprintf(stderr, "prediction terminated in %f sec", sec(clock() - begin));
 
         // release the memory used to store the image
         if(r.data != im.data) free_image(r);

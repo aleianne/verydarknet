@@ -21,6 +21,8 @@ void inject_fault(fault_list_entry_t fault_record, network *net, int target_laye
     int mac_position = fault_record.fault_position;
     int bit = fault_record.faulty_bit;
 
+    fprintf(stderr, "fault type: %d, fault position %d fault bit %d\n", fault_record.fault_type, fault_record.fault_type, fault_record.faulty_bit);
+
     // inject the fault into the network 
     FAULT_MODEL fault_model = fault_record.fault_type;
     
@@ -49,6 +51,8 @@ void inject_fault(fault_list_entry_t fault_record, network *net, int target_laye
 
 void remove_fault(fault_list_entry_t fault_record, network *net, int target_layer) {
     FAULT_MODEL fault_model = fault_record.fault_type;
+    
+    fprintf(stderr, "fault type: %d, fault position %d fault bit %d\n", fault_record.fault_type, fault_record.fault_type, fault_record.faulty_bit);
 
     switch (fault_model) {
 
