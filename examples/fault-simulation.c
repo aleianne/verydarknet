@@ -177,7 +177,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
         strcat(filename, "first_image");
 
         // save the prediction into a file  
-        write_prediction_file_2(prediction_results, filename, 3, "fault\tlabel\tconfidence score");
+        write_prediction_file_2(prediction_results, filename, fault_list_size, "fault\tlabel\tconfidence score");
 
         fprintf(stderr, "prediction terminated in %f sec\n", sec(clock() - begin));
 
