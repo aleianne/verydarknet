@@ -213,7 +213,7 @@ void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *
             } break;
 
             default: {
-
+                strcpy(fault_type, "");
             }
         }
 

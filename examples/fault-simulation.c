@@ -140,7 +140,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     for (i = 0; i < 1; i++) {
 
         // create a new simulation for the selected image
-        char *img = imagepath_array[j];
+        char *img = imagepath_array[i];
 
         // pay attection here, i must change the image path 
         //char *filename = path_extension(&imagepath_array[i], pathname);
@@ -150,7 +150,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
         image r = letterbox_image(im, net->w, net->h);
         image_data = r.data;
 
-        for (j = 0; j < fault_list_size; j++) {
+        for (j = 0; j < 3; j++) {
 
             fault_list_entry_t *entry = faultlist_array[j];
 
@@ -182,7 +182,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
 
         // save the prediction into a file  
         //write_faulty_prediction_file(prediction_results, filename, test_set_size);
-        write_prediction_file_2(prediction_results, path, fault_list_size, "fault\tlabel\tconfidence score");
+        write_prediction_file_2(prediction_results, path, 3, "fault\tlabel\tconfidence score");
 
         fprintf(stderr, "prediction terminated in %f sec", sec(clock() - begin));
 
