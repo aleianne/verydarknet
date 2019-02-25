@@ -150,7 +150,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
         image r = letterbox_image(im, net->w, net->h);
         image_data = r.data;
 
-        for (j = 0; j < 3; j++) {
+        for (j = 0; j < fault_list_size; j++) {
 
             fault_list_entry_t *entry = faultlist_array[j];
 
@@ -178,12 +178,12 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
 
         // create a new filename in order to store the data contained into the prediction results array
         char filename[256] = "sim_results/";
-        strcat(filename, img);
+        strcat(filename, "first_image");
 
         // save the prediction into a file  
         write_prediction_file_2(prediction_results, filename, 3, "fault\tlabel\tconfidence score");
 
-        fprintf(stderr, "prediction terminated in %f sec", sec(clock() - begin));
+        fprintf(stderr, "prediction terminated in %f sec\n", sec(clock() - begin));
 
         // release the memory used to store the image
         if(r.data != im.data) free_image(r);
