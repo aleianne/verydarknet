@@ -21,6 +21,11 @@ def generate_stuck_at_fault_list(fault_list_name, component_num):
                 fault_list_entry = "stuck-at-1\t" + str(i+1) + "\t" + str(j) + "\n"
                 fp.write(fault_list_entry)
 
+        for i in range(component_num):
+            for j in range(23, 31):
+                fault_list_entry = "stuck-at-0\t" + str(i+1) + "\t" + str(j) + "\n"
+                fp.write(fault_list_entry)   
+
 
     print("fault list generated correclty")
     fp.close()

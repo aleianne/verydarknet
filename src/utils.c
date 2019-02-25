@@ -737,7 +737,6 @@ char *change_ext(char* mystr, char *new_ext) {
         *lastdot = '\0';
     
     strcat(retstr, new_ext);
-
     return retstr;
 }
 
