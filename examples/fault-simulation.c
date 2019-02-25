@@ -120,7 +120,7 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     int test_set_size = image_list->size;
     int fault_list_size = image_list->size;
     
-    fault_list_size = (int) fault_list_size / 2;
+    //fault_list_size = fault_list_size / 2;
 
     int i, j;
 
@@ -167,6 +167,8 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
             prediction_results[j].c_score = max_f;
             prediction_results[j].fault = *entry;
             prediction_results[j].label_pred = predicted_label;
+
+            fprintf(stderr, "sono qui");
 
             remove_fault(*entry, net, target_layer);
         }
