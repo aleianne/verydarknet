@@ -162,7 +162,10 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
             remove_fault(*entry, net, target_layer);
         }
         
+        // save the results into the sim results directory
         write_prediction_file_2(prediction_results, imagepath_array[i], fault_list_size);
+
+        fprintf(stderr, "image %s completed succesfully\n", imagepath_array[i]);
 
         // release the memory used to store the image
         if(r.data != im.data) free_image(r);

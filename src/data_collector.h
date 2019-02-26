@@ -1,9 +1,10 @@
 #ifndef DATA_COLLECTOR_H
-#define DATA_COLLECTOT_H 
+#define DATA_COLLECTOR_H 
 
+
+#include <stdlib.h>
+#include <string.h>
 #include "darknet.h"
-#include "stdlib.h"
-#include "string.h"
 #include "utils.h"
 
 #define LABEL_N 10
@@ -20,6 +21,9 @@ void print_layer_fc_info(layer l, int layer_id);
 void print_prediction_results(float *pred, int n);
 void init_stuck_at_data_struct();
 void update_sa_freq(int st_type, int bit, int label);*/
+
+// this is the output directory to be used to store the results of the simulations
+static const char DIR[] = "sim_results/";
 
 FILE *handle_file_open(char *filename);
 char *path_extension(char *filename, char *path);

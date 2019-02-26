@@ -148,7 +148,7 @@ char *faulty_prediction_name_generator(fault_list_entry_t fault_record) {
 }
 
 char *generate_result_filename(char *filename) {
-    char *prefix = "sim_results/";
+    char *prefix = DIR;
     int l = strlen(prefix);
 
     char *image = change_ext(filename, ".csv");

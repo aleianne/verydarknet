@@ -39,9 +39,8 @@ void gemm_nt_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
             register float sum = 0;
             for(k = 0; k < K; ++k){
                 result = ALPHA*A[i*lda+k]*B[j*ldb + k];
-                mul_counter--;
                 //counter2++;
-                if (mul_counter == 0) {
+                if (mul_counter == 1) {
                     float tmp = compute_faulty_multiplication(result, f_parsed.bit, f_parsed.type);
                     sum += tmp;
                     /*counter1++;
@@ -53,6 +52,7 @@ void gemm_nt_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
                 }    
             }
             C[i*ldc+j] += sum;
+            mul_counter--;
         }
     }
 }
@@ -151,7 +151,7 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
     int mul_counter = f_parsed.fault_location;
 
     // only for debug
-   // fprintf(stderr, "the fault injected is type %d, the position is %d, the bit is %d", f_parsed.type, f_parsed.fault_location, f_parsed.bit);
+    // fprintf(stderr, "the fault injected is type %d, the position is %d, the bit is %d", f_parsed.type, f_parsed.fault_location, f_parsed.bit);
 
     //int counter1 = 0; int counter2 = 0;
     /*
@@ -176,8 +176,8 @@ void gemm_nn_faulty_stuck_at(void *fault, int M, int N, int K, float ALPHA,
                     C[i*ldc+j] += tmp;
                 }
                 //C[i*ldc+j] += A_PART*B[k*ldb+j];   
-               // mul_counter--;
-               // counter1++;
+                // counter1++;
+                mul_counter--;
             }
         }
     }
