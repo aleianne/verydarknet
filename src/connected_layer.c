@@ -215,6 +215,7 @@ void forward_connected_layer(layer l, network net)
     } else if (l.f_model == NO_FAULT) {
         gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
     } else if (l.f_model == STUCK_AT_0 || l.f_model == STUCK_AT_1) {
+        //fprintf(stderr, "the fault has been injected into the connected layer");
         gemm_nt_faulty_stuck_at(l.fault, m,n,k,1,a,k,b,k,c,n);
     } else {
         gemm(0,1,m,n,k,1,a,k,b,k,1,c,n);
