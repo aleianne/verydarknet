@@ -27,7 +27,6 @@ float confidence_score_margin(float *predictions, int n) {
     top_k(predictions, n, n, indexes);
     float first = predictions[indexes[0]];
     float second = predictions[indexes[1]];
-    fprintf(stderr, "the first score is %f, the second score is %f", first, second);
     return (first - second);
 }
 
