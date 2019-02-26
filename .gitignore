@@ -7,6 +7,7 @@
 *.png
 *.jpg
 *.pyc
+.vscode
 data/
 caffe/
 grasp/
