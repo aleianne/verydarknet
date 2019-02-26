@@ -7,8 +7,6 @@ fault_list="fault_list/fault_list.csv"
 
 echo "begin to clean darknet environment"
 
-cd ..
-
 if [ -f $fault_list ];
 then 
     echo "delete the fault list" $fault_list
