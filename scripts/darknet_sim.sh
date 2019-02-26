@@ -27,5 +27,5 @@ then
 fi
 
 # execute darknet 
-./darknet simulation $data $network_configuration $weight $test_set $fault_list -layer 0
+./darknet simulation $data $network_configuration $weight $test_set $fault_list -layer -1
 
