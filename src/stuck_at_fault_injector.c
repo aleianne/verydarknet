@@ -61,7 +61,7 @@ void remove_stuck_at_fault(network *net, int layer_n) {
         }
     } else {
         // if layer number is less than 0 we must delete the fault from all the layers
-        int i;
+        int i = 0;
         int found = 0;
         while (found != 1 && i < net->n) {
             if (net->layers[i].type == CONVOLUTIONAL || net->layers[i].type == CONNECTED) {
