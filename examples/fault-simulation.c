@@ -25,8 +25,8 @@ int max_confidence_score(float *vec, int N) {
 float confidence_score_margin(float *predictions, int n) {
     int *indexes = malloc(n*sizeof(int));
     top_k(predictions, n, n, indexes);
-    float first = predictions[indexes[n-1]];
-    float second = predictions[indexes[n-2]];
+    float first = predictions[indexes[0]];
+    float second = predictions[indexes[1]];
     fprintf(stderr, "the first score is %f, the second score is %f", first, second);
     return (first - second);
 }
@@ -125,6 +125,9 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
 
     int test_set_size = image_list->size;
     int fault_list_size = fault_list->size;
+
+    //int fault_list_size = 1;
+    //int test_set_size = 1;
 
     int i, j;
 
