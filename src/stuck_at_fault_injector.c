@@ -69,7 +69,7 @@ void remove_stuck_at_fault(network *net, int layer_n) {
                 free(l->fault);
                 l->f_model = NO_FAULT;
                 l->fault = NULL;
-                found == 1;
+                found = 1;
             }
             i++;
         }
