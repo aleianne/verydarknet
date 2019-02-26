@@ -629,6 +629,7 @@ typedef struct prediction_result_fault {
     fault_list_entry_t *fault;
     int label_pred;
     float c_score;
+    float score_margin;
 } prediction_result_fault_t;
 
 network *load_network(char *cfg, char *weights, int clear);

@@ -208,13 +208,14 @@ void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *
     FILE *file = handle_file_open(resultname);
     char fault_type[30];
 
-    fprintf(file, "fault type\tposition\tbit\tlabel\tconfidence score\n");
+    fprintf(file, "fault type\tposition\tbit\tlabel\tconfidence score\tmargin\n");
 
     int i;
     for (i = 0; i < size; i++) {
         fault_list_entry_t *fault = prediction_array[i].fault;
         int label = prediction_array[i].label_pred;
         float c_score = prediction_array[i].c_score;
+        float margin = prediction_array[i].score_margin;
 
         switch (fault->fault_type) 
         {
@@ -231,7 +232,7 @@ void write_prediction_file_2(prediction_result_fault_t *prediction_array, char *
             }
         }
 
-        fprintf(file, "%s\t%d\t%d\t%d\t%f\n", fault_type, fault->fault_position, fault->faulty_bit, label, c_score);
+        fprintf(file, "%s\t%d\t%d\t%d\t%f\t%f\n", fault_type, fault->fault_position, fault->faulty_bit, label, c_score, margin);
     }
 
     free(resultname);

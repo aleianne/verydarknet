@@ -22,6 +22,15 @@ int max_confidence_score(float *vec, int N) {
 	return i_max;
 }
 
+float confidence_score_margin(float *predictions, int n) {
+    int *indexes = malloc(n*sizeof(int));
+    top_k(predictions, n, n, indexes);
+    float first = predictions[indexes[n-1]];
+    float second = predictions[indexes[n-2]];
+    fprintf(stderr, "the first score is %f, the second score is %f", first, second);
+    return (first - second);
+}
+
 list *load_imagepath_array(char *testsetfile) {
     FILE *file = fopen(testsetfile, "r");
 
@@ -117,8 +126,6 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
     int test_set_size = image_list->size;
     int fault_list_size = fault_list->size;
 
-    test_set_size = 1;
-
     int i, j;
 
     float *image_data;
@@ -154,10 +161,12 @@ void execute_faulty_prediction(network *net, list *image_list, list *fault_list,
 
             int predicted_label = max_confidence_score(predictions, top);
             float max_f = predictions[predicted_label];
+            float margin = confidence_score_margin(predictions, top);
 
             prediction_results[j].c_score = max_f;
             prediction_results[j].fault = entry;
             prediction_results[j].label_pred = predicted_label;
+            prediction_results[j].score_margin = margin;
 
             remove_fault(*entry, net, target_layer);
         }
