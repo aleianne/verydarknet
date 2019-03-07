@@ -1,4 +1,4 @@
-import namedtuple from collections
+from classicifaction import Classification
 
 
 def convert_result_file(filename, header):
@@ -57,10 +57,11 @@ def convert_result_file(filename, header):
             collect_faulty_predictions(items)
 
 
-''' questa funzione deve essere instanziata due volte, una per ogni stuck-at '''
+''' this function should be used two times, one for each stuck-at'''
 def generate_classification_matrix():
 
-    # fare attenzione ai nomi utilizzati per la classificazione
+    # this implementation is not good because the namedtuple is unmutable object
+    '''# fare attenzione ai nomi utilizzati per la classificazione
     resClassification = namedtuple('resClassification', [])
 
     # generate the list that should contains the information 
@@ -71,8 +72,18 @@ def generate_classification_matrix():
         e1 = resClassification(0, 0, 0)
         newList.append(e1)
 
+    return newList '''
+
+    newList = []
+
+    for i in range(10):
+        c = Classification(0, 0, 0)
+        newList.append(c)
+
     return newList
+
         
+# the threshold is not useful into this new logic
 def collect_results_for_bit(items, threshold, classificationList1):
 
     # save tokens into specific variables
@@ -83,6 +94,11 @@ def collect_results_for_bit(items, threshold, classificationList1):
     label = int(tokens[3])
     confidence_score = float(tokens[4]) 
     margin = float(tokens[5])
+
+
+    # add the data line read from the file into the classification list passed as argument
+
+    
 
 
 
@@ -154,3 +170,7 @@ def load_golden_results2(filename, header):
             gold_res[tokens[0]] = tokens[1]
         
     return gold_res
+
+
+
+# conviene creare una classe che gestisca le informazioni necessarie per la classificazione
