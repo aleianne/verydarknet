@@ -2,13 +2,15 @@ from classicifaction import Classification
 import numpy as np
 
 
-''' this function is the entry point of all the analysys '''
-def analyze_result_files():
+''' 
+    this function is the entry point of all the analysys
+'''
+def analize_result_files():
 
 
-
-
-''' this function open the file received from input and generate all the data statistics'''
+''' 
+    this function open the file received from input and generate all the data statistics
+'''
 def convert_result_file(filename, header, golden_results):
 
     # define the threshold value that should be used to characterize the reult obtained 
@@ -69,32 +71,8 @@ def init_classification_matrix():
     matrix1 = np.zeros((8, 10), dtype=int)
     matrix0 = np.zeros((8, 10), dtype=int)
 
-''' this function should be used two times, one for each stuck-at '''
-def generate_classification_matrix():
-
-    # this implementation is not good because the namedtuple is unmutable object
-    '''# fare attenzione ai nomi utilizzati per la classificazione
-    resClassification = namedtuple('resClassification', [])
-
-    # generate the list that should contains the information 
-    newList = []
-
-    for i in range(10):
-        # create a new entry 
-        e1 = resClassification(0, 0, 0)
-        newList.append(e1)
-
-    return newList '''
-
-    newList = []
-
-    for i in range(10):
-        c = Classification(0, 0, 0)
-        newList.append(c)
-
-    return newList
-
-''' this method collect the result from the result file and store the information 
+''' 
+    this method collect the result from the result file and store the information 
     into a list of Classification object, the index of the list is the target bit of the injection
 ''' 
 def collect_results_for_bit(items, classificationList1, golden_label):
