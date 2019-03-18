@@ -1,17 +1,10 @@
-from classicifaction import Classification
+from classification import Classification
 import numpy as np
 
-
-''' 
-    this function is the entry point of all the analysys
-'''
 def analize_result_files():
 
-
-''' 
-    this function open the file received from input and generate all the data statistics
-'''
 def convert_result_file(filename, header, golden_results):
+    ''' this function open the file received from input and generate all the data statistics '''
 
     # define the threshold value that should be used to characterize the reult obtained 
     threshold = 2.0
@@ -58,24 +51,12 @@ def convert_result_file(filename, header, golden_results):
             elif (tokens[0] == 'stuck-at-0'):
                 # add the stuck-at-1 list
 
-
-
             collect_results_for_bit(items)
             collect_faulty_predictions(items)
 
-def init_classification_matrix():
-
-    # create two matrix that should contains the label predicted for each faulty bit position
-    # the first one is used for s-a-1
-    # the second one is usde for s-a-0
-    matrix1 = np.zeros((8, 10), dtype=int)
-    matrix0 = np.zeros((8, 10), dtype=int)
-
-''' 
-    this method collect the result from the result file and store the information 
-    into a list of Classification object, the index of the list is the target bit of the injection
-''' 
 def collect_results_for_bit(items, classificationList1, golden_label):
+    ''' this method collect the result from the result file and store the information 
+    into a list of Classification object, the index of the list is the target bit of the injection ''' 
 
     # save tokens into specific variables
     fault_model = tokens[0]
@@ -92,7 +73,6 @@ def collect_results_for_bit(items, classificationList1, golden_label):
     c1 = classificationList1[bit]
     c1.classify_data(label, confidence_score, margin, golden_label)
 
-
 def collect_faulty_predictions(items, matrix, golden_prediction):
     # collect the faulty prediction 
     # take the label matrix and than save the label predicted
@@ -106,7 +86,6 @@ def collect_faulty_predictions(items, matrix, golden_prediction):
     if (golden_prediction != label):
         value = matrix[bit][label]
         matrix[bit][label] = value + 1
-
 
 if __name__ = "__main__": 
     analyze_result_files()

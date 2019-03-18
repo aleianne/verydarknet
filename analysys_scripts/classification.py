@@ -4,7 +4,7 @@ class Classification:
         little documentation about the instance variable meaning:
             -x : is the number of label correclty detected by the network (i.e. the label is equal to the golden one and the margin between label with the highest confidence score and the second highest confidence score is higer than a given threshold)
             -y : is the number of label correclty detected by the network but the marigin between the two highest scores is below a given threshold
-            -z : in the number of label wronlgy predicted by the netowork        
+            -z : in the number of label wronlgy predicted by the network        
     ''' 
 
     # init the class with the parameters passed as argument
