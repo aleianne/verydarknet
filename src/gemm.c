@@ -112,7 +112,7 @@ void gemm_nt(int M, int N, int K, float ALPHA,
     }
 }
 
-void gemm_nt_faulty(fc_transition_fault fault, int M, int N, int K, float ALPHA, 
+/*void gemm_nt_faulty(fc_transition_fault fault, int M, int N, int K, float ALPHA, 
         float *A, int lda, 
         float *B, int ldb,
         float *C, int ldc)
@@ -132,7 +132,7 @@ void gemm_nt_faulty(fc_transition_fault fault, int M, int N, int K, float ALPHA,
             C[i*ldc+j] += sum;
         }
     }
-}
+}*/
 
 
 void gemm_tn(int M, int N, int K, float ALPHA, 
