@@ -10,6 +10,7 @@ typedef struct transition_fault_t {
     int output_neuron;
 } transition_fault;
 
+<<<<<<< HEAD
 typedef struct fc_transition_fault_t {
     int bit;
     int batch;
@@ -27,6 +28,13 @@ float inject_mul_fault(fault_value f, float *C, int ldc, int weight, int filter,
 
 void create_new_fault(network *net,  transition_fault *fault_i, int target_layer);
 void create_new_fc_fault(network *net, fc_transition_fault *fault_i, int target_layer);
+=======
+void create_new_fault(int target_layer, network *net,  transition_fault *fault_i);
+void inject_transition_fault(transition_fault f, int i, int j, int k, float *result);
+
+void create_new_fc_fault(int target_layer, network *net, fc_transition_fault *fault_i);
+void inject_fc_transition_fault(fc_transition_fault f, int i, int j, int k, float *result);
+>>>>>>> analysys_scripts
 
 float check_bit_on_fault_transition(int shift, float old_value, float new_value);
 

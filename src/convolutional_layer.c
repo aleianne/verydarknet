@@ -223,7 +223,13 @@ convolutional_layer make_convolutional_layer(int batch, int h, int w, int c, int
     // here define the struct for the fault injection 
     l.f_model = NO_FAULT;
 
+<<<<<<< HEAD
     //printf("the number of multiplication into this convolutional layer is %d\n", l.h * l.w * l.c * l.out_c * l.out_h * l.out_w);
+=======
+    l.is_faulty = 0;
+    l.fc_fault = (fc_transition_fault *) calloc(1, sizeof(fc_transition_fault));
+    l.fault = (transition_fault *) calloc(1, sizeof(transition_fault));
+>>>>>>> analysys_scripts
 
     // float scale = 1./sqrt(size*size*c);
     float scale = sqrt(2./(size*size*c/l.groups));
@@ -501,6 +507,7 @@ void forward_convolutional_layer(convolutional_layer l, network net)
                 // this function try to transform the convolution op into a more simple matrix multiplication
                 im2col_cpu(im, l.c/l.groups, l.h, l.w, l.size, l.stride, l.pad, b);
             }
+<<<<<<< HEAD
 
             // inject the fault into the network
             if (l.f_model == TRANSITION_FAULT) {
@@ -514,6 +521,16 @@ void forward_convolutional_layer(convolutional_layer l, network net)
                 gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
             } else {
                 gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
+=======
+            
+            // update: this is the tensor multiplication between the weight tensor for each filter to the input image 
+            // the result is stored into c
+            if (l.is_faulty == 0) {
+                gemm(0,0,m,n,k,1,a,k,b,n,1,c,n);
+            } else {
+                print_layer_weights(l.weights, l.nweights);
+                gemm_nn_faulty(*l.fault,m,n,k,1,a,k,b,n,c,n);
+>>>>>>> analysys_scripts
             }
 
             /*switch(l.f_model) {

@@ -112,6 +112,14 @@ typedef struct pred_struct_t {
     int bit;
 } pred_struct;
 
+typedef struct fc_transition_fault_t {
+    int bit;
+    int batch;
+    int input_neuron;
+    int output_neuron;
+    int is_faulty;
+} fc_transition_fault;
+
 typedef enum {
     NO_FAULT,
     TRANSITION_FAULT,
